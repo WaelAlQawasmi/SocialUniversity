@@ -1,0 +1,15 @@
+{
+  "socaialenv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-app-socaialenv-172204-authRole",
+      "UnauthRoleArn": "arn:aws:iam::287949203358:role/amplify-app-socaialenv-172204-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::287949203358:role/amplify-app-socaialenv-172204-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-app-socaialenv-172204-deployment",
+      "UnauthRoleName": "amplify-app-socaialenv-172204-unauthRole",
+      "StackName": "amplify-app-socaialenv-172204",
+      "StackId": "arn:aws:cloudformation:us-east-1:287949203358:stack/amplify-app-socaialenv-172204/5ed394b0-f0a4-11ec-b003-12b2d3eaccad",
+      "AmplifyAppId": "d295jd5dsp8irz"
+    }
+  }
+}
