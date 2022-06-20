@@ -1,38 +1,46 @@
 # SocialUniversity
 
-Social app  for the community of University wherer the statudants can disuss the unversite issues and post on it in the app and  the studans  in the same majer can discuss togother using posting fetuer and communcate togother using chat fetuer
-and the d=studants can shere the file togother
+For university students, our application will help them to communicate with their 
+colleagues in the same department and the same university. and they can also find the
+required resources to help them on their study and saving their time instead of spent their
+time searching on these resources in different places. in addition, if any student 
+Interested in finding a suitable job he can browse the job opportunities section to find
+a suitable job if he want to work while he is studying or after his graduation.
+the students can post or ask anything on the main channel or their department group to 
+help each other and exchanging their information.
 
 ___
 
 
 ## Wireframe
 
-![](image/login_page.png)
+![login](image/login_page.png)
 
-![](image/Signup_page.png)
+![signup](image/Signup_page.png)
 
-![](image/page1_page.png)
+![post1](image/page1_page.png)
 
-![](image/Page2_page.png)
+![post2](image/Page2_page.png)
 
-![](image/Material_page.png)
+![material](image/Material_page.png)
 
-![](image/Navigation_page.png)
+![navigation Drawer](image/Navigation_page.png)
 
-![](image/job_page.png)
+![job](image/job_page.png)
 
-![](image/chat_page.png)
+![chat](image/chat_page.png)
 
-![](image/profile.png)
+![profile](image/profile.png)
 
 
 ___
+
 
 ## Database Schema
 
 ![databaseSchema](image/database_schema.png)
 ___
+
 
 ## Members
 
