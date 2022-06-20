@@ -14,25 +14,31 @@ ___
 
 ## Wireframe
 
-![](image/login_page.png)
+![login](image/login_page.png)
 
-![](image/Signup_page.png)
+![signup](image/Signup_page.png)
 
-![](image/page1_page.png)
+![post1](image/page1_page.png)
 
-![](image/Page2_page.png)
+![post2](image/Page2_page.png)
 
-![](image/Material_page.png)
+![material](image/Material_page.png)
 
-![](image/Navigation_page.png)
+![navigation Drawer](image/Navigation_page.png)
 
-![](image/job_page.png)
+![job](image/job_page.png)
 
-![](image/chat_page.png)
+![chat](image/chat_page.png)
 
-![](image/profile.png)
+![profile](image/profile.png)
 
 
+___
+
+
+## Database Schema
+
+![databaseSchema](image/database_schema.png)
 ___
 
 
