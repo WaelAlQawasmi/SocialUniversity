@@ -29,6 +29,11 @@ ___
 
 ___
 
+## Database Schema
+
+![databaseSchema](image/database_schema.png)
+___
+
 ## Members
 
 1. Wael Alqawasmi
