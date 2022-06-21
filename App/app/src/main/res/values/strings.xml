@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Social University App</string>
+    <string name="label_enter_code">Enter verification code</string>
+    <string name="confirmationText">A confirmation code will be sent to Your email.\nPlease enter the confirmation code here.</string>
 </resources>
