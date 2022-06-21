@@ -6,4 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.VerificationActivity">
 
+    <EditText
+        android:id="@+id/verification_code"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="80dp"
+        android:background="#E2F6FF"
+        android:paddingStart="19dp"
+        android:paddingEnd="19dp"
+        android:hint="@string/label_enter_code"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/verify_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Verify"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.829"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verification_code" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/confirmationText"
+        android:textColor="#007988"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

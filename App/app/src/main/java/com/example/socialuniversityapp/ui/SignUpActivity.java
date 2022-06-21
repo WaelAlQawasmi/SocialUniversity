@@ -21,6 +21,7 @@ import com.example.socialuniversityapp.R;
 public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG = SignUpActivity.class.getSimpleName();
+    public static final String EMAIL = "email";
     private EditText mFullName, mUniversityId, mMajor, mPassword, mEmail;
     private TextView mLoginLink;
     private Button mSignUpButton;
@@ -85,6 +86,7 @@ public class SignUpActivity extends AppCompatActivity {
                     mLoadingProgressBar.setVisibility(View.INVISIBLE);
 
                     Intent intent = new Intent(SignUpActivity.this, VerificationActivity.class);
+                    intent.putExtra(EMAIL, email);
                     startActivity(intent);
 
                     finish();
