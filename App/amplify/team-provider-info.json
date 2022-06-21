@@ -10,6 +10,11 @@
       "StackName": "amplify-app-socaialenv-172204",
       "StackId": "arn:aws:cloudformation:us-east-1:287949203358:stack/amplify-app-socaialenv-172204/5ed394b0-f0a4-11ec-b003-12b2d3eaccad",
       "AmplifyAppId": "d295jd5dsp8irz"
+    },
+    "categories": {
+      "auth": {
+        "app96dd2c01": {}
+      }
     }
   }
 }
