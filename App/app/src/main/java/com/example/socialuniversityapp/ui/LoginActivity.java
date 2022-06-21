@@ -11,7 +11,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.socialuniversityapp.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -33,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
         mSignUpLink = findViewById(R.id.login_toSign_up);
         mLoadingProgressBar = findViewById(R.id.loading_login);
+
+
 
         // Go To SignUp Activity
         mSignUpLink.setOnClickListener(mSignUpLinkClick);

@@ -3,12 +3,17 @@
     package="com.example.socialuniversityapp">
 
     <application
+        android:name=".AmplifyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
+        <activity android:name=".ui.MaterialActivity"></activity>
+        <activity android:name=".ui.JobActivity" />
+        <activity android:name=".ui.UniversityPostActivity" />
+        <activity android:name=".ui.MajorPostActivity" />
         <activity
             android:name=".ui.VerificationActivity"
             android:exported="false" />
@@ -23,5 +28,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>
