@@ -1,36 +1,42 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation CreateJob(
+  $input: CreateJobInput!
+  $condition: ModelJobConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createJob(input: $input, condition: $condition) {
     id
     name
-    description
+    body
+    phone
+    address
     createdAt
     updatedAt
   }
 }
-mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+mutation UpdateJob(
+  $input: UpdateJobInput!
+  $condition: ModelJobConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateJob(input: $input, condition: $condition) {
     id
     name
-    description
+    body
+    phone
+    address
     createdAt
     updatedAt
   }
 }
-mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+mutation DeleteJob(
+  $input: DeleteJobInput!
+  $condition: ModelJobConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteJob(input: $input, condition: $condition) {
     id
     name
-    description
+    body
+    phone
+    address
     createdAt
     updatedAt
   }
