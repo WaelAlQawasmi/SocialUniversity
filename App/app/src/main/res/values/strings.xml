@@ -4,8 +4,8 @@
     <string name="confirmationText">A confirmation code will be sent to Your email.\nPlease enter the confirmation code here.</string>
 
 
-<!--to toggle the open close button
+    <!--to toggle the open close button
     of the navigation drawer-->
-<string name="nav_open">Open</string>
-<string name="nav_close">Close</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 </resources>

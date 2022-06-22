@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private final View.OnClickListener mSignUpLinkClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }
     };
 
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
 
                     mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, AddJobActivity.class));
                     finish();
                 },
                 error -> Log.e(TAG, error.toString())
