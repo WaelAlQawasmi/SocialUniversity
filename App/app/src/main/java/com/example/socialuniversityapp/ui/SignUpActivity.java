@@ -73,6 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
     };
 
     private void signUp(String email, String password, String user_name, String major, String uniId) {
+        mLoadingProgressBar = findViewById(R.id.loading);
         AuthSignUpOptions options = AuthSignUpOptions.builder()
                 .userAttribute(AuthUserAttributeKey.email(), email)
                 .userAttribute(AuthUserAttributeKey.nickname(), user_name)
@@ -82,9 +83,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         Amplify.Auth.signUp(email, password, options,
                 result -> {
-                    Log.i(TAG, "Result: " + result.toString());
-                    mLoadingProgressBar.setVisibility(View.INVISIBLE);
 
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                        }
+                                      });
                     Intent intent = new Intent(SignUpActivity.this, VerificationActivity.class);
                     intent.putExtra(EMAIL, email);
                     startActivity(intent);
