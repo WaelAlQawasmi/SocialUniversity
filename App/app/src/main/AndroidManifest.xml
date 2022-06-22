@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
-        <activity android:name=".ui.MaterialActivity"></activity>
+        <activity
+            android:name=".NavigationDrawerActivity"
+            android:exported="false" />
+        <activity android:name=".ui.MaterialActivity" />
         <activity android:name=".ui.JobActivity" />
         <activity android:name=".ui.UniversityPostActivity" />
         <activity android:name=".ui.MajorPostActivity" />
@@ -28,6 +31,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>
