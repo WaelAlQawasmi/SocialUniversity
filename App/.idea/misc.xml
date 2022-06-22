@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_navigation_drawer.xml" value="0.20416666666666666" />
@@ -10,6 +11,27 @@
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_university_post.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_verification.xml" value="0.25" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.15625" />
+=======
+        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job.xml" value="0.136" />
+        <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_verification.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_navagation.xml" value="0.1" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_navigation_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/app_bar_navagation.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/content_navagation.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/fragment_gallery.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/fragment_home.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/fragment_slideshow.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/nav_header_navagation.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.1752136752136752" />
+>>>>>>> d5eaaeb47f28a659c72e012321c0168eddf39cb7
       </map>
     </option>
   </component>
