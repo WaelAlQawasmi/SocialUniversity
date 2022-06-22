@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-socialuniversity-dev-223846-authRole",
+      "UnauthRoleArn": "arn:aws:iam::287949203358:role/amplify-socialuniversity-dev-223846-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::287949203358:role/amplify-socialuniversity-dev-223846-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-socialuniversity-dev-223846-deployment",
+      "UnauthRoleName": "amplify-socialuniversity-dev-223846-unauthRole",
+      "StackName": "amplify-socialuniversity-dev-223846",
+      "StackId": "arn:aws:cloudformation:us-east-1:287949203358:stack/amplify-socialuniversity-dev-223846/c5a1fa60-f199-11ec-bb43-121ce14ebb21",
+      "AmplifyAppId": "d3tx04484triy"
+    }
+  }
+}
