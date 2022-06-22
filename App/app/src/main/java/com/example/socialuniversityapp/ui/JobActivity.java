@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.socialuniversityapp.R;
 
+
 public class JobActivity extends AppCompatActivity {
 
     @Override

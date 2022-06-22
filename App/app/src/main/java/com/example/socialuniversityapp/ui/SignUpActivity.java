@@ -76,6 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
         AuthSignUpOptions options = AuthSignUpOptions.builder()
                 .userAttribute(AuthUserAttributeKey.email(), email)
                 .userAttribute(AuthUserAttributeKey.nickname(), user_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:university_ids"), uniId)
+                .userAttribute(AuthUserAttributeKey.custom("custom:major_university"), major)
                 .build();
 
         Amplify.Auth.signUp(email, password, options,
@@ -104,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                         public void run() {
                             AlertDialog alert = builder.create();
 
-                            alert.setTitle("Email Already Exists");
+                            alert.setTitle("Error!");
                             alert.show();
                         }
                     });
