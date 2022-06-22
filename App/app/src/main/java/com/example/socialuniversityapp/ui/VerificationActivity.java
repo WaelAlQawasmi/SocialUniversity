@@ -1,13 +1,16 @@
 package com.example.socialuniversityapp.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
@@ -16,8 +19,11 @@ public class VerificationActivity extends AppCompatActivity {
 
     private static final String TAG = VerificationActivity.class.getSimpleName();
     private EditText mVerificationCode;
-    private Button verifyButton;
+    private Button mVerifyButton;
+    private TextView mTextError;
     private String email;
+
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +31,13 @@ public class VerificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verification);
 
         mVerificationCode = findViewById(R.id.verification_code);
-        verifyButton = findViewById(R.id.verify_button);
+        mVerifyButton = findViewById(R.id.verify_button);
+        mTextError = findViewById(R.id.verification_error_text);
 
         Intent intent = getIntent();
         email = intent.getStringExtra(SignUpActivity.EMAIL);
 
-        verifyButton.setOnClickListener(mVerifyButtonClick);
+        mVerifyButton.setOnClickListener(mVerifyButtonClick);
     }
 
     private final View.OnClickListener mVerifyButtonClick= new View.OnClickListener() {
@@ -45,7 +52,14 @@ public class VerificationActivity extends AppCompatActivity {
                         startActivity(new Intent(VerificationActivity.this, LoginActivity.class));
                         finish();
                     },
-                    error -> Log.e(TAG, error.toString())
+                    error -> {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mTextError.setText("The Verification Code Isn't Correct");
+                            }
+                        });
+                    }
             );
         }
     };
