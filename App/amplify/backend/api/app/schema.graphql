@@ -20,6 +20,7 @@ type UniPost @model {
 }
 type Comment @model {
   id: ID!
+  comment_user_name: String!
   content: String
 }
 type Like @model {

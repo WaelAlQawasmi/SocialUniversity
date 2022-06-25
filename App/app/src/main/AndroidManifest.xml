@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.socialuniversityapp">
+    package="com.example.socialuniversityapp" >
 
     <application
         android:name=".AmplifyApplication"
@@ -9,13 +9,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SocialUniversityApp">
-        <activity android:name=".ui.AddJobActivity"></activity>
+        android:theme="@style/Theme.SocialUniversityApp" >
+        <activity
+            android:name=".ui.CommentActivity"
+            android:exported="false" />
+        <activity android:name=".ui.AddJobActivity" />
         <activity
             android:name=".ui.materialAndPostsActivity"
-            android:exported="false">
+            android:exported="false" >
         </activity>
-            />
         <activity
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
@@ -37,7 +39,7 @@
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.SignUpActivity" />
         <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.SplashScreenActivity">
+        <activity android:name=".ui.SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
