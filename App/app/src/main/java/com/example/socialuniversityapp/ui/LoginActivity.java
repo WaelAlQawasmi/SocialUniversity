@@ -18,6 +18,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 import com.example.socialuniversityapp.R;
+import com.example.socialuniversityapp.recycler_view.JobRecyclerView;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private final View.OnClickListener mSignUpLinkClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
         }
     };
 
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
 
                     mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                    startActivity(new Intent(LoginActivity.this, AddJobActivity.class));
+                    startActivity(new Intent(LoginActivity.this, JobRecyclerView.class));
                     finish();
                 },
                 error -> Log.e(TAG, error.toString())

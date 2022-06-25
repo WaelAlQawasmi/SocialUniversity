@@ -4,7 +4,7 @@ package com.example.socialuniversityapp.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity(tableName = "Job")
-public class Job {
+public class JobData {
     @PrimaryKey(autoGenerate = true)
     public int id;
     private String title;
@@ -12,7 +12,7 @@ public class Job {
     private String phone;
     private String address;
 
-    public Job(String title, String body, String phone, String address) {
+    public JobData(String title, String body, String phone, String address) {
         this.title = title;
         this.body = body;
         this.phone = phone;
