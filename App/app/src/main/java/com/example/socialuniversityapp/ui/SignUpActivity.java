@@ -13,10 +13,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -73,17 +77,17 @@ public class SignUpActivity extends AppCompatActivity {
     };
 
     private void signUp(String email, String password, String user_name, String major, String uniId) {
+
         mLoadingProgressBar = findViewById(R.id.loading);
-        AuthSignUpOptions options = AuthSignUpOptions.builder()
-                .userAttribute(AuthUserAttributeKey.email(), email)
-                .userAttribute(AuthUserAttributeKey.nickname(), user_name)
-                .userAttribute(AuthUserAttributeKey.custom("custom:university_ids"), uniId)
-                .userAttribute(AuthUserAttributeKey.custom("custom:major_university"), major)
-                .build();
+        // create a list of attributes
+        List<AuthUserAttribute> attributes=new ArrayList<>();
+        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), email));
+        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(),user_name));
+        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:university_ids"), uniId));
+        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:major_university"), major));
 
-        Amplify.Auth.signUp(email, password, options,
+        Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
                 result -> {
-
 
                     runOnUiThread(new Runnable() {
                         @Override
