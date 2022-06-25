@@ -32,3 +32,147 @@ subscription OnDeleteJob {
     updatedAt
   }
 }
+subscription OnCreateUniPost {
+  onCreateUniPost {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUniPost {
+  onUpdateUniPost {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUniPost {
+  onDeleteUniPost {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateComment {
+  onCreateComment {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+subscription OnUpdateComment {
+  onUpdateComment {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+subscription OnDeleteComment {
+  onDeleteComment {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+subscription OnCreateLike {
+  onCreateLike {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}
+subscription OnUpdateLike {
+  onUpdateLike {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}
+subscription OnDeleteLike {
+  onDeleteLike {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}

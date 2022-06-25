@@ -24,3 +24,106 @@ query ListJobs($filter: ModelJobFilterInput, $limit: Int, $nextToken: String) {
     nextToken
   }
 }
+query GetUniPost($id: ID!) {
+  getUniPost(id: $id) {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListUniPosts(
+  $filter: ModelUniPostFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUniPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      user_name
+      body
+      image
+      likes {
+        nextToken
+      }
+      comments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetComment($id: ID!) {
+  getComment(id: $id) {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+query ListComments(
+  $filter: ModelCommentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      createdAt
+      updatedAt
+      uniPostCommentsId
+    }
+    nextToken
+  }
+}
+query GetLike($id: ID!) {
+  getLike(id: $id) {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}
+query ListLikes(
+  $filter: ModelLikeFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      userId
+      createdAt
+      updatedAt
+      uniPostLikesId
+    }
+    nextToken
+  }
+}
