@@ -9,3 +9,20 @@ type Job @model {
   phone: String!
   address: String!
 }
+
+type UniPost @model {
+  id: ID!
+  user_name: String!
+  body: String
+  image: String
+  likes: [Like] @hasMany
+  comments: [Comment] @hasMany
+}
+type Comment @model {
+  id: ID!
+  content: String
+}
+type Like @model {
+  id: ID!
+  userId: String!
+}

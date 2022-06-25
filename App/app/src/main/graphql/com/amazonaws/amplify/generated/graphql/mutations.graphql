@@ -41,3 +41,174 @@ mutation DeleteJob(
     updatedAt
   }
 }
+mutation CreateUniPost(
+  $input: CreateUniPostInput!
+  $condition: ModelUniPostConditionInput
+) {
+  createUniPost(input: $input, condition: $condition) {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUniPost(
+  $input: UpdateUniPostInput!
+  $condition: ModelUniPostConditionInput
+) {
+  updateUniPost(input: $input, condition: $condition) {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUniPost(
+  $input: DeleteUniPostInput!
+  $condition: ModelUniPostConditionInput
+) {
+  deleteUniPost(input: $input, condition: $condition) {
+    id
+    user_name
+    body
+    image
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateComment(
+  $input: CreateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  createComment(input: $input, condition: $condition) {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+mutation UpdateComment(
+  $input: UpdateCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  updateComment(input: $input, condition: $condition) {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+mutation DeleteComment(
+  $input: DeleteCommentInput!
+  $condition: ModelCommentConditionInput
+) {
+  deleteComment(input: $input, condition: $condition) {
+    id
+    content
+    createdAt
+    updatedAt
+    uniPostCommentsId
+  }
+}
+mutation CreateLike(
+  $input: CreateLikeInput!
+  $condition: ModelLikeConditionInput
+) {
+  createLike(input: $input, condition: $condition) {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}
+mutation UpdateLike(
+  $input: UpdateLikeInput!
+  $condition: ModelLikeConditionInput
+) {
+  updateLike(input: $input, condition: $condition) {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}
+mutation DeleteLike(
+  $input: DeleteLikeInput!
+  $condition: ModelLikeConditionInput
+) {
+  deleteLike(input: $input, condition: $condition) {
+    id
+    userId
+    createdAt
+    updatedAt
+    uniPostLikesId
+  }
+}
