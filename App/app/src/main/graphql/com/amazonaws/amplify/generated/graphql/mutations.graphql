@@ -63,6 +63,7 @@ mutation CreateUniPost(
     comments {
       items {
         id
+        comment_user_name
         content
         createdAt
         updatedAt
@@ -96,6 +97,7 @@ mutation UpdateUniPost(
     comments {
       items {
         id
+        comment_user_name
         content
         createdAt
         updatedAt
@@ -129,6 +131,7 @@ mutation DeleteUniPost(
     comments {
       items {
         id
+        comment_user_name
         content
         createdAt
         updatedAt
@@ -146,6 +149,7 @@ mutation CreateComment(
 ) {
   createComment(input: $input, condition: $condition) {
     id
+    comment_user_name
     content
     createdAt
     updatedAt
@@ -158,6 +162,7 @@ mutation UpdateComment(
 ) {
   updateComment(input: $input, condition: $condition) {
     id
+    comment_user_name
     content
     createdAt
     updatedAt
@@ -170,6 +175,7 @@ mutation DeleteComment(
 ) {
   deleteComment(input: $input, condition: $condition) {
     id
+    comment_user_name
     content
     createdAt
     updatedAt
