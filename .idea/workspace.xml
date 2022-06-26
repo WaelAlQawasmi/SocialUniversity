@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,7 +22,31 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b00591e-2599-4873-ae65-b1fc76516fb9" name="Default Changelist" comment="" />
+    <list default="true" id="6b00591e-2599-4873-ae65-b1fc76516fb9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/newSousalUnvercity.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/cli-inputs.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/parameters.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/resolvers/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/schema.graphql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/stacks/CustomResources.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/transform.conf.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/auth/app520f5e7b/cli-inputs.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/S3Trigger8a2abc3c-cloudformation-template.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/amplify.state" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/event.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/amplify/backend/storage/s373b83eee/cli-inputs.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/.config/project-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/.config/project-config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/backend-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/backend-config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/backend/types/amplify-dependent-resources-ref.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/types/amplify-dependent-resources-ref.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amplify/team-provider-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/team-provider-info.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +72,10 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/App" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunManager">
@@ -57,6 +87,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -80,6 +111,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

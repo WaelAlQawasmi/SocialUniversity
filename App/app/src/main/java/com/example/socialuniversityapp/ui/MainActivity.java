@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         binding = ActivityNavagationBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+ setContentView(binding.getRoot());
 
 
         setSupportActionBar(binding.appBarNavagation.toolbar);
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "app",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "C:\\Users\\Roa'a\\final\\SocialUniversity\\App\\amplify\\backend\\api\\app\\schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    }
+  }
+}
