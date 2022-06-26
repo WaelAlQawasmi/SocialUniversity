@@ -3,6 +3,7 @@ package com.example.socialuniversityapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,10 +33,14 @@ public class NavagationActivity extends AppCompatActivity implements NavigationV
     private static final String TAG =" out" ;
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavagationBinding binding;
+    private Object NavagationActivity;
+    Activity ui= (Activity) NavagationActivity;
+public  void integration(Activity ui){
+    this.ui=ui;
 
-
+}
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         binding = ActivityNavagationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,18 +52,18 @@ public class NavagationActivity extends AppCompatActivity implements NavigationV
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navagation);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavController navController = Navigation.findNavController(     ui, R.id.nav_host_fragment_content_navagation);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) ui, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, findViewById(R.id.activity_main_drawer), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                ui, drawer, findViewById(R.id.activity_main_drawer), R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
@@ -111,11 +116,11 @@ public class NavagationActivity extends AppCompatActivity implements NavigationV
 
 
 
-    private void logout() {
+    protected void logout() {
         Amplify.Auth.signOut(
                 () -> {
                     Log.i(TAG, "Signed out successfully");
-                    startActivity(new Intent(NavagationActivity.this, LoginActivity.class));
+                    startActivity(new Intent(ui, LoginActivity.class));
                     authSession("logout");
                     finish();
                 },
@@ -126,24 +131,24 @@ public class NavagationActivity extends AppCompatActivity implements NavigationV
 
 
 
-    private void navigateToProfile() {
+    protected void navigateToProfile() {
 
 
-        Intent settingsIntent = new Intent(this, MainActivity.class);
+        Intent settingsIntent = new Intent(ui, MainActivity.class);
         startActivity(settingsIntent);
     }
 
-    private void navigateToWeher() {
+    protected void navigateToWeher() {
 
 
-        Intent settingsIntent = new Intent(this, MainActivity.class);
+        Intent settingsIntent = new Intent(ui, MainActivity.class);
         startActivity(settingsIntent);
     }
 
     private void navigateToJob() {
 
 
-        Intent settingsIntent = new Intent(this, JobActivity.class);
+        Intent settingsIntent = new Intent(ui, JobActivity.class);
         startActivity(settingsIntent);
     }
 

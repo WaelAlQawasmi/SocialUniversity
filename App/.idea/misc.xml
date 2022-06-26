@@ -35,6 +35,10 @@
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.1752136752136752" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.1752136752136752" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_job.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_material.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_material_and_posts.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_navagation.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
@@ -42,8 +46,13 @@
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_verification.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/app_bar_navagation.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/content_navagation.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/fragment_gallery.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/fragment_slideshow.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/list_item.xml" value="0.25" />
         <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/nav_header_navagation.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/post_row.xml" value="0.25" />
+        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.264" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_material_and_posts.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.15092592592592594" />
