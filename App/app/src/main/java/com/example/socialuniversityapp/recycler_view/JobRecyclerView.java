@@ -19,7 +19,7 @@ import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.adapter.JobAdapter;
 import com.example.socialuniversityapp.data.JobData;
 import com.example.socialuniversityapp.ui.AddJobActivity;
-import com.example.socialuniversityapp.ui.ui.JobDetails;
+import com.example.socialuniversityapp.ui.JobDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

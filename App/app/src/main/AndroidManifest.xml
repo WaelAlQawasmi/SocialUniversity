@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
         <activity
-            android:name=".ui.ui.JobDetails"
+            android:name=".ui.AddPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CommentActivity"
             android:exported="false" />
         <activity android:name=".ui.AddJobActivity" />
         <activity
@@ -21,12 +24,12 @@
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
         <activity
-            android:name=".NavagationActivity"
+            android:name=".ui.NavagationActivity"
             android:exported="false"
             android:label="@string/title_activity_navagation"
             android:theme="@style/Theme.SocialUniversityApp.NoActionBar" />
         <activity
-            android:name=".NavigationDrawerActivity"
+            android:name=".ui.NavigationDrawerActivity"
             android:exported="false" />
         <activity android:name=".ui.MaterialActivity" />
         <activity android:name=".ui.JobActivity" />
