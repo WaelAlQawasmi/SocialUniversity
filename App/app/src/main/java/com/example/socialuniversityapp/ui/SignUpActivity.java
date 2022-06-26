@@ -79,6 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUp(String email, String password, String user_name, String major, String uniId) {
 
         mLoadingProgressBar = findViewById(R.id.loading);
+
         // create a list of attributes
         List<AuthUserAttribute> attributes=new ArrayList<>();
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), email));
@@ -87,6 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major));
 
         Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
+
                 result -> {
 
                     runOnUiThread(new Runnable() {
@@ -103,7 +105,12 @@ public class SignUpActivity extends AppCompatActivity {
                 },
                 error -> {
                     Log.e(TAG, "Sign up failed", error);
-                    mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                        }
+                    });
 
                     builder.setMessage(error.getMessage()).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override

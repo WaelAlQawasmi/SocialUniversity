@@ -1,17 +1,13 @@
 {
-  "projectName": "SocialUniversity",
-  "version": "3.1",
-  "frontend": "javascript",
-  "javascript": {
-    "framework": "none",
-    "config": {
-      "SourceDir": "src",
-      "DistributionDir": "dist",
-      "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start"
-    }
-  },
   "providers": [
     "awscloudformation"
-  ]
+  ],
+  "projectName": "App",
+  "version": "3.1",
+  "frontend": "android",
+  "android": {
+    "config": {
+      "ResDir": "app/src/main/res"
+    }
+  }
 }

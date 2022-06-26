@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "app38af627a": {
+    "app520f5e7b": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -45,11 +45,28 @@
       }
     }
   },
+  "function": {
+    "S3Trigger8a2abc3c": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true
+    }
+  },
   "storage": {
-    "s3d7e468c2": {
+    "s373b83eee": {
       "service": "S3",
       "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "S3Trigger8a2abc3c",
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
+          ]
+        }
+      ]
     }
   }
 }

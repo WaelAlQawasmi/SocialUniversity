@@ -19,5 +19,6 @@ public class MajorPostActivity extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_major_post, container, false);
+
     }
 }

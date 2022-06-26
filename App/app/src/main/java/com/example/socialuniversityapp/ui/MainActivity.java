@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.databinding.ActivityNavagationBinding;
+import com.example.socialuniversityapp.recycler_view.JobRecyclerView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -38,17 +40,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         binding = ActivityNavagationBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+ setContentView(binding.getRoot());
+
 
         setSupportActionBar(binding.appBarNavagation.toolbar);
-        binding.appBarNavagation.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -77,7 +77,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
     ///////////////////////MENU//////////////////////
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -116,9 +119,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-
     private void logout() {
+        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("remember","false");
+        editor.apply();
         Amplify.Auth.signOut(
                 () -> {
                     Log.i(TAG, "Signed out successfully");
@@ -130,8 +135,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         );
 
     }
-
-
 
     private void navigateToProfile() {
 
@@ -150,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void navigateToJob() {
 
 
-        Intent settingsIntent = new Intent(this, JobActivity.class);
+        Intent settingsIntent = new Intent(this, JobRecyclerView.class);
         startActivity(settingsIntent);
     }
 
