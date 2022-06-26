@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "auth": {
-        "app38af627a": {
+        "app520f5e7b": {
             "IdentityPoolId": "string",
             "IdentityPoolName": "string",
             "UserPoolId": "string",
@@ -17,8 +17,16 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientID": "string"
         }
     },
+    "function": {
+        "S3Trigger8a2abc3c": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
     "storage": {
-        "s3d7e468c2": {
+        "s373b83eee": {
             "BucketName": "string",
             "Region": "string"
         }

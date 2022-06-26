@@ -38,10 +38,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         binding = ActivityNavagationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         setSupportActionBar(binding.appBarNavagation.toolbar);
+
         binding.appBarNavagation.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
     ///////////////////////MENU//////////////////////
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -116,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
-
     private void logout() {
         Amplify.Auth.signOut(
                 () -> {
@@ -130,8 +134,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         );
 
     }
-
-
 
     private void navigateToProfile() {
 
