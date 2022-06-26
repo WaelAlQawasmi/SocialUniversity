@@ -77,8 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
         AuthSignUpOptions options = AuthSignUpOptions.builder()
                 .userAttribute(AuthUserAttributeKey.email(), email)
                 .userAttribute(AuthUserAttributeKey.nickname(), user_name)
-                .userAttribute(AuthUserAttributeKey.custom("custom:university_ids"), uniId)
-                .userAttribute(AuthUserAttributeKey.custom("custom:major_university"), major)
+                .userAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId)
+                .userAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major)
                 .build();
 
         Amplify.Auth.signUp(email, password, options,

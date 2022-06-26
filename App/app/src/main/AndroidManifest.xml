@@ -10,12 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
-        <activity android:name=".ui.AddJobActivity"></activity>
+        <activity
+            android:name=".ui.ui.JobDetails"
+            android:exported="false" />
+        <activity android:name=".ui.AddJobActivity" />
         <activity
             android:name=".ui.materialAndPostsActivity"
-            android:exported="false">
-        </activity>
-            />
+            android:exported="false"></activity>
         <activity
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
