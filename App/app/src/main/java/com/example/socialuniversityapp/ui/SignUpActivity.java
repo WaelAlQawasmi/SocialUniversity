@@ -83,8 +83,8 @@ public class SignUpActivity extends AppCompatActivity {
         List<AuthUserAttribute> attributes=new ArrayList<>();
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), email));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(),user_name));
-        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:university_ids"), uniId));
-        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:major_university"), major));
+        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId));
+        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major));
 
         Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
                 result -> {
