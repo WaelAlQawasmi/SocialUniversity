@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
 
                     mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                    startActivity(new Intent(LoginActivity.this, JobRecyclerView.class));
+                    startActivity(new Intent(LoginActivity.this, materialAndPostsActivity.class));
                     finish();
                 },
                 error -> Log.e(TAG, error.toString())
