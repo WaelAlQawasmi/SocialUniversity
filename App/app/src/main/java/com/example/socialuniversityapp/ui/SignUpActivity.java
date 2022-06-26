@@ -79,14 +79,16 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUp(String email, String password, String user_name, String major, String uniId) {
 
         mLoadingProgressBar = findViewById(R.id.loading);
-        // create a list of attributes
-        List<AuthUserAttribute> attributes=new ArrayList<>();
-        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.email(), email));
-        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(),user_name));
-        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:university_ids"), uniId));
-        attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:major_university"), major));
 
-        Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
+        AuthSignUpOptions options = AuthSignUpOptions.builder()
+                .userAttribute(AuthUserAttributeKey.email(), email)
+                .userAttribute(AuthUserAttributeKey.nickname(), user_name)
+                .userAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId)
+                .userAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major)
+                .build();
+
+        Amplify.Auth.signUp(email, password, options,
+
                 result -> {
 
                     runOnUiThread(new Runnable() {
