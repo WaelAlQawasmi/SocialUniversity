@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,6 +41,7 @@ public class UniversityPostActivity extends Fragment {
     private String authUserId;
     private Boolean flag;
     private int likesCount;
+    private String nickNameUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,13 +49,32 @@ public class UniversityPostActivity extends Fragment {
         return inflater.inflate(R.layout.activity_university_post, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         List<UniPost> uniPostList=new ArrayList<>();
 
-        // 
+        // fetch the current authenticated user ID and name
+        Amplify.Auth.fetchUserAttributes(
+                attributes -> {
+                    Log.i("AuthDemo", "User attributes = " + attributes.toString());
+                    attributes.forEach(authUserAttribute -> {
+                        if (authUserAttribute.getKey().getKeyString().equals("sub"))
+                        {
+                            authUserId=authUserAttribute.getValue();
+                        }
+                        if (authUserAttribute.getKey().getKeyString().equals("nickname"))
+                        {
+                            nickNameUser=authUserAttribute.getValue();
+                        }
+                    });
+                },
+                error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
+        );
+
+        //
         Amplify.API.query(ModelQuery.list(UniPost.class),
                 success -> {
                     if (success.hasData()) {
@@ -82,20 +103,6 @@ public class UniversityPostActivity extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onPostItemLikeClicked(int position) {
-
-                // fetch the current authenticated user ID
-                Amplify.Auth.fetchUserAttributes(
-                        attributes -> {
-                            Log.i("AuthDemo", "User attributes = " + attributes.toString());
-                            attributes.forEach(authUserAttribute -> {
-                                if (authUserAttribute.getKey().getKeyString().equals("sub"))
-                                {
-                                    authUserId=authUserAttribute.getValue();
-                                }
-                            });
-                        },
-                        error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
-                );
 
                 flag = false;
                 likesCount=0;
@@ -162,7 +169,10 @@ public class UniversityPostActivity extends Fragment {
 
             @Override
             public void onPostItemCommentClicked(int position) {
-                // TODO: 6/25/2022 move to the comments page (intent)
+                Intent intent=new Intent(getActivity(),CommentActivity.class);
+                intent.putExtra("postId",uniPostList.get(position).getId());
+                intent.putExtra("userName",nickNameUser);
+                startActivity(intent);
             }
         });
 

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job.xml" value="0.136" />
+        <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_comment.xml" value="0.1296875" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_job.xml" value="0.15443840579710144" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job.xml" value="0.2" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job_details.xml" value="0.18541666666666667" />
@@ -15,6 +17,7 @@
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
+
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_verification.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/drawable/ic_menu_camera.xml" value="0.2555" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.1" />

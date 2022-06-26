@@ -43,6 +43,7 @@ query GetUniPost($id: ID!) {
     comments {
       items {
         id
+        comment_user_name
         content
         createdAt
         updatedAt
@@ -80,6 +81,7 @@ query ListUniPosts(
 query GetComment($id: ID!) {
   getComment(id: $id) {
     id
+    comment_user_name
     content
     createdAt
     updatedAt
@@ -94,6 +96,7 @@ query ListComments(
   listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      comment_user_name
       content
       createdAt
       updatedAt
