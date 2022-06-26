@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,15 +16,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.adapter.fragmentAdapter;
 import com.example.socialuniversityapp.databinding.ActivityNavagationBinding;
+import com.example.socialuniversityapp.databinding.FragmentHomeBinding;
+import com.example.socialuniversityapp.ui.ui.home.HomeViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -33,6 +38,8 @@ public class materialAndPostsActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Button logout;
+    private Button profile;
+    private FragmentHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +49,9 @@ public class materialAndPostsActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         logout = findViewById(R.id.logout);
-
         tabLayout.setupWithViewPager(viewPager);
+        profile=findViewById(R.id.profile);
+
         fragmentAdapter fragmentAdapter = new fragmentAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         fragmentAdapter.addFragment(new MaterialActivity(), "material");
@@ -68,6 +76,11 @@ public class materialAndPostsActivity extends AppCompatActivity {
 
 
         });
+
+        profile.setOnClickListener(view ->{
+            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+        });
     }
         private void authSession(String method) {
             Amplify.Auth.fetchAuthSession(
@@ -75,9 +88,6 @@ public class materialAndPostsActivity extends AppCompatActivity {
                     error -> Log.e(TAG, error.toString())
             );
         }
-
-
-
 
 
 }
