@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.databinding.ActivityNavagationBinding;
+import com.example.socialuniversityapp.recycler_view.JobRecyclerView;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -111,7 +112,7 @@ public class JobActivity extends AppCompatActivity implements NavigationView.OnN
     private void navigateToJob() {
 
 
-        Intent settingsIntent = new Intent(this, JobActivity.class);
+        Intent settingsIntent = new Intent(this, JobRecyclerView.class);
         startActivity(settingsIntent);
     }
 
