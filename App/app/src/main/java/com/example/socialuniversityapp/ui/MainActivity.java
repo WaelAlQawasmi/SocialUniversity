@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.amplifyframework.core.Amplify;
@@ -123,6 +124,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void logout() {
+        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("remember","false");
+        editor.apply();
         Amplify.Auth.signOut(
                 () -> {
                     Log.i(TAG, "Signed out successfully");

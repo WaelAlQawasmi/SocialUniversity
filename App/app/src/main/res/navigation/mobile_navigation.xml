@@ -5,6 +5,8 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+
+
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.socialuniversityapp.ui.ui.home.HomeFragment"

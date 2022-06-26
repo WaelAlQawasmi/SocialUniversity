@@ -105,7 +105,12 @@ public class SignUpActivity extends AppCompatActivity {
                 },
                 error -> {
                     Log.e(TAG, "Sign up failed", error);
-                    mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                        }
+                    });
 
                     builder.setMessage(error.getMessage()).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
