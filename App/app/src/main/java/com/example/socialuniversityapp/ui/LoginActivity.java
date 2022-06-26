@@ -3,13 +3,17 @@ package com.example.socialuniversityapp.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -39,6 +43,31 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
         mSignUpLink = findViewById(R.id.login_toSign_up);
         mLoadingProgressBar = findViewById(R.id.loading_login);
+        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+        String Checkbox_true_or_false=preferences.getString("remember","");
+         Log.e(TAG,Checkbox_true_or_false);
+        if(Checkbox_true_or_false.equals("true")){
+            String stored_email=preferences.getString("email","");
+            String stored_password=preferences.getString("password","");
+
+            Amplify.Auth.signIn(
+                    stored_email,
+                    stored_password,
+                    result -> {
+                        Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+
+                        runOnUiThread(new Runnable() {
+                                          @Override
+                                          public void run() {
+                                              mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                                          }
+                        });
+                        startActivity(new Intent(LoginActivity.this, materialAndPostsActivity.class));
+                        finish();
+                    },
+                    error -> Log.e(TAG, error.toString())
+            );
+        }
 
 
 
@@ -64,9 +93,27 @@ public class LoginActivity extends AppCompatActivity {
             mLoadingProgressBar.setVisibility(View.VISIBLE);
             login(mEmail.getText().toString(), mPassword.getText().toString());
         }
+
     };
 
+
     private void login(String email, String password) {
+        CheckBox rememberMeCheckBox=findViewById(R.id.remember_me);
+
+        if(rememberMeCheckBox.isChecked()){
+            SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.putString("remember","true");
+            editor.putString("email",email);
+            editor.putString("password",password);
+            editor.apply();
+        }
+        else{
+            SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+            SharedPreferences.Editor editor=preferences.edit();
+            editor.putString("remember","false");
+            editor.apply();
+        }
         Amplify.Auth.signIn(
                 email,
                 password,
@@ -74,7 +121,9 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
 
                     mLoadingProgressBar.setVisibility(View.INVISIBLE);
+
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
                     finish();
                 },
                 error -> Log.e(TAG, error.toString())
