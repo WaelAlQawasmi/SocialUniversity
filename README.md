@@ -7,7 +7,7 @@ time searching on these resources in different places. in addition, if any stude
 Interested in finding a suitable job he can browse the job opportunities section to find
 a suitable job if he want to work while he is studying or after his graduation.
 the students can post or ask anything on the main channel or their department group to 
-help each other and exchanging their information.
+help each other and exchanging their Information.
 
 ___
 
