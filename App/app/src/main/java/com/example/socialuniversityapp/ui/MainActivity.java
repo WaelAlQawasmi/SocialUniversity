@@ -11,6 +11,7 @@ import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.databinding.ActivityNavagationBinding;
 import com.example.socialuniversityapp.recycler_view.JobRecyclerView;
+import com.example.socialuniversityapp.recycler_view.MajorPostActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.nav_wether:
-
+                navigateTomaterial();
 
                 return true;
 
@@ -150,10 +151,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(settingsIntent);
     }
 
+    private void navigateTomaterial() {
+
+
+        Intent settingsIntent = new Intent(this, materialAndPostsActivity.class);
+        startActivity(settingsIntent);
+    }
+
     private void navigateToJob() {
 
 
         Intent settingsIntent = new Intent(this, JobRecyclerView.class);
+        startActivity(settingsIntent);
+    }
+    private void navigateToMajorPostActivity() {
+
+
+
+        Intent settingsIntent = new Intent(this, MaterialActivity.class);
         startActivity(settingsIntent);
     }
 
@@ -183,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_wether:
 
-
+                navigateToMajorPostActivity();
                 return true;
 
             case R.id.nav_jobs:
