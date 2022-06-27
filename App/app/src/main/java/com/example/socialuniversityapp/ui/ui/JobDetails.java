@@ -39,7 +39,7 @@ public class JobDetails extends AppCompatActivity {
                         mAddress.setText(job.getAddress());
                     }
                 },
-                error -> Log.e(TAG, "Query failure", error)
+                error -> Log.e(TAG, "Query Failure !", error)
         );
 
     }
