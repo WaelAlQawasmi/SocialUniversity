@@ -19,7 +19,7 @@ import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.adapter.JobAdapter;
 import com.example.socialuniversityapp.data.JobData;
 import com.example.socialuniversityapp.ui.AddJobActivity;
-import com.example.socialuniversityapp.ui.JobDetails;
+//import com.example.socialuniversityapp.ui.JobDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -76,10 +76,10 @@ public class JobRecyclerView extends AppCompatActivity {
             Toast.makeText(
                     JobRecyclerView.this,
                     "you clicked :  " + newJobList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), JobDetails.class);
-            intent.putExtra("id", newJobList.get(position).getId());
-            System.out.println("Job list DB : "+ newJobList);
-            startActivity(intent);
+//            Intent intent = new Intent(getApplicationContext(), JobDetails.class);
+//            intent.putExtra("id", newJobList.get(position).getId());
+//            System.out.println("Job list DB : "+ newJobList);
+//            startActivity(intent);
         }){
 //            @Override
             public void onTaskItemClicked(int position) {
