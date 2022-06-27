@@ -54,9 +54,9 @@ public class materialAndPostsActivity extends AppCompatActivity {
 
         fragmentAdapter fragmentAdapter = new fragmentAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
-        fragmentAdapter.addFragment(new MaterialActivity(), "material");
-        fragmentAdapter.addFragment(new MajorPostActivity(), "major");
-        fragmentAdapter.addFragment(new UniversityPostActivity(), "university");
+       // fragmentAdapter.addFragment(new MaterialActivity(), "material");
+    fragmentAdapter.addFragment(new MajorPostActivity(), "major");
+   fragmentAdapter.addFragment(new UniversityPostActivity(), "university");
         viewPager.setAdapter(fragmentAdapter);
 
         logout.setOnClickListener(view -> {
