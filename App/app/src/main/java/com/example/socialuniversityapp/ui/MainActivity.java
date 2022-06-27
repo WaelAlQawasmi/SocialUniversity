@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void navigateToProfile() {
 
 
-        Intent settingsIntent = new Intent(this, MainActivity.class);
+        Intent settingsIntent = new Intent(this, Profile.class);
         startActivity(settingsIntent);
     }
 

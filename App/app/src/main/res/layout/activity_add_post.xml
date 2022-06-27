@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/titanoneregular"
+        android:fontFamily="@font/oswald_bold"
         android:text="Post"
         android:textColor="@color/black"
         android:textSize="40sp"
