@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
         <activity
+
             android:name=".ui.logoutInNavgation"
             android:exported="false" />
         <activity
@@ -21,6 +22,7 @@
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
         <activity
+
             android:name=".ui.VerificationActivity"
             android:exported="false" />
         <activity android:name=".ui.MainActivity" />
