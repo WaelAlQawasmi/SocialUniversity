@@ -1,6 +1,7 @@
 package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -47,6 +49,7 @@ public class AddPostActivity extends AppCompatActivity {
 
     Handler handler;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +66,14 @@ public class AddPostActivity extends AppCompatActivity {
         // Fetch Username from cognito
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
-                    username = attributes.get(3).toString();
-                    Log.i("AuthDemo", "User attributes = " + attributes.get(3).toString());
+                    Log.i("AuthDemo", "User attributes = " + attributes.toString());
+                    attributes.forEach(authUserAttribute -> {
+
+                        if (authUserAttribute.getKey().getKeyString().equals("nickname"))
+                        {
+                            username=authUserAttribute.getValue();
+                        }
+                    });
                 },
                 error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
         );
