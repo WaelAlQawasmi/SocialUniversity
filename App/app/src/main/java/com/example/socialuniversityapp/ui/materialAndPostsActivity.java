@@ -23,6 +23,7 @@ public class materialAndPostsActivity extends Fragment  {
     private ViewPager2 viewPager;
     private String []titles=new String[]{"Material","Major","University"};
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class materialAndPostsActivity extends Fragment  {
         viewPager = root.findViewById(R.id.viewPager);
 
 //        tabLayout.setupWithViewPager(viewPager);
+
 
 
 

@@ -4,6 +4,8 @@
     tools:showIn="navigation_view"
     android:id="@+id/activity_main_drawer">
 
+
+
     <group android:checkableBehavior="single" android:id="@+id/toolbar"
         tools:ignore="DuplicateIds">
         <item

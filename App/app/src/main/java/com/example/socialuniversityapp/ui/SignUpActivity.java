@@ -32,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     private ProgressBar mLoadingProgressBar;
     private AlertDialog.Builder builder;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

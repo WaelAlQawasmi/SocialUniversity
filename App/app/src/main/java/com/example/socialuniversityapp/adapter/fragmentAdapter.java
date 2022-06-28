@@ -20,6 +20,7 @@ private String []titles=new String[]{"Material","Major","University"};
 //    private final ArrayList<Fragment> fragmentArrayList=new ArrayList<>();
 //    private final ArrayList<String> fragmentsTitle=new ArrayList<>();
 
+
     public fragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }

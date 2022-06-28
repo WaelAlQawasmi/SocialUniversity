@@ -9,6 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.UniversityPostActivity">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/uniPosts"
         android:layout_width="match_parent"

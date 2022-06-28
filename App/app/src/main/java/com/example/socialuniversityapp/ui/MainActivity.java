@@ -30,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         DrawerLayout drawer = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navgationView);
         navigationView.setItemIconTintList(null);
         findViewById(R.id.toolbar).setOnClickListener(view -> {
             drawer.openDrawer(GravityCompat.START);
         });
+
 
 
         findViewById(R.id.fab).setOnClickListener(view -> {

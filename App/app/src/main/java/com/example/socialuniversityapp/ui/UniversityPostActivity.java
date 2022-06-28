@@ -47,6 +47,7 @@ public class UniversityPostActivity extends Fragment {
     private String nickNameUser;
     private FloatingActionButton mFloatingActionButton;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

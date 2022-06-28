@@ -8,6 +8,7 @@
     android:id="@+id/materialAndPostsActivity"
     tools:context=".ui.materialAndPostsActivity">
 
+
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

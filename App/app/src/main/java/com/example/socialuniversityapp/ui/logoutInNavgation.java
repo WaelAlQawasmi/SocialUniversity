@@ -25,7 +25,9 @@ public class logoutInNavgation extends Fragment {
         View root  = inflater.inflate(R.layout.activity_logout_in_navgation, container, false);
         logout();
 
+
         return root;
+
 
     }
     private void logout() {

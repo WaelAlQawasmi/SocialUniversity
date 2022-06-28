@@ -20,6 +20,7 @@ public class MajorPostActivity extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_major_post, container, false);
 
+
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
