@@ -22,7 +22,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
-//import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
         holder.stdName.setText(postList.get(position).getUserName());
-//        holder.postTime.setText(postList.get(position).getCreatedAt().toString());
+        holder.postTime.setText(postList.get(position).getCreatedAt().toString());
         holder.postDesc.setText(postList.get(position).getBody());
         if (postList.get(position).getImage() != null)
         {
