@@ -182,3 +182,36 @@ subscription OnDeleteLike {
     uniPostLikesId
   }
 }
+subscription OnCreateMaterial {
+  onCreateMaterial {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMaterial {
+  onUpdateMaterial {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMaterial {
+  onDeleteMaterial {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}

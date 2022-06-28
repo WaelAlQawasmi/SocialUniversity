@@ -42,11 +42,13 @@ import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 
+import com.amplifyframework.datastore.generated.model.Material;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 
@@ -75,7 +77,7 @@ public class MaterialActivity extends Fragment {
     String[] teamsName = {"team1", "team2", "team3"};
     HashMap<String, String> teams = new HashMap<String, String>();
     public static final int REQUEST_CODE = 123;
-    public static String IMGurl = null;
+    public static String IMGurl = "fileName";
 
 
     View root;
@@ -89,7 +91,7 @@ public class MaterialActivity extends Fragment {
         Button upload = (Button) root.findViewById(R.id.uplod_btn);
         upload.setOnClickListener(view -> {
 
-                imageUpload();
+            imageUpload();
 
         });
 
@@ -110,15 +112,27 @@ public class MaterialActivity extends Fragment {
 
 
 
-    public void imageUpload() {
-        // Launches photo picker in single-select mode.
-        // This means that the user can select one photo or video.
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*|application/pdf|audio/*");
 
-        startActivityForResult(intent, REQUEST_CODE);
+
+    public void Upload() {
+
+        EditText fileName = root.findViewById(R.id.fileName);
+        String titleName = fileName.getText().toString();
+
+        EditText fileDisc = root.findViewById(R.id.fileDisc);
+        String bodyName = fileDisc.getText().toString();
+
+        Material item = Material.builder()
+                .fileName(titleName)
+                .fileDis(bodyName)
+                .fileUrl(IMGurl)
+                .fileMajor("Engineering")
+                .build();
+        // Data store save
+
+      Amplify.API.mutate(ModelMutation.create(item),  success -> Log.i(TAG, "Saved item: " ),
+              error -> Log.e(TAG, "Could not save item to DataStore", error));
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -146,11 +160,12 @@ public class MaterialActivity extends Fragment {
                     // upload file to s3
                     imageKey = UUID.randomUUID().toString();
                     Amplify.Storage.uploadFile(
-                            imageKey + ".jpg",
+                            imageKey + data.getType(),
                             file,
-                            result -> {
+                            result ->  {
                                 Log.i(TAG, "Successfully uploaded: " + result.getKey());
-
+                                IMGurl = result.getKey();
+                                changUploadBotonColor();
 
                             },
                             storageFailure -> Log.e(TAG, "Failed Upload", storageFailure)
@@ -165,6 +180,23 @@ public class MaterialActivity extends Fragment {
                 return;
         }
 
+    }
+
+
+    public void imageUpload() {
+        // Launches photo picker in single-select mode.
+        // This means that the user can select one photo or video.
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*|application/pdf|audio/*");
+
+        startActivityForResult(intent, REQUEST_CODE);
+        Upload();
+    }
+
+    public void changUploadBotonColor() {
+        Button upload = root.findViewById(R.id.uplod_btn);
+        upload.setText("uploded!");
+        upload.setBackgroundColor(this.getResources().getColor(R.color.error_color));
     }
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
