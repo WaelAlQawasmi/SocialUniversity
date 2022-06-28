@@ -7,6 +7,10 @@
     <group android:checkableBehavior="single" android:id="@+id/toolbar"
         tools:ignore="DuplicateIds">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/username_icon"
             android:title="@string/menu_profile" />
@@ -18,10 +22,6 @@
             android:id="@+id/nav_jobs"
             android:icon="@drawable/jobs"
             android:title="@string/menu_jobs" />
-        <item
-            android:id="@+id/post"
-            android:icon="@drawable/password_icon"
-            android:title="post" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/out"
