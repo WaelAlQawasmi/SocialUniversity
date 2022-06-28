@@ -89,6 +89,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
 
+
+
+
                 result -> {
 
                     runOnUiThread(new Runnable() {

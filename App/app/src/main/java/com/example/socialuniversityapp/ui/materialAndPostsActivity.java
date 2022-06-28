@@ -35,9 +35,10 @@ public class materialAndPostsActivity extends Fragment  {
 //        tabLayout.setupWithViewPager(viewPager);
 
 
-
         fragmentAdapter fragmentAdapter = new fragmentAdapter(this.getActivity());
-
+//        fragmentAdapter.addFragment(new MaterialActivity(), "material");
+//        fragmentAdapter.addFragment(new MajorPostActivity(), "major");
+//        fragmentAdapter.addFragment(new UniversityPostActivity(), "university");
         viewPager.setAdapter(fragmentAdapter);
 
         new TabLayoutMediator(tabLayout,viewPager,(tab,position)->{
