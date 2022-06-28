@@ -22,7 +22,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -85,7 +85,7 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
             handler = new Handler(Looper.getMainLooper(), msg -> {
                 String imageUrl = msg.getData().getString("url");
                 holder.postImg.setVisibility(View.VISIBLE);
-                Picasso.get().load(imageUrl).into(holder.postImg);
+            //    Picasso.get().load(imageUrl).into(holder.postImg);
                 return true;
             });
 
