@@ -2,6 +2,10 @@ package com.example.socialuniversityapp.recycler_view;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,6 +31,11 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
     private static final String TAG = UniversityPostActivity.class.getSimpleName();
     List<UniPost> postList;
     ClickListener listener;
+
+
+
+    private Handler handler;
+    private String imageKey;
 
     public UniversityPostActivity(List<UniPost> postList, ClickListener listener) {
         this.postList = postList;
@@ -49,12 +59,37 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
         holder.stdName.setText(postList.get(position).getUserName());
-        holder.postTime.setText(postList.get(position).getCreatedAt().toString());
+//        holder.postTime.setText(postList.get(position).getCreatedAt().toString());
         holder.postDesc.setText(postList.get(position).getBody());
         if (postList.get(position).getImage() != null)
         {
-            // TODO: 6/24/2022 fetch the image from the url in the uniPost table
-            holder.postImg.setImageResource(R.drawable.post_img);
+            imageKey = postList.get(position).getImage();
+            Amplify.Storage.getUrl(
+                    imageKey+".jpg",
+                    success ->{
+                        Bundle bundle = new Bundle();
+                        bundle.putString("url", success.getUrl().toString());
+
+                        Message message = new Message();
+                        message.setData(bundle);
+
+                        handler.sendMessage(message);
+
+                        Log.i(TAG, "image " + success.getUrl());
+                    },
+                    error -> {
+                        Log.i(TAG, "image Error : " + error);
+                    });
+
+            // Handler
+            handler = new Handler(Looper.getMainLooper(), msg -> {
+                String imageUrl = msg.getData().getString("url");
+                holder.postImg.setVisibility(View.VISIBLE);
+                Picasso.get().load(imageUrl).into(holder.postImg);
+                return true;
+            });
+
+
         }
         holder.postLikes.setText(postList.get(position).getLikes().size()+" Like");
         holder.postComments.setText(postList.get(position).getComments().size()+" Comment");
@@ -72,11 +107,11 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
         TextView stdName;
         TextView postTime;
         TextView postDesc;
-        ImageView postImg;
         TextView postLikes;
         TextView postComments;
-        Button like;
-        Button comment;
+        ImageView postImg;
+
+
 
         ClickListener listener;
 
@@ -91,13 +126,12 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
             postImg=itemView.findViewById(R.id.post_img);
             postLikes=itemView.findViewById(R.id.post_like);
             postComments=itemView.findViewById(R.id.post_comment);
-            like=itemView.findViewById(R.id.like);
-            comment=itemView.findViewById(R.id.comment);
 
-            like.setOnClickListener(view -> {
+
+            postLikes.setOnClickListener(view -> {
                 listener.onPostItemLikeClicked(getAdapterPosition());
             });
-            comment.setOnClickListener(view -> {
+            postComments.setOnClickListener(view -> {
                 listener.onPostItemCommentClicked(getAdapterPosition());
             });
 
@@ -106,6 +140,12 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
     public interface ClickListener {
         void onPostItemLikeClicked(int position);
         void onPostItemCommentClicked(int position);
+    }
+    private void imageContentLoad(String imageKey, PostViewHolder holder){
+
+
+
+
     }
 
 }

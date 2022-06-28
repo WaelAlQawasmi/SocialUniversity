@@ -128,10 +128,7 @@ public class UniversityPostActivity extends Fragment {
                                     likesCount++;
                                     if (postLike.getUserId().equals(authUserId)){
                                         flag = true;
-                                        // change the button
-                                        Button bLike = view.findViewById(R.id.like);
-                                        bLike.setText("Liked");
-                                        bLike.setEnabled(false);
+
                                         // TODO: 6/25/2022 disLike -> delete the current like row from the table
                                     }
                                 }
@@ -193,4 +190,5 @@ public class UniversityPostActivity extends Fragment {
         return true;
         });
     }
+
 }

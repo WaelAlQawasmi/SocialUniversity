@@ -48,12 +48,7 @@
                     android:layout_marginStart="12dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/uniTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:text="33 min" />
+
 
             </LinearLayout>
 
@@ -66,35 +61,41 @@
                 android:src="@drawable/more" />
 
         </LinearLayout>
-
         <TextView
             android:id="@+id/postDesc"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Description"
-            android:padding="10dp"
+            android:layout_marginStart="9dp"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:layout_marginTop="10dp"
+            android:text="33 min" />
+
 
         <ImageView
             android:id="@+id/post_img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:src="@drawable/ic_launcher_background"
             tools:srcCompat="@tools:sample/avatars"
+            android:layout_gravity="center"
             android:visibility="gone"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
 
             <TextView
                 android:id="@+id/post_like"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1.2K Like"
+                android:drawableStart="@drawable/_like_"
+                android:drawablePadding="5dp"
+                android:text="0 Like"
                 android:padding="5dp"
                 android:textColor="@color/main_color"
                 android:textStyle="bold" />
@@ -105,42 +106,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="1.2K Comment"
-                android:textAlignment="textEnd"
+                android:drawableStart="@drawable/comment"
+                android:drawablePadding="5dp"
                 android:padding="5dp"
                 android:textColor="@color/main_color"
                 android:textStyle="bold"/>
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Like"
-                android:layout_gravity="start"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:layout_marginStart="45dp"
-                android:background="@drawable/button_style"
-                app:rippleColor="#33AAAAAA" />
-
-            <Button
-                android:id="@+id/comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="COMMENT"
-                android:textColor="@color/white"
-                android:textSize="11sp"
-                android:layout_marginStart="90dp"
-                android:background="@drawable/button_style"
-                app:rippleColor="#33AAAAAA" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
