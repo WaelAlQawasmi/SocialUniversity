@@ -1,5 +1,7 @@
 package com.example.socialuniversityapp.ui;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -8,11 +10,6 @@ import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.amplifyframework.storage.options.StorageUploadFileOptions;
-import com.example.socialuniversityapp.R;
-
-
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
@@ -65,8 +62,11 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.amplifyframework.storage.options.StorageUploadFileOptions;
+import com.example.socialuniversityapp.R;
 
-public class MaterialActivity extends AppCompatActivity {
+public class MaterialActivity extends Fragment {
+
 
     String[] states = {"new", "assigned", "in progress", "complete"};
     String[] teamsName = {"team1", "team2", "team3"};
@@ -75,12 +75,16 @@ public class MaterialActivity extends AppCompatActivity {
     public static String IMGurl = null;
 
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_material);
-        Button upload =(Button) findViewById(R.id.uplod_btn);
+   
+      
+     
+   public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        
+       View root= inflater.inflate(R.layout.activity_material, container, false);
+       int myTasks =root.R.id.uplod_btn;
+  Button upload =(Button) findViewById(root.R.id.uplod_btn);
         upload.setOnClickListener(view -> {
             try {
                 uploadFile();
@@ -90,18 +94,9 @@ public class MaterialActivity extends AppCompatActivity {
         });
 
     }
+return root;
 
-
-    // IF YOU EDIT
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        int myTasks =R.id.uplod_btn;
-//
-//
-//
-//        return inflater.inflate(R.layout.activity_material, container, false);
-//    }
+    }
 
 
 
@@ -113,6 +108,13 @@ public class MaterialActivity extends AppCompatActivity {
         intent.setType("image/*");
 
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 
 
@@ -177,6 +179,7 @@ public class MaterialActivity extends AppCompatActivity {
         upload.setText("uploded!");
         upload.setBackgroundColor(this.getResources().getColor(R.color.browser_actions_bg_grey));
     }
+
 
 
 

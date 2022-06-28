@@ -1,10 +1,8 @@
 package com.example.socialuniversityapp.ui;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +27,11 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Like;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
+
+import com.example.socialuniversityapp.recycler_view.UniversityPostAdapter;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +110,7 @@ public class UniversityPostActivity extends Fragment {
 
 
         // defining action to the like and comment buttons
-        com.example.socialuniversityapp.recycler_view.UniversityPostActivity postRecyclerView = new com.example.socialuniversityapp.recycler_view.UniversityPostActivity(uniPostList, new com.example.socialuniversityapp.recycler_view.UniversityPostActivity.ClickListener() {
+        UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(uniPostList, new UniversityPostAdapter.ClickListener() {
             @SuppressLint("SetTextI18n")
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
