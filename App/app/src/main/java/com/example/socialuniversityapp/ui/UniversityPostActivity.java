@@ -29,6 +29,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Like;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
+import com.example.socialuniversityapp.recycler_view.UniversityPostAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class UniversityPostActivity extends Fragment {
 
 
         // defining action to the like and comment buttons
-        com.example.socialuniversityapp.recycler_view.UniversityPostActivity postRecyclerView = new com.example.socialuniversityapp.recycler_view.UniversityPostActivity(uniPostList, new com.example.socialuniversityapp.recycler_view.UniversityPostActivity.ClickListener() {
+        UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(uniPostList, new UniversityPostAdapter.ClickListener() {
             @SuppressLint("SetTextI18n")
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -128,10 +129,7 @@ public class UniversityPostActivity extends Fragment {
                                     likesCount++;
                                     if (postLike.getUserId().equals(authUserId)){
                                         flag = true;
-                                        // change the button
-                                        Button bLike = view.findViewById(R.id.like);
-                                        bLike.setText("Liked");
-                                        bLike.setEnabled(false);
+
                                         // TODO: 6/25/2022 disLike -> delete the current like row from the table
                                     }
                                 }
