@@ -26,9 +26,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostActivity.PostViewHolder> {
+public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAdapter.PostViewHolder> {
 
-    private static final String TAG = UniversityPostActivity.class.getSimpleName();
+    private static final String TAG = UniversityPostAdapter.class.getSimpleName();
     List<UniPost> postList;
     ClickListener listener;
 
@@ -37,7 +37,7 @@ public class UniversityPostActivity extends RecyclerView.Adapter<UniversityPostA
     private Handler handler;
     private String imageKey;
 
-    public UniversityPostActivity(List<UniPost> postList, ClickListener listener) {
+    public UniversityPostAdapter(List<UniPost> postList, ClickListener listener) {
         this.postList = postList;
         this.listener = listener;
     }
