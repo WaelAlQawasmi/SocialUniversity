@@ -130,3 +130,32 @@ query ListLikes(
     nextToken
   }
 }
+query GetMaterial($id: ID!) {
+  getMaterial(id: $id) {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}
+query ListMaterials(
+  $filter: ModelMaterialFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMaterials(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      fileName
+      fileDis
+      fileUrl
+      fileMajor
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
