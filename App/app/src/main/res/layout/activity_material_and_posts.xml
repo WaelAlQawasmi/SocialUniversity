@@ -1,73 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:id="@+id/materialAndPostLayout"
+    android:id="@+id/materialAndPostsActivity"
     tools:context=".ui.materialAndPostsActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:tabIndicatorColor="@color/white"
+        android:background="@color/main_color"
+        app:tabTextColor="#D6D6D6"
+        android:id="@+id/tabLayout">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:text="material"
-            android:layout_height="wrap_content">
 
-        </com.google.android.material.tabs.TabItem>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:text="major"
-            android:layout_height="wrap_content">
 
-        </com.google.android.material.tabs.TabItem>
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:text="university"
-            android:layout_height="wrap_content">
 
-        </com.google.android.material.tabs.TabItem>
+
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/viewPager"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tabLayout"
+        android:id="@+id/viewPager">
 
 
-    </androidx.viewpager.widget.ViewPager>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="profile"
-        android:id="@+id/profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+    </androidx.viewpager2.widget.ViewPager2>
 
-    </Button>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="logout"
-        android:id="@+id/logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile">
-
-    </Button>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

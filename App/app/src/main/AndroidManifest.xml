@@ -11,27 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
         <activity
+            android:name=".ui.logoutInNavgation"
+            android:exported="false" />
+        <activity
             android:name=".ui.ui.JobDetails"
             android:exported="false" />
         <activity android:name=".ui.AddJobActivity" />
         <activity
-            android:name=".ui.materialAndPostsActivity"
-            android:exported="false"></activity>
-        <activity
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
-        <activity
-            android:name=".NavagationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_navagation"
-            android:theme="@style/Theme.SocialUniversityApp.NoActionBar" />
-        <activity
-            android:name=".NavigationDrawerActivity"
-            android:exported="false" />
-        <activity android:name=".ui.MaterialActivity" />
-        <activity android:name=".ui.JobActivity" />
-        <activity android:name=".ui.UniversityPostActivity" />
-        <activity android:name=".ui.MajorPostActivity" />
         <activity
             android:name=".ui.VerificationActivity"
             android:exported="false" />

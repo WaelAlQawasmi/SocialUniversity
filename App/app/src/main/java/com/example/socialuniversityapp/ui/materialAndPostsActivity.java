@@ -1,93 +1,60 @@
 package com.example.socialuniversityapp.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.amplifyframework.core.Amplify;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.adapter.fragmentAdapter;
-import com.example.socialuniversityapp.databinding.ActivityNavagationBinding;
-import com.example.socialuniversityapp.databinding.FragmentHomeBinding;
-import com.example.socialuniversityapp.ui.ui.home.HomeViewModel;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-public class materialAndPostsActivity extends AppCompatActivity {
+
+public class materialAndPostsActivity extends Fragment  {
     private static final String TAG = materialAndPostsActivity.class.getSimpleName();
     private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private Button logout;
-    private Button profile;
-    private FragmentHomeBinding binding;
+    private ViewPager2 viewPager;
+    private String []titles=new String[]{"Material","Major","University"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_material_and_posts);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root  = inflater.inflate(R.layout.activity_material_and_posts, container, false);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
-        logout = findViewById(R.id.logout);
-        tabLayout.setupWithViewPager(viewPager);
-        profile=findViewById(R.id.profile);
 
-        fragmentAdapter fragmentAdapter = new fragmentAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        tabLayout = root.findViewById(R.id.tabLayout);
+        viewPager = root.findViewById(R.id.viewPager);
 
-        fragmentAdapter.addFragment(new MaterialActivity(), "material");
-        fragmentAdapter.addFragment(new MajorPostActivity(), "major");
-        fragmentAdapter.addFragment(new UniversityPostActivity(), "university");
+//        tabLayout.setupWithViewPager(viewPager);
+
+
+        fragmentAdapter fragmentAdapter = new fragmentAdapter(this.getActivity());
+//        fragmentAdapter.addFragment(new MaterialActivity(), "material");
+//        fragmentAdapter.addFragment(new MajorPostActivity(), "major");
+//        fragmentAdapter.addFragment(new UniversityPostActivity(), "university");
         viewPager.setAdapter(fragmentAdapter);
 
-        logout.setOnClickListener(view -> {
-            SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
-            SharedPreferences.Editor editor=preferences.edit();
-            editor.putString("remember","false");
-            editor.apply();
-            Amplify.Auth.signOut(
-                    () -> {
-                        Log.i(TAG, "Signed out successfully");
-                        startActivity(new Intent(materialAndPostsActivity.this, LoginActivity.class));
-                        authSession("logout");
-                        finish();
-                    },
-                    error -> Log.e(TAG, error.toString())
-            );
-
-
-        });
-
-        profile.setOnClickListener(view ->{
-            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(intent);
-        });
+        new TabLayoutMediator(tabLayout,viewPager,(tab,position)->{
+tab.setText(titles[position]);
+        }).attach();
+        return root;
     }
-        private void authSession(String method) {
-            Amplify.Auth.fetchAuthSession(
-                    result -> Log.i(TAG, "Auth Session => " + method + result),
-                    error -> Log.e(TAG, error.toString())
-            );
-        }
+
+
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
 
 
 }

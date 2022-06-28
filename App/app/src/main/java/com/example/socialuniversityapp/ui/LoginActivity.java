@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                               mLoadingProgressBar.setVisibility(View.INVISIBLE);
                                           }
                         });
-                        startActivity(new Intent(LoginActivity.this, materialAndPostsActivity.class));
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
                     },
                     error -> Log.e(TAG, error.toString())

@@ -3,22 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_profile">
 
 
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.socialuniversityapp.ui.ui.home.HomeFragment"
+        android:id="@+id/nav_profile"
+        android:name="com.example.socialuniversityapp.ui.materialAndPostsActivity"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/activity_material_and_posts" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.socialuniversityapp.ui.ui.gallery.GalleryFragment"
-        android:label="@string/menu_weather"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_jobs"
+        android:name="com.example.socialuniversityapp.ui.JobActivity"
+        android:label="Jobs"
+        tools:layout="@layout/activity_job_recycler" />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.socialuniversityapp.ui.logoutInNavgation"
+        android:label="logout"
+        tools:layout="@layout/activity_logout_in_navgation" />
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.socialuniversityapp.ui.ui.slideshow.SlideshowFragment"
