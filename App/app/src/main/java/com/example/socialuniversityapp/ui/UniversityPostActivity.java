@@ -1,10 +1,8 @@
 package com.example.socialuniversityapp.ui;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +27,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Like;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.socialuniversityapp.recycler_view.UniversityPostAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +41,6 @@ public class UniversityPostActivity extends Fragment {
     private Boolean flag;
     private int likesCount;
     private String nickNameUser;
-    private FloatingActionButton mFloatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,20 +92,12 @@ public class UniversityPostActivity extends Fragment {
                 error -> {
                     Log.e(TAG, "Could not query Api", error);
                 });
-        // move to add post Activity
-        mFloatingActionButton = view.findViewById(R.id.floating_action_button);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent (getActivity(), AddPostActivity.class));
-            }
-        });
-        handler = new Handler(Looper.getMainLooper(), msg -> {
-        mRecyclerView = view.findViewById(R.id.uniPosts);
 
+        handler = new Handler(Looper.getMainLooper(), msg -> {
+        mRecyclerView=view.findViewById(R.id.uniPosts);
 
         // defining action to the like and comment buttons
-        com.example.socialuniversityapp.recycler_view.UniversityPostActivity postRecyclerView = new com.example.socialuniversityapp.recycler_view.UniversityPostActivity(uniPostList, new com.example.socialuniversityapp.recycler_view.UniversityPostActivity.ClickListener() {
+        UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(uniPostList, new UniversityPostAdapter.ClickListener() {
             @SuppressLint("SetTextI18n")
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override

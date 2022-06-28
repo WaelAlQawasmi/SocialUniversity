@@ -1,4 +1,3 @@
-
 package com.example.socialuniversityapp.ui;
 
 import android.os.Bundle;
@@ -26,5 +25,4 @@ public class JobActivity extends Fragment {
     }
 
     
-
 }
