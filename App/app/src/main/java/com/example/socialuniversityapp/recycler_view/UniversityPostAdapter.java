@@ -85,7 +85,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
             handler = new Handler(Looper.getMainLooper(), msg -> {
                 String imageUrl = msg.getData().getString("url");
                 holder.postImg.setVisibility(View.VISIBLE);
-                Picasso.get().load(imageUrl).into(holder.postImg);
+          Picasso.get().load(imageUrl).into(holder.postImg);
                 return true;
             });
 
