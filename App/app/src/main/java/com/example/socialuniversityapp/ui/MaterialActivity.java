@@ -75,16 +75,16 @@ public class MaterialActivity extends Fragment {
     public static String IMGurl = null;
 
 
-   
-      
-     
+
+
+    View root;
    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        
-       View root= inflater.inflate(R.layout.activity_material, container, false);
-       int myTasks =root.R.id.uplod_btn;
-  Button upload =(Button) findViewById(root.R.id.uplod_btn);
+
+       root= inflater.inflate(R.layout.activity_material, container, false);
+       int myTasks =R.id.uplod_btn;
+  Button upload =(Button) root.findViewById(R.id.uplod_btn);
         upload.setOnClickListener(view -> {
             try {
                 uploadFile();
@@ -93,7 +93,7 @@ public class MaterialActivity extends Fragment {
             }
         });
 
-    }
+
 return root;
 
     }
@@ -157,7 +157,7 @@ return root;
     private File BitMapHandler(Uri currentUri, String titleName) throws IOException {
         Bitmap bitmap = getBitmapFromUri(currentUri);
 
-        File file = new File(getApplicationContext().getFilesDir(), titleName + ".jpg");
+        File file = new File(getActivity().getFilesDir(), titleName + ".jpg");
         OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
         os.close();
@@ -167,7 +167,7 @@ return root;
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
+                getActivity().getContentResolver().openFileDescriptor(uri, "r");
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
@@ -175,7 +175,7 @@ return root;
         return image;
     }
     public void changUploadBotonColor() {
-        Button upload = findViewById(R.id.uplod_btn);
+        Button upload = root.findViewById(R.id.uplod_btn);
         upload.setText("uploded!");
         upload.setBackgroundColor(this.getResources().getColor(R.color.browser_actions_bg_grey));
     }
