@@ -134,7 +134,6 @@ query GetMaterial($id: ID!) {
   getMaterial(id: $id) {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -150,7 +149,6 @@ query ListMaterials(
     items {
       id
       fileName
-      fileDis
       fileUrl
       fileMajor
       createdAt
