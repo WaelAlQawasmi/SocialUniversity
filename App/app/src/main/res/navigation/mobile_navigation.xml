@@ -3,15 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_profile">
+    app:startDestination="@+id/nav_home">
 
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.socialuniversityapp.ui.materialAndPostsActivity"
+        android:label="Home"
+        tools:layout="@layout/activity_material_and_posts" />
 
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.socialuniversityapp.ui.materialAndPostsActivity"
+        android:name="com.example.socialuniversityapp.ui.Profile"
         android:label="@string/menu_profile"
-        tools:layout="@layout/activity_material_and_posts" />
+        tools:layout="@layout/activity_profile" />
 
     <fragment
         android:id="@+id/nav_jobs"

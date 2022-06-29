@@ -218,3 +218,45 @@ mutation DeleteLike(
     uniPostLikesId
   }
 }
+mutation CreateMaterial(
+  $input: CreateMaterialInput!
+  $condition: ModelMaterialConditionInput
+) {
+  createMaterial(input: $input, condition: $condition) {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMaterial(
+  $input: UpdateMaterialInput!
+  $condition: ModelMaterialConditionInput
+) {
+  updateMaterial(input: $input, condition: $condition) {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMaterial(
+  $input: DeleteMaterialInput!
+  $condition: ModelMaterialConditionInput
+) {
+  deleteMaterial(input: $input, condition: $condition) {
+    id
+    fileName
+    fileDis
+    fileUrl
+    fileMajor
+    createdAt
+    updatedAt
+  }
+}
