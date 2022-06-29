@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -26,11 +29,16 @@ public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG = SignUpActivity.class.getSimpleName();
     public static final String EMAIL = "email";
-    private EditText mFullName, mUniversityId, mMajor, mPassword, mEmail;
+    private EditText mFullName, mUniversityId, mPassword, mEmail;
+    private AutoCompleteTextView mAutoCompleteTextView;
     private TextView mLoginLink;
     private Button mSignUpButton;
     private ProgressBar mLoadingProgressBar;
     private AlertDialog.Builder builder;
+
+    private String majorName;
+    String[] items = {"Computer Science", "Software Eng", "AI", "Networking Sec", "Data Analysis", "Math", "Physics"};
+    ArrayAdapter<String> adapterItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         // Inflate
         mFullName = findViewById(R.id.sign_up_fullName_text);
         mUniversityId =findViewById(R.id.sign_up_idNumber_text);
-        mMajor = findViewById(R.id.sign_up_major_text);
+        mAutoCompleteTextView = findViewById(R.id.sign_up_major_text);
         mPassword = findViewById(R.id.sign_up_password_text);
         mEmail = findViewById(R.id.sign_up_email_text);
         mLoginLink = findViewById(R.id.sign_up_toLogin);
@@ -48,6 +56,12 @@ public class SignUpActivity extends AppCompatActivity {
         mLoadingProgressBar = findViewById(R.id.loading);
 
         builder = new AlertDialog.Builder(this);
+
+        adapterItem = new ArrayAdapter<>(this, R.layout.list_item, items);
+        mAutoCompleteTextView.setAdapter(adapterItem);
+
+        // auto Complete Click
+        mAutoCompleteTextView.setOnItemClickListener(autoCompleteTextViewClick);
 
         // Go To Login Activity
         mLoginLink.setOnClickListener(mLoginLinkClick);
@@ -57,6 +71,28 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    // auto Complete Click
+    private final AdapterView.OnItemClickListener autoCompleteTextViewClick = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            char currentValue = adapterView.getItemAtPosition(position).toString().charAt(0);
+            switch (currentValue){
+                case 'C':
+                case 'S':
+                case 'A':
+                case 'N':
+                case 'D':
+                case 'P':
+                case 'M':
+                    majorName = adapterView.getItemAtPosition(position).toString();
+                    break;
+
+            }
+
+        }
+    };
+
     private final View.OnClickListener mSignUpButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -64,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
             signUp(mEmail.getText().toString(),
                     mPassword.getText().toString(),
                     mFullName.getText().toString(),
-                    mMajor.getText().toString(),
+                    majorName,
                     mUniversityId.getText().toString());
         }
     };
