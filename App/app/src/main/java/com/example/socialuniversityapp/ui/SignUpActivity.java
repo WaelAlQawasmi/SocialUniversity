@@ -37,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     private AlertDialog.Builder builder;
 
     private String majorName;
-    String[] items = {"Computer Science", "Software Eng", "AI", "Networking Sec", "Data Analysis", "Math", "Physics"};
+    String[] items = {"Computer Science", "Software Eng", "AI", "Networking Sec", "Data Analysis", "Math", "Physics", "History"};
     ArrayAdapter<String> adapterItem;
 
     @Override
