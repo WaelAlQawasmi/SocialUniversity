@@ -71,7 +71,7 @@ import com.example.socialuniversityapp.R;
 
 public class AddMaterial extends AppCompatActivity{
     private String username, imageKey;
-
+    String titleName;
 
     HashMap<String, String> teams = new HashMap<String, String>();
     public static final int REQUEST_CODE = 123;
@@ -98,14 +98,13 @@ public class AddMaterial extends AppCompatActivity{
     public void Upload() {
 
         EditText fileName = findViewById(R.id.fileName);
-        String titleName = fileName.getText().toString();
+         titleName = fileName.getText().toString();
 
         EditText fileDisc = findViewById(R.id.fileDisc);
         String bodyName = fileDisc.getText().toString();
 
         Material item = Material.builder()
                 .fileName(titleName)
-                .fileDis(bodyName)
                 .fileUrl(imageKey)
                 .fileMajor("Engineering")
                 .build();
@@ -133,7 +132,7 @@ public class AddMaterial extends AppCompatActivity{
                     Bitmap bitmapImage = getBitmapFromUri(currentUri);
 
                     // Convert Bitmap to File
-                    File file = new File(getFilesDir(), "image.jpg");
+                    File file = new File(getFilesDir(), titleName+".jpg");
                     OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
                     bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, os);
                     os.close();

@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedOutputStream;
@@ -57,6 +59,23 @@ public class Profile extends Fragment {
         TextView email = root.findViewById(R.id.email_profile);
         TextView major = root.findViewById(R.id.major_prof);
         TextView uniID = root.findViewById(R.id.uniId);
+        ImageView imageEdit=root.findViewById(R.id.edit);
+
+        EditText nameEdit = root.findViewById(R.id.userName_edit);
+        EditText uniId_edit = root.findViewById(R.id.uniId_edit);
+        EditText major_edit = root.findViewById(R.id.major_edit);
+
+
+        imageEdit.setOnClickListener(view -> {
+            name.setVisibility(View.GONE);
+            uniID.setVisibility(View.GONE);
+            major.setVisibility(View.GONE);
+
+             nameEdit.setVisibility(View.VISIBLE);
+             uniId_edit.setVisibility(View.VISIBLE);
+             major_edit.setVisibility(View.VISIBLE);
+
+        });
 //        newImage = findViewById(R.id.imageView_profile);
 
         Amplify.Auth.fetchUserAttributes(

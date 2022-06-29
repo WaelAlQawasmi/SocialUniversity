@@ -225,7 +225,6 @@ mutation CreateMaterial(
   createMaterial(input: $input, condition: $condition) {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -239,7 +238,6 @@ mutation UpdateMaterial(
   updateMaterial(input: $input, condition: $condition) {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -253,7 +251,6 @@ mutation DeleteMaterial(
   deleteMaterial(input: $input, condition: $condition) {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt

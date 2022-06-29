@@ -31,7 +31,15 @@
             android:text="Name"
             android:textColor="@color/black"
             android:textSize="35sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="visible" />
+        <EditText
+            android:id="@+id/userName_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_alignBottom="@+id/userName_profile"
+            />
 
         <TextView
             android:id="@+id/title"
@@ -48,6 +56,7 @@
             android:layout_below="@+id/title"
             android:layout_marginTop="-30dp"
             android:src="@drawable/profile_ui_design" />
+
 
         <TextView
             android:id="@+id/My_profile"
@@ -92,6 +101,15 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/major_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_alignBottom="@+id/major_prof"
+            />
+
+
         <TextView
             android:id="@+id/uniId"
             android:layout_width="match_parent"
@@ -105,6 +123,14 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/uniId_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_alignBottom="@+id/uniId"
+            />
 
         <TextView
             android:id="@+id/logout_profile"
@@ -132,6 +158,30 @@
             app:srcCompat="@drawable/camera" />
 
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="409dp"
+            android:layout_marginEnd="6dp"
+            app:srcCompat="@drawable/pencil" />
+
+        <Button
+            android:id="@+id/editDone"
+            android:layout_width="111dp"
+            android:layout_height="37dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="bottom|right"
+            android:text="edit"
+            android:layout_marginTop="669dp"
+            android:layout_marginEnd="13dp"
+            app:srcCompat="@drawable/email_icon" />
+
+
+</RelativeLayout>
 
 

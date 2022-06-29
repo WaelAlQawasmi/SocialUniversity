@@ -1970,22 +1970,6 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "fileDis",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
                         "name": "fileUrl",
                         "description": null,
                         "args": [],
@@ -2073,16 +2057,6 @@
                     },
                     {
                         "name": "fileName",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "fileDis",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -3662,20 +3636,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "fileDis",
-                        "description": null,
-                        "type": {
-                            "kind": "NON_NULL",
-                            "name": null,
-                            "ofType": {
-                                "kind": "SCALAR",
-                                "name": "String",
-                                "ofType": null
-                            }
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "fileUrl",
                         "description": null,
                         "type": {
@@ -3716,16 +3676,6 @@
                 "inputFields": [
                     {
                         "name": "fileName",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "fileDis",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -3819,16 +3769,6 @@
                     },
                     {
                         "name": "fileName",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "String",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "fileDis",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
