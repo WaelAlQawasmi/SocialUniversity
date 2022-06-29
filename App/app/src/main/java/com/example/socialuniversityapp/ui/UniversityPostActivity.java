@@ -44,6 +44,8 @@ public class UniversityPostActivity extends Fragment {
     private String nickNameUser;
     private FloatingActionButton mFloatingActionButton;
 
+    private FloatingActionButton mFloatingActionButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -106,6 +108,11 @@ public class UniversityPostActivity extends Fragment {
 
         handler = new Handler(Looper.getMainLooper(), msg -> {
         mRecyclerView=view.findViewById(R.id.uniPosts);
+        mFloatingActionButton = view.findViewById(R.id.floating_action_button);
+
+        mFloatingActionButton.setOnClickListener(view1 -> {
+            startActivity(new Intent(getActivity().getApplicationContext(), AddPostActivity.class));
+        });
 
         // defining action to the like and comment buttons
         UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(uniPostList, new UniversityPostAdapter.ClickListener() {

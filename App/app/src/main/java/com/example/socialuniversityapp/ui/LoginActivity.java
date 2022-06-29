@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
         mSignUpLink = findViewById(R.id.login_toSign_up);
         mLoadingProgressBar = findViewById(R.id.loading_login);
+
         SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
         String Checkbox_true_or_false=preferences.getString("remember","");
          Log.e(TAG,Checkbox_true_or_false);

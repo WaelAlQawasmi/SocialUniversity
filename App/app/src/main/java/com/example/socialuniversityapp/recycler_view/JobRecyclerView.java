@@ -32,15 +32,19 @@ public class JobRecyclerView extends AppCompatActivity {
     List<JobData> jobList = new ArrayList<>();
     Handler handler;
 
+    private FloatingActionButton mFloatingActionButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_recycler);
-        mRecyclerView = findViewById(R.id.jobs_recycler);
 
-        FloatingActionButton addJob = findViewById(R.id.floating_action_button);
-        addJob.setOnClickListener(view -> {
+        mRecyclerView = findViewById(R.id.jobs_recycler);
+        mFloatingActionButton = findViewById(R.id.floating_action_button);
+
+        mFloatingActionButton.setOnClickListener(view -> {
             navigateToAddJob();
+            startActivity(new Intent(JobRecyclerView.this, AddJobActivity.class));
         });
 
         Amplify.API.query(ModelQuery.list(Job.class),
