@@ -33,13 +33,13 @@
             android:textSize="35sp"
             android:textStyle="bold"
             android:visibility="visible" />
+
         <EditText
             android:id="@+id/userName_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_alignBottom="@+id/userName_profile"
-            />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/title"
@@ -105,7 +105,7 @@
             android:id="@+id/major_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_alignBottom="@+id/major_prof"
             />
 
@@ -128,7 +128,7 @@
             android:id="@+id/uniId_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_alignBottom="@+id/uniId"
             />
 
@@ -170,15 +170,16 @@
             app:srcCompat="@drawable/pencil" />
 
         <Button
+            android:visibility="invisible"
             android:id="@+id/editDone"
             android:layout_width="111dp"
             android:layout_height="37dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|right"
+            android:layout_marginTop="406dp"
+            android:layout_marginEnd="1dp"
             android:text="edit"
-            android:layout_marginTop="669dp"
-            android:layout_marginEnd="13dp"
             app:srcCompat="@drawable/email_icon" />
 
 
