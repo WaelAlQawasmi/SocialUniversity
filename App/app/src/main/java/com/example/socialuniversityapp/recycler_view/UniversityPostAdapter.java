@@ -59,7 +59,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
         holder.stdName.setText(postList.get(position).getUserName());
-//        holder.postTime.setText(postList.get(position).getCreatedAt().toString());
+        holder.postTime.setText(postList.get(position).getCreatedAt().format().substring(postList.get(position).getCreatedAt().format().indexOf('T')+1,postList.get(position).getCreatedAt().format().indexOf('.')-3)+" "+postList.get(position).getCreatedAt().toDate().toString().substring(4,9).replace(" ","/"));
         holder.postDesc.setText(postList.get(position).getBody());
         if (postList.get(position).getImage() != null)
         {
@@ -121,7 +121,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
             this.listener = listener;
 
             stdName=itemView.findViewById(R.id.uniUsername);
-//            postTime=itemView.findViewById(R.id.uniTime);
+            postTime=itemView.findViewById(R.id.uniTime);
             postDesc=itemView.findViewById(R.id.postDesc);
             postImg=itemView.findViewById(R.id.post_img);
             postLikes=itemView.findViewById(R.id.post_like);

@@ -27,10 +27,3 @@ type Like @model {
   id: ID!
   userId: String!
 }
-type Material @model {
-  id: ID!
-  fileName: String!
-  fileDis: String!
-  fileUrl: String!
-  fileMajor: String!
-}
