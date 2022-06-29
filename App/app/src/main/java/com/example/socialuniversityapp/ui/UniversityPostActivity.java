@@ -28,6 +28,7 @@ import com.amplifyframework.datastore.generated.model.Like;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.recycler_view.UniversityPostAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class UniversityPostActivity extends Fragment {
     private Boolean flag;
     private int likesCount;
     private String nickNameUser;
+    private FloatingActionButton mFloatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +95,15 @@ public class UniversityPostActivity extends Fragment {
                     Log.e(TAG, "Could not query Api", error);
                 });
 
+        // move to add post Activity
+        mFloatingActionButton = view.findViewById(R.id.floating_action_button);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent (getActivity(), AddPostActivity.class));
+            }
+        });
+
         handler = new Handler(Looper.getMainLooper(), msg -> {
         mRecyclerView=view.findViewById(R.id.uniPosts);
 
@@ -117,10 +128,7 @@ public class UniversityPostActivity extends Fragment {
                                     likesCount++;
                                     if (postLike.getUserId().equals(authUserId)){
                                         flag = true;
-                                        // change the button
-                                        Button bLike = view.findViewById(R.id.like);
-                                        bLike.setText("Liked");
-                                        bLike.setEnabled(false);
+
                                         // TODO: 6/25/2022 disLike -> delete the current like row from the table
                                     }
                                 }

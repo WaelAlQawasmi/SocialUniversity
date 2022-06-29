@@ -2,92 +2,54 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="5dp">
+    app:contentPadding="2dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/profilelayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_img"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/username_icon"
-                tools:ignore="MissingClass" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/CommentUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginStart="12dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/CommentTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:text="33 min" />
-
-            </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/moreBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:layout_gravity="top"
-                android:src="@drawable/more" />
-
-        </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/prof_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/profile" />
 
         <TextView
-            android:id="@+id/CommentContent"
+            android:id="@+id/comment_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Content"
-            android:padding="10dp"
+            android:layout_toRightOf="@id/prof_img"
+            android:text="Username"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment_name"
+            android:layout_toEndOf="@id/prof_img"
+            android:layout_toRightOf="@id/prof_img"
+            android:text="Content"
+            android:textColor="@color/black" />
 
-
-
-
-
-
-
-        </LinearLayout>
-
-
-
-
-
+        <TextView
+            android:id="@+id/comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment_text"
+            android:layout_toEndOf="@id/prof_img"
+            android:layout_toRightOf="@id/prof_img"
+            android:text="12/06/19"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

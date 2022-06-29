@@ -53,9 +53,9 @@ class CustomViewHolder extends RecyclerView.ViewHolder {
         this.listener = listener;
 //        username = itemView.findViewById(R.id.title);
 //        describtion = itemView.findViewById(R.id.state);
-        CommentUsername = itemView.findViewById(R.id.CommentUsername);
-        CommentContent = itemView.findViewById(R.id.CommentContent);
-        CommentTime = itemView.findViewById(R.id.CommentTime);
+        CommentUsername = itemView.findViewById(R.id.comment_name);
+        CommentContent = itemView.findViewById(R.id.comment_text);
+        CommentTime = itemView.findViewById(R.id.comment_time);
         itemView.setOnClickListener(view -> this.listener.onCommentDataItemClicked(getAdapterPosition()));
 
     }
