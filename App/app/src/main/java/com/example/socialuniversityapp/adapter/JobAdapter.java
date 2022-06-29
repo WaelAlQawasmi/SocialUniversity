@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.datastore.generated.model.Job;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.data.JobData;
 
@@ -24,8 +23,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder>{
         this.jobsList = jobsList;
         this.listener = listener;
     }
-
-
 
     @NonNull
     @Override
@@ -73,7 +70,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder>{
                 }
             });
         }
-
     }
     public interface ClickListener {
         void onTaskItemClicked (int position);

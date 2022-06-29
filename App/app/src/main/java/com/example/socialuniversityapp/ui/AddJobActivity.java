@@ -18,6 +18,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Job;
 import com.example.socialuniversityapp.R;
+import com.example.socialuniversityapp.recycler_view.JobRecyclerView;
 
 public class AddJobActivity extends AppCompatActivity {
 
@@ -93,6 +94,7 @@ public class AddJobActivity extends AppCompatActivity {
             Amplify.API.mutate(ModelMutation.create(job),
                     success -> {
                         Log.i(TAG, "Add Job Success");
+                        startActivity(new Intent(AddJobActivity.this, JobRecyclerView.class));
                     },
                     error -> {
                     });
