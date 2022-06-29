@@ -2,6 +2,7 @@ package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +21,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -34,7 +38,7 @@ import java.io.OutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends Fragment {
     private static final String TAG = "Profile";
     public static final int REQUEST_CODE = 123;
     Handler handler;
@@ -42,16 +46,17 @@ public class Profile extends AppCompatActivity {
     String imageKey = null;
     String downImage ;
     CircleImageView newImage ;
+    View root;
     private final MediaPlayer mp = new MediaPlayer();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+         root  = inflater.inflate(R.layout.activity_profile, container, false);
 
-        TextView name = findViewById(R.id.userName_profile);
-        TextView email = findViewById(R.id.email_profile);
-        TextView major = findViewById(R.id.major_prof);
-        TextView uniID = findViewById(R.id.uniId);
+        TextView name = root.findViewById(R.id.userName_profile);
+        TextView email = root.findViewById(R.id.email_profile);
+        TextView major = root.findViewById(R.id.major_prof);
+        TextView uniID = root.findViewById(R.id.uniId);
 //        newImage = findViewById(R.id.imageView_profile);
 
         Amplify.Auth.fetchUserAttributes(
@@ -79,13 +84,14 @@ public class Profile extends AppCompatActivity {
             return true;
         });
 
-        FloatingActionButton iamgeBtn = findViewById(R.id.imgBtn);
+        FloatingActionButton iamgeBtn = root.findViewById(R.id.imgBtn);
         iamgeBtn.setOnClickListener(view2 -> imageUpload());
 
-        TextView logout = findViewById(R.id.logout_profile);
+        TextView logout = root.findViewById(R.id.logout_profile);
         logout.setOnClickListener(view -> {
             logout();
         });
+        return root;
     }
 
     public void imageUpload(){
@@ -94,7 +100,7 @@ public class Profile extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE);
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             // Handle error
@@ -107,14 +113,14 @@ public class Profile extends AppCompatActivity {
                 // Get photo picker response for single select.
                 Uri currentUri = data.getData();
 
-                String imgName= findViewById(R.id.imageView_profile).toString();
+                String imgName= root.findViewById(R.id.imageView_profile).toString();
                 // Do stuff with the photo/video URI.
                 Log.i(TAG, "the uri is => " + currentUri);
 
                 try {
                     Bitmap bitmap = getBitmapFromUri(currentUri);
 
-                    file = new File(getApplicationContext().getFilesDir(), "profImg.jpg");
+                    file = new File(getActivity().getFilesDir(), "profImg.jpg");
                     System.out.println(file.toString());
                     OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
@@ -144,7 +150,7 @@ public class Profile extends AppCompatActivity {
 //        */
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
+                getActivity().getContentResolver().openFileDescriptor(uri, "r");
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
         Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
         parcelFileDescriptor.close();
@@ -155,12 +161,12 @@ public class Profile extends AppCompatActivity {
     private void downloadImg(String imageKey) {
         Amplify.Storage.downloadFile(
                 imageKey,
-                new File( getApplicationContext().getFilesDir() + "/" + imageKey),
+                new File( getActivity().getFilesDir() + "/" + imageKey),
                 response -> {
 
                     Log.i(TAG, "Successfully downloaded: " + response.getFile().getName());
-                    newImage = findViewById(R.id.imageView_profile);
-                    Bitmap bitmap = BitmapFactory.decodeFile(getApplicationContext().getFilesDir()+"/"+ response.getFile().getName());
+                    newImage = root.findViewById(R.id.imageView_profile);
+                    Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getApplicationContext().getFilesDir()+"/"+ response.getFile().getName());
                     newImage.setImageBitmap(bitmap);
 
                 },
@@ -169,7 +175,7 @@ public class Profile extends AppCompatActivity {
     }
 
     private void playAudio(InputStream audioData) {
-        File mp3File = new File(getCacheDir(), "audio.mp3");
+        File mp3File = new File(getActivity().getCacheDir(), "audio.mp3");
 
         try (OutputStream out = new FileOutputStream(mp3File)) {
             byte[] buffer = new byte[8 * 1_024];
@@ -190,9 +196,9 @@ public class Profile extends AppCompatActivity {
         Amplify.Auth.signOut(
                 () -> {
                     Log.i(TAG, "Signed out successfully");
-                    startActivity(new Intent(Profile.this, LoginActivity.class));
+                    startActivity(new Intent(this.getActivity(), LoginActivity.class));
                     getAuthSession("logout");
-                    finish();
+                    getActivity().finish();
                 },
                 error -> Log.e(TAG, error.toString())
         );

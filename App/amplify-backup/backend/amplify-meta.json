@@ -1,0 +1,85 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-app-socaialenv-172204-authRole",
+      "UnauthRoleArn": "arn:aws:iam::287949203358:role/amplify-app-socaialenv-172204-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::287949203358:role/amplify-app-socaialenv-172204-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-app-socaialenv-172204-deployment",
+      "UnauthRoleName": "amplify-app-socaialenv-172204-unauthRole",
+      "StackName": "amplify-app-socaialenv-172204",
+      "StackId": "arn:aws:cloudformation:us-east-1:287949203358:stack/amplify-app-socaialenv-172204/5ed394b0-f0a4-11ec-b003-12b2d3eaccad",
+      "AmplifyAppId": "d295jd5dsp8irz"
+    }
+  },
+  "api": {
+    "app": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
+  "auth": {
+    "app520f5e7b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
+    }
+  },
+  "function": {
+    "S3Trigger8a2abc3c": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true
+    }
+  },
+  "storage": {
+    "s373b83eee": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "S3Trigger8a2abc3c",
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
+          ]
+        }
+      ]
+    }
+  }
+}

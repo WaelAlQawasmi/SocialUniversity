@@ -1,5 +1,6 @@
 package com.example.socialuniversityapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,11 @@ public class JobActivity extends Fragment {
 
         View root  = inflater.inflate(R.layout.activity_job_recycler, container, false);
 
+        root.findViewById(R.id.floating_action_button).setOnClickListener(view ->{
+            Intent addJobActivity=new Intent(getActivity(),AddJobActivity.class);
+            startActivity(addJobActivity);
 
+        });
 
         return root;
     }

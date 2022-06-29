@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.socialuniversityapp">
 
     <application
@@ -11,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
         <activity
-            android:name=".ui.Profile"
+            android:name=".ui.AddMaterial"
             android:exported="false" />
         <activity
             android:name=".ui.AddPostActivity"
@@ -21,23 +22,8 @@
             android:exported="false" />
         <activity android:name=".ui.AddJobActivity" />
         <activity
-            android:name=".ui.materialAndPostsActivity"
-            android:exported="false" />
-        <activity
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
-        <activity
-            android:name=".ui.NavagationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_navagation"
-            android:theme="@style/Theme.SocialUniversityApp.NoActionBar" />
-        <activity
-            android:name=".ui.NavigationDrawerActivity"
-            android:exported="false" />
-        <activity android:name=".ui.MaterialActivity" />
-        <activity android:name=".ui.JobActivity" />
-        <activity android:name=".ui.UniversityPostActivity" />
-        <activity android:name=".ui.MajorPostActivity" />
         <activity
             android:name=".ui.VerificationActivity"
             android:exported="false" />

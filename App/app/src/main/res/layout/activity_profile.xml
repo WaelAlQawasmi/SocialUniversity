@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,11 +8,7 @@
     tools:context=".ui.Profile"
     android:id="@+id/drawer_layout">
 
-    <RelativeLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".UserProfile">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -138,10 +134,4 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white">
-    </RelativeLayout>
-</androidx.drawerlayout.widget.DrawerLayout>
+
