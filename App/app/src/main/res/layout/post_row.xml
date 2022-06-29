@@ -79,7 +79,7 @@
         <ImageView
             android:id="@+id/post_img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:src="@drawable/ic_launcher_background"
             tools:srcCompat="@tools:sample/avatars"
             android:visibility="gone"/>
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1.2K Like"
+                android:text="0 Like"
                 android:padding="5dp"
                 android:textColor="@color/main_color"
                 android:textStyle="bold" />
@@ -104,7 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1.2K Comment"
+                android:text="0 Comment"
                 android:textAlignment="textEnd"
                 android:padding="5dp"
                 android:textColor="@color/main_color"
@@ -112,35 +112,7 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Like"
-                android:layout_gravity="start"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:layout_marginStart="45dp"
-                android:background="@drawable/button_style"
-                app:rippleColor="#33AAAAAA" />
-
-            <Button
-                android:id="@+id/comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="COMMENT"
-                android:textColor="@color/white"
-                android:textSize="11sp"
-                android:layout_marginStart="90dp"
-                android:background="@drawable/button_style"
-                app:rippleColor="#33AAAAAA" />
-
-        </LinearLayout>
 
     </LinearLayout>
 
