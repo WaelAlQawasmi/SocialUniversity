@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
-
+        <activity
+            android:name=".ui.AddMaterial"
+            android:exported="false" />
         <activity
             android:name=".ui.AddPostActivity"
             android:exported="false" />
@@ -22,7 +24,6 @@
         <activity
             android:name=".recycler_view.JobRecyclerView"
             android:exported="false" />
-
         <activity
             android:name=".ui.VerificationActivity"
             android:exported="false" />
