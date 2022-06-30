@@ -23,11 +23,13 @@ public final class Like implements Model {
   public static final QueryField ID = field("Like", "id");
   public static final QueryField USER_ID = field("Like", "userId");
   public static final QueryField UNI_POST_LIKES_ID = field("Like", "uniPostLikesId");
+  public static final QueryField MAJOR_POST_LIKES_ID = field("Like", "majorPostLikesId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String userId;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   private final @ModelField(targetType="ID") String uniPostLikesId;
+  private final @ModelField(targetType="ID") String majorPostLikesId;
   public String getId() {
       return id;
   }
@@ -48,10 +50,15 @@ public final class Like implements Model {
       return uniPostLikesId;
   }
   
-  private Like(String id, String userId, String uniPostLikesId) {
+  public String getMajorPostLikesId() {
+      return majorPostLikesId;
+  }
+  
+  private Like(String id, String userId, String uniPostLikesId, String majorPostLikesId) {
     this.id = id;
     this.userId = userId;
     this.uniPostLikesId = uniPostLikesId;
+    this.majorPostLikesId = majorPostLikesId;
   }
   
   @Override
@@ -66,7 +73,8 @@ public final class Like implements Model {
               ObjectsCompat.equals(getUserId(), like.getUserId()) &&
               ObjectsCompat.equals(getCreatedAt(), like.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), like.getUpdatedAt()) &&
-              ObjectsCompat.equals(getUniPostLikesId(), like.getUniPostLikesId());
+              ObjectsCompat.equals(getUniPostLikesId(), like.getUniPostLikesId()) &&
+              ObjectsCompat.equals(getMajorPostLikesId(), like.getMajorPostLikesId());
       }
   }
   
@@ -78,6 +86,7 @@ public final class Like implements Model {
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .append(getUniPostLikesId())
+      .append(getMajorPostLikesId())
       .toString()
       .hashCode();
   }
@@ -90,7 +99,8 @@ public final class Like implements Model {
       .append("userId=" + String.valueOf(getUserId()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
-      .append("uniPostLikesId=" + String.valueOf(getUniPostLikesId()))
+      .append("uniPostLikesId=" + String.valueOf(getUniPostLikesId()) + ", ")
+      .append("majorPostLikesId=" + String.valueOf(getMajorPostLikesId()))
       .append("}")
       .toString();
   }
@@ -111,6 +121,7 @@ public final class Like implements Model {
     return new Like(
       id,
       null,
+      null,
       null
     );
   }
@@ -118,7 +129,8 @@ public final class Like implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       userId,
-      uniPostLikesId);
+      uniPostLikesId,
+      majorPostLikesId);
   }
   public interface UserIdStep {
     BuildStep userId(String userId);
@@ -129,6 +141,7 @@ public final class Like implements Model {
     Like build();
     BuildStep id(String id);
     BuildStep uniPostLikesId(String uniPostLikesId);
+    BuildStep majorPostLikesId(String majorPostLikesId);
   }
   
 
@@ -136,6 +149,7 @@ public final class Like implements Model {
     private String id;
     private String userId;
     private String uniPostLikesId;
+    private String majorPostLikesId;
     @Override
      public Like build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -143,7 +157,8 @@ public final class Like implements Model {
         return new Like(
           id,
           userId,
-          uniPostLikesId);
+          uniPostLikesId,
+          majorPostLikesId);
     }
     
     @Override
@@ -159,6 +174,12 @@ public final class Like implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep majorPostLikesId(String majorPostLikesId) {
+        this.majorPostLikesId = majorPostLikesId;
+        return this;
+    }
+    
     /** 
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -171,10 +192,11 @@ public final class Like implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String userId, String uniPostLikesId) {
+    private CopyOfBuilder(String id, String userId, String uniPostLikesId, String majorPostLikesId) {
       super.id(id);
       super.userId(userId)
-        .uniPostLikesId(uniPostLikesId);
+        .uniPostLikesId(uniPostLikesId)
+        .majorPostLikesId(majorPostLikesId);
     }
     
     @Override
@@ -185,6 +207,11 @@ public final class Like implements Model {
     @Override
      public CopyOfBuilder uniPostLikesId(String uniPostLikesId) {
       return (CopyOfBuilder) super.uniPostLikesId(uniPostLikesId);
+    }
+    
+    @Override
+     public CopyOfBuilder majorPostLikesId(String majorPostLikesId) {
+      return (CopyOfBuilder) super.majorPostLikesId(majorPostLikesId);
     }
   }
   
