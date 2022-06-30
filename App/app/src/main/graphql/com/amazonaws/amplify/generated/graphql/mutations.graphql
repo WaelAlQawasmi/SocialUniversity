@@ -57,6 +57,7 @@ mutation CreateUniPost(
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -68,6 +69,7 @@ mutation CreateUniPost(
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -91,6 +93,7 @@ mutation UpdateUniPost(
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -102,6 +105,7 @@ mutation UpdateUniPost(
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -125,6 +129,7 @@ mutation DeleteUniPost(
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -136,6 +141,118 @@ mutation DeleteUniPost(
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateMajorPost(
+  $input: CreateMajorPostInput!
+  $condition: ModelMajorPostConditionInput
+) {
+  createMajorPost(input: $input, condition: $condition) {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateMajorPost(
+  $input: UpdateMajorPostInput!
+  $condition: ModelMajorPostConditionInput
+) {
+  updateMajorPost(input: $input, condition: $condition) {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteMajorPost(
+  $input: DeleteMajorPostInput!
+  $condition: ModelMajorPostConditionInput
+) {
+  deleteMajorPost(input: $input, condition: $condition) {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -154,6 +271,7 @@ mutation CreateComment(
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 mutation UpdateComment(
@@ -167,6 +285,7 @@ mutation UpdateComment(
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 mutation DeleteComment(
@@ -180,6 +299,7 @@ mutation DeleteComment(
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 mutation CreateLike(
@@ -192,6 +312,7 @@ mutation CreateLike(
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 mutation UpdateLike(
@@ -204,6 +325,7 @@ mutation UpdateLike(
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 mutation DeleteLike(
@@ -216,6 +338,7 @@ mutation DeleteLike(
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 mutation CreateMaterial(
