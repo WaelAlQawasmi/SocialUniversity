@@ -37,6 +37,7 @@ query GetUniPost($id: ID!) {
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -48,6 +49,7 @@ query GetUniPost($id: ID!) {
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -78,6 +80,64 @@ query ListUniPosts(
     nextToken
   }
 }
+query GetMajorPost($id: ID!) {
+  getMajorPost(id: $id) {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListMajorPosts(
+  $filter: ModelMajorPostFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMajorPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      user_name
+      body
+      image
+      major
+      likes {
+        nextToken
+      }
+      comments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
 query GetComment($id: ID!) {
   getComment(id: $id) {
     id
@@ -86,6 +146,7 @@ query GetComment($id: ID!) {
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 query ListComments(
@@ -101,6 +162,7 @@ query ListComments(
       createdAt
       updatedAt
       uniPostCommentsId
+      majorPostCommentsId
     }
     nextToken
   }
@@ -112,6 +174,7 @@ query GetLike($id: ID!) {
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 query ListLikes(
@@ -126,6 +189,7 @@ query ListLikes(
       createdAt
       updatedAt
       uniPostLikesId
+      majorPostLikesId
     }
     nextToken
   }
@@ -134,7 +198,6 @@ query GetMaterial($id: ID!) {
   getMaterial(id: $id) {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -150,7 +213,6 @@ query ListMaterials(
     items {
       id
       fileName
-      fileDis
       fileUrl
       fileMajor
       createdAt

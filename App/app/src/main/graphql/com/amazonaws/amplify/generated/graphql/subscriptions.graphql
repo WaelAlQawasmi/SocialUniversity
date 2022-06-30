@@ -45,6 +45,7 @@ subscription OnCreateUniPost {
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -56,6 +57,7 @@ subscription OnCreateUniPost {
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -76,6 +78,7 @@ subscription OnUpdateUniPost {
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -87,6 +90,7 @@ subscription OnUpdateUniPost {
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -107,6 +111,7 @@ subscription OnDeleteUniPost {
         createdAt
         updatedAt
         uniPostLikesId
+        majorPostLikesId
       }
       nextToken
     }
@@ -118,6 +123,109 @@ subscription OnDeleteUniPost {
         createdAt
         updatedAt
         uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateMajorPost {
+  onCreateMajorPost {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateMajorPost {
+  onUpdateMajorPost {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteMajorPost {
+  onDeleteMajorPost {
+    id
+    user_name
+    body
+    image
+    major
+    likes {
+      items {
+        id
+        userId
+        createdAt
+        updatedAt
+        uniPostLikesId
+        majorPostLikesId
+      }
+      nextToken
+    }
+    comments {
+      items {
+        id
+        comment_user_name
+        content
+        createdAt
+        updatedAt
+        uniPostCommentsId
+        majorPostCommentsId
       }
       nextToken
     }
@@ -133,6 +241,7 @@ subscription OnCreateComment {
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 subscription OnUpdateComment {
@@ -143,6 +252,7 @@ subscription OnUpdateComment {
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 subscription OnDeleteComment {
@@ -153,6 +263,7 @@ subscription OnDeleteComment {
     createdAt
     updatedAt
     uniPostCommentsId
+    majorPostCommentsId
   }
 }
 subscription OnCreateLike {
@@ -162,6 +273,7 @@ subscription OnCreateLike {
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 subscription OnUpdateLike {
@@ -171,6 +283,7 @@ subscription OnUpdateLike {
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 subscription OnDeleteLike {
@@ -180,13 +293,13 @@ subscription OnDeleteLike {
     createdAt
     updatedAt
     uniPostLikesId
+    majorPostLikesId
   }
 }
 subscription OnCreateMaterial {
   onCreateMaterial {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -197,7 +310,6 @@ subscription OnUpdateMaterial {
   onUpdateMaterial {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -208,7 +320,6 @@ subscription OnDeleteMaterial {
   onDeleteMaterial {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
