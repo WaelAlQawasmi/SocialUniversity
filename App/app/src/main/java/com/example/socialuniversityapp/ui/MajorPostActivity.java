@@ -26,6 +26,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.MajorPost;
 import com.amplifyframework.datastore.generated.model.UniPost;
+import com.amplifyframework.datastore.generated.model.User;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.recycler_view.MajorPostAdapter;
 import com.example.socialuniversityapp.recycler_view.UniversityPostAdapter;
@@ -73,14 +74,16 @@ public class MajorPostActivity extends Fragment {
 
                     attributes.forEach(authUserAttribute -> {
 
-                        if (authUserAttribute.getKey().getKeyString().equals("nickname"))
+                        if (authUserAttribute.getKey().getKeyString().equals("custom:majoreName"))
                             majorUser=authUserAttribute.getValue();
+                        Log.i(TAG, "User Major in auth : "+ majorUser);
 
                     });
+                    fetchPostFromAPI(view,majorUser);
+
                 },
                 error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
         );
-        fetchPostFromAPI(view);
     }
 
 
@@ -93,18 +96,18 @@ public class MajorPostActivity extends Fragment {
         }
 
     };
-    public void fetchPostFromAPI(View view){
-        Log.i(TAG, "User Major: "+ majorUser);
-        Amplify.API.query(ModelQuery.list(MajorPost.class),
-                success -> {
+    public void fetchPostFromAPI(View view,String majorUser){
+        Log.i(TAG, "User Major in api : "+ majorUser);
+        Amplify.API.query(ModelQuery.list(MajorPost.class, MajorPost.MAJOR.contains(majorUser)),
+                posts -> {
+                    for(MajorPost majorposts:posts.getData()){
+                        majorPostList.add(majorposts);
+                    }
 
-                        for (MajorPost majorPost : success.getData()) {
-//                            if (majorPost.getMajor().equals(majorUser))
-                            majorPostList.add(majorPost);
-                        }
+
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("postsList", success.toString());
+                    bundle.putString("postsList", posts.toString());
 
                     Message message = new Message();
                     message.setData(bundle);
