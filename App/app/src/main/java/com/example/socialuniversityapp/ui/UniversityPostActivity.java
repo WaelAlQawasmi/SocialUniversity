@@ -1,15 +1,18 @@
 package com.example.socialuniversityapp.ui;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +22,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.autofill.AutofillValue;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -33,6 +38,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UniversityPostActivity extends Fragment {
 
@@ -44,7 +50,9 @@ public class UniversityPostActivity extends Fragment {
     private int likesCount;
     private String nickNameUser;
     private FloatingActionButton mFloatingActionButton;
-    List<UniPost> uniPostList=new ArrayList<>();
+    private ImageButton like_ic;
+    private ImageButton comment_ic;
+    List<UniPost> uniPostList;
 
 
     @Override
@@ -58,46 +66,27 @@ public class UniversityPostActivity extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        uniPostList=new ArrayList<>();
+        mRecyclerView=view.findViewById(R.id.uniPosts);
 
         // fetch the current authenticated user ID and name
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
                     Log.i("AuthDemo", "User attributes = " + attributes.toString());
                     attributes.forEach(authUserAttribute -> {
-                        if (authUserAttribute.getKey().getKeyString().equals("sub")) {
-                            authUserId = authUserAttribute.getValue();
+                        if (authUserAttribute.getKey().getKeyString().equals("sub"))
+                        {
+                            authUserId=authUserAttribute.getValue();
                         }
-                        if (authUserAttribute.getKey().getKeyString().equals("nickname")) {
-                            nickNameUser = authUserAttribute.getValue();
+                        if (authUserAttribute.getKey().getKeyString().equals("nickname"))
+                        {
+                            nickNameUser=authUserAttribute.getValue();
                         }
                     });
                 },
                 error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
         );
 
-        fetchPostFromAPI(view);
-
-        // move to add post Activity
-        mFloatingActionButton = view.findViewById(R.id.floating_action_button);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), AddPostActivity.class);
-                intent.putExtra("context", "University");
-                startActivity(intent);
-            }
-        });
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        mRecyclerView = mRecyclerView.findViewById();
-
-    }
-
-    public void fetchPostFromAPI(View view) {
         //
         Amplify.API.query(ModelQuery.list(UniPost.class),
                 success -> {
@@ -118,98 +107,92 @@ public class UniversityPostActivity extends Fragment {
                     Log.e(TAG, "Could not query Api", error);
                 });
 
+        // move to add post Activity
+        mFloatingActionButton = view.findViewById(R.id.floating_action_button);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent (getActivity(), AddPostActivity.class));
+            }
+        });
+
         handler = new Handler(Looper.getMainLooper(), msg -> {
-            mRecyclerView = view.findViewById(R.id.uniPosts);
+
+
+        // defining action to the like and comment buttons
+        UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(uniPostList, new UniversityPostAdapter.ClickListener() {
+            @SuppressLint("SetTextI18n")
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onPostItemLikeClicked(int position) {
+
+
+
+            }
+
+            @Override
+            public void onPostItemCommentClicked(int position) {
+                Intent intent=new Intent(getActivity(),CommentActivity.class);
+                intent.putExtra("postId",uniPostList.get(position).getId());
+                intent.putExtra("userName",nickNameUser);
+                intent.putExtra("authUserId",authUserId);
+                startActivity(intent);
+            }
+        });
+
+        mRecyclerView.setAdapter(postRecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return true;
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<UniPost> onResumePostList=new ArrayList<>();
+        Amplify.API.query(ModelQuery.list(UniPost.class),
+                success -> {
+                    if (success.hasData()) {
+                        for (UniPost uniPost : success.getData()) {
+                            onResumePostList.add(uniPost);
+                        }
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString("postsList", success.toString());
+
+                    Message message = new Message();
+                    message.setData(bundle);
+
+                    handler.sendMessage(message);
+                },
+                error -> {
+                    Log.e(TAG, "Could not query Api", error);
+                });
+
+        handler = new Handler(Looper.getMainLooper(), msg -> {
 
 
             // defining action to the like and comment buttons
-            UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(uniPostList, new UniversityPostAdapter.ClickListener() {
+            UniversityPostAdapter postRecyclerView = new UniversityPostAdapter(onResumePostList, new UniversityPostAdapter.ClickListener() {
                 @SuppressLint("SetTextI18n")
                 @RequiresApi(api = Build.VERSION_CODES.N)
                 @Override
                 public void onPostItemLikeClicked(int position) {
 
-                    flag = false;
-                    likesCount = 0;
 
-                    // fetch like table rows that have the current post ID
-                    Amplify.API.query(ModelQuery.list(Like.class, Like.UNI_POST_LIKES_ID.eq(uniPostList.get(position).getId())),
-                            likeSuccess -> {
-                                if (likeSuccess.hasData()) {
-                                    // check if user liked the post before by searching about the user id in the like rows
-                                    for (Like postLike : likeSuccess.getData()) {
-                                        likesCount++;
-                                        if (postLike.getUserId().equals(authUserId)) {
-                                            flag = true;
-
-                                            // TODO: 6/25/2022 disLike -> delete the current like row from the table
-                                        }
-                                    }
-                                }
-
-
-                                // if the user didn't like the post before
-                                if (!flag) {
-                                    // create an Instance of the Like model
-                                    Like like = Like.builder()
-                                            .userId(authUserId)
-                                            .uniPostLikesId(uniPostList.get(position).getId())
-                                            .build();
-
-                                    // save the Like instance
-                                    Amplify.DataStore.save(like,
-                                            success -> {
-                                                Log.i(TAG, "Saved like: " + success.item().getUserId());
-                                            },
-                                            error -> {
-                                                Log.e(TAG, "Could not save item to DataStore", error);
-                                            }
-                                    );
-
-                                    Amplify.API.mutate(
-                                            ModelMutation.create(like),
-                                            success -> {
-                                                Log.i(TAG, "Saved item: " + success.getData().getUserId());
-                                            },
-                                            error -> {
-                                                Log.e(TAG, "Could not save item to API", error);
-                                            }
-                                    );
-
-                                    // update the likes count in the post
-                                    likesCount++;
-                                    TextView pLikes = view.findViewById(R.id.post_like);
-                                    pLikes.setText(likesCount + " Like");
-                                }
-                            },
-                            likeFailure -> {
-                                Log.e(TAG, "Failed to fetch the likes ", likeFailure);
-                            });
 
                 }
 
                 @Override
                 public void onPostItemCommentClicked(int position) {
-                    Intent intent = new Intent(getActivity(), CommentActivity.class);
-                    intent.putExtra("postId", uniPostList.get(position).getId());
-                    intent.putExtra("userName", nickNameUser);
+                    Intent intent=new Intent(getActivity(),CommentActivity.class);
+                    intent.putExtra("postId",onResumePostList.get(position).getId());
+                    intent.putExtra("userName",nickNameUser);
+                    intent.putExtra("authUserId",authUserId);
                     startActivity(intent);
                 }
-
-                @Override
-                public void onPostItemImageClicked(int position) {
-                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
-                    userProfile.putExtra("userId", uniPostList.get(position).getId());
-                    startActivity(userProfile);
-                }
-
-                @Override
-                public void onPostItemUserNameClicked(int position) {
-                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
-                    userProfile.putExtra("username", uniPostList.get(position).getUserName());
-                    startActivity(userProfile);
-                }
-
             });
 
             mRecyclerView.setAdapter(postRecyclerView);
