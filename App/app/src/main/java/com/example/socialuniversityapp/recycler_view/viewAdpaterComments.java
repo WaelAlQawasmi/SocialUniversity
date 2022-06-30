@@ -1,5 +1,6 @@
 package com.example.socialuniversityapp.recycler_view;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,10 @@ import com.example.socialuniversityapp.R;
 import java.util.List;
 
 public class viewAdpaterComments extends RecyclerView.Adapter<CustomViewHolder> {
-    public static List<Comment> dataList;
-    CustomClickListener listener;
+    List<Comment> commentList;
 
-    public viewAdpaterComments(List<Comment> datalist) {
-        this.dataList=datalist;
+    public viewAdpaterComments(List<Comment> commentList) {
+        this.commentList=commentList;
     }
 
     @NonNull
@@ -26,40 +26,36 @@ public class viewAdpaterComments extends RecyclerView.Adapter<CustomViewHolder> 
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItemView = layoutInflater.inflate(R.layout.comments_row, parent, false);
-        return new CustomViewHolder(listItemView, listener);
+        return new CustomViewHolder(listItemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        Comment comment=dataList.get(position);
+        Comment comment=commentList.get(position);
        holder.CommentUsername.setText(comment.getCommentUserName());
         holder.CommentContent.setText(comment.getContent());
-//        holder.CommentTime.setText(comment.getCreatedAt());
+        holder.CommentTime.setText(comment.getCreatedAt().format().substring(commentList.get(position).getCreatedAt().format().indexOf('T')+1,commentList.get(position).getCreatedAt().format().indexOf('.')-3)+" "+commentList.get(position).getCreatedAt().toDate().toString().substring(4,9).replace(" ","/"));
 
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        return commentList.size();
     }
 }
 class CustomViewHolder extends RecyclerView.ViewHolder {
     TextView CommentUsername;
     TextView CommentTime;
     TextView CommentContent;
-    CustomClickListener listener;
-    public CustomViewHolder(@NonNull View itemView, CustomClickListener listener) {
+
+    public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.listener = listener;
-//        username = itemView.findViewById(R.id.title);
-//        describtion = itemView.findViewById(R.id.state);
+
         CommentUsername = itemView.findViewById(R.id.comment_name);
         CommentContent = itemView.findViewById(R.id.comment_text);
         CommentTime = itemView.findViewById(R.id.comment_time);
-        itemView.setOnClickListener(view -> this.listener.onCommentDataItemClicked(getAdapterPosition()));
+
 
     }
-}
-interface CustomClickListener {
-    void onCommentDataItemClicked(int position);
 }

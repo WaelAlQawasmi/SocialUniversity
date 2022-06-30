@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#3490dc</color>
     <color name="error_color">#FF00</color>
+    <color name="like_color">#70B8F1</color>
+    <color name="liked_color">#0362AC</color>
 </resources>

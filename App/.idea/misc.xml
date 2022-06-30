@@ -4,15 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_job.xml" value="0.1" />
-        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_material.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_post.xml" value="0.1640625" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job.xml" value="0.2" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job_details.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job_recycler.xml" value="0.176" />
+        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job_recycler.xml" value="0.2" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.25052083333333336" />
-        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_material.xml" value="0.1" />
+        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_material.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_material_and_posts.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.14945652173913043" />
@@ -24,24 +22,22 @@
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/final/SocialUniversity/App/app/src/main/res/layout/activity_verification.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_add_job.xml" value="0.1911231884057971" />
-        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_job_recycler.xml" value="0.1" />
-        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.1911231884057971" />
-        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.21875" />
-        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_university_post.xml" value="0.21875" />
-
+        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/drawable-anydpi/post_like.xml" value="0.1585" />
+        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1025" />
+        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1025" />
+        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1025" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_add_post.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_comment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.159375" />
+        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_university_post.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/comment_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/comments_row.xml" value="0.25" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/post_row.xml" value="0.25" />
-        <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.159375" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.159375" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.18" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.2" />
-
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/drawable/ic_menu_camera.xml" value="0.2555" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.20512820512820512" />
@@ -58,11 +54,6 @@
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.1752136752136752" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.1752136752136752" />
-        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_job.xml" value="0.24615384615384617" />
-        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_job_details.xml" value="0.25" />
-        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_job_recycler.xml" value="0.25" />
-        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_main.xml" value="0.24615384615384617" />
-        <entry key="..\:/Users/WAEL/newSousalUnvercity/App/app/src/main/res/layout/activity_material.xml" value="0.24615384615384617" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.264" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_material_and_posts.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.15092592592592594" />
@@ -73,7 +64,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
