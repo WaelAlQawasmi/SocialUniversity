@@ -22,12 +22,10 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class Material implements Model {
   public static final QueryField ID = field("Material", "id");
   public static final QueryField FILE_NAME = field("Material", "fileName");
-  public static final QueryField FILE_DIS = field("Material", "fileDis");
   public static final QueryField FILE_URL = field("Material", "fileUrl");
   public static final QueryField FILE_MAJOR = field("Material", "fileMajor");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String fileName;
-  private final @ModelField(targetType="String", isRequired = true) String fileDis;
   private final @ModelField(targetType="String", isRequired = true) String fileUrl;
   private final @ModelField(targetType="String", isRequired = true) String fileMajor;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
@@ -38,10 +36,6 @@ public final class Material implements Model {
   
   public String getFileName() {
       return fileName;
-  }
-  
-  public String getFileDis() {
-      return fileDis;
   }
   
   public String getFileUrl() {
@@ -60,10 +54,9 @@ public final class Material implements Model {
       return updatedAt;
   }
   
-  private Material(String id, String fileName, String fileDis, String fileUrl, String fileMajor) {
+  private Material(String id, String fileName, String fileUrl, String fileMajor) {
     this.id = id;
     this.fileName = fileName;
-    this.fileDis = fileDis;
     this.fileUrl = fileUrl;
     this.fileMajor = fileMajor;
   }
@@ -78,7 +71,6 @@ public final class Material implements Model {
       Material material = (Material) obj;
       return ObjectsCompat.equals(getId(), material.getId()) &&
               ObjectsCompat.equals(getFileName(), material.getFileName()) &&
-              ObjectsCompat.equals(getFileDis(), material.getFileDis()) &&
               ObjectsCompat.equals(getFileUrl(), material.getFileUrl()) &&
               ObjectsCompat.equals(getFileMajor(), material.getFileMajor()) &&
               ObjectsCompat.equals(getCreatedAt(), material.getCreatedAt()) &&
@@ -91,7 +83,6 @@ public final class Material implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getFileName())
-      .append(getFileDis())
       .append(getFileUrl())
       .append(getFileMajor())
       .append(getCreatedAt())
@@ -106,7 +97,6 @@ public final class Material implements Model {
       .append("Material {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("fileName=" + String.valueOf(getFileName()) + ", ")
-      .append("fileDis=" + String.valueOf(getFileDis()) + ", ")
       .append("fileUrl=" + String.valueOf(getFileUrl()) + ", ")
       .append("fileMajor=" + String.valueOf(getFileMajor()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
@@ -132,7 +122,6 @@ public final class Material implements Model {
       id,
       null,
       null,
-      null,
       null
     );
   }
@@ -140,17 +129,11 @@ public final class Material implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       fileName,
-      fileDis,
       fileUrl,
       fileMajor);
   }
   public interface FileNameStep {
-    FileDisStep fileName(String fileName);
-  }
-  
-
-  public interface FileDisStep {
-    FileUrlStep fileDis(String fileDis);
+    FileUrlStep fileName(String fileName);
   }
   
 
@@ -170,10 +153,9 @@ public final class Material implements Model {
   }
   
 
-  public static class Builder implements FileNameStep, FileDisStep, FileUrlStep, FileMajorStep, BuildStep {
+  public static class Builder implements FileNameStep, FileUrlStep, FileMajorStep, BuildStep {
     private String id;
     private String fileName;
-    private String fileDis;
     private String fileUrl;
     private String fileMajor;
     @Override
@@ -183,22 +165,14 @@ public final class Material implements Model {
         return new Material(
           id,
           fileName,
-          fileDis,
           fileUrl,
           fileMajor);
     }
     
     @Override
-     public FileDisStep fileName(String fileName) {
+     public FileUrlStep fileName(String fileName) {
         Objects.requireNonNull(fileName);
         this.fileName = fileName;
-        return this;
-    }
-    
-    @Override
-     public FileUrlStep fileDis(String fileDis) {
-        Objects.requireNonNull(fileDis);
-        this.fileDis = fileDis;
         return this;
     }
     
@@ -228,10 +202,9 @@ public final class Material implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String fileName, String fileDis, String fileUrl, String fileMajor) {
+    private CopyOfBuilder(String id, String fileName, String fileUrl, String fileMajor) {
       super.id(id);
       super.fileName(fileName)
-        .fileDis(fileDis)
         .fileUrl(fileUrl)
         .fileMajor(fileMajor);
     }
@@ -239,11 +212,6 @@ public final class Material implements Model {
     @Override
      public CopyOfBuilder fileName(String fileName) {
       return (CopyOfBuilder) super.fileName(fileName);
-    }
-    
-    @Override
-     public CopyOfBuilder fileDis(String fileDis) {
-      return (CopyOfBuilder) super.fileDis(fileDis);
     }
     
     @Override

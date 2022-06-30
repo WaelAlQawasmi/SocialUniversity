@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 
+import com.amplifyframework.auth.AuthUserAttribute;
+import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.core.Amplify;
 import com.example.socialuniversityapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +27,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedOutputStream;
@@ -35,6 +39,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,43 +50,97 @@ public class Profile extends Fragment {
     Handler handler;
     File file;
     String imageKey = null;
-    String downImage ;
-    CircleImageView newImage ;
+    String downImage;
+    CircleImageView newImage;
     View root;
     private final MediaPlayer mp = new MediaPlayer();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         root  = inflater.inflate(R.layout.activity_profile, container, false);
+        root = inflater.inflate(R.layout.activity_profile, container, false);
 
         TextView name = root.findViewById(R.id.userName_profile);
         TextView email = root.findViewById(R.id.email_profile);
         TextView major = root.findViewById(R.id.major_prof);
         TextView uniID = root.findViewById(R.id.uniId);
+        ImageView imageEdit = root.findViewById(R.id.edit);
+        Button editDone = root.findViewById(R.id.editDone);
+        EditText nameEdit = root.findViewById(R.id.userName_edit);
+        EditText uniId_edit = root.findViewById(R.id.uniId_edit);
+        EditText major_edit = root.findViewById(R.id.major_edit);
+
+
+        imageEdit.setOnClickListener(view -> {
+            // CHANge visibiltt if butones
+            imageEdit.setVisibility(View.INVISIBLE);
+            editDone.setVisibility(View.VISIBLE);
+            // change visabilty of text viow
+            name.setVisibility(View.INVISIBLE);
+            uniID.setVisibility(View.INVISIBLE);
+            major.setVisibility(View.INVISIBLE);
+            String filterId = (String) uniID.getText();
+
+            nameEdit.setText(name.getText());
+            uniId_edit.setText(filterId.replace("ID : ", ""));
+            major_edit.setText(major.getText());
+            nameEdit.setVisibility(View.VISIBLE);
+            uniId_edit.setVisibility(View.VISIBLE);
+            major_edit.setVisibility(View.VISIBLE);
+
+
+        });
+
+
+
+        editDone.setOnClickListener(view -> {
+
+
+            List<AuthUserAttribute> attributes=new ArrayList<>();
+
+            attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(), nameEdit.getText().toString()));
+            attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId_edit.getText().toString()));
+            attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major_edit.getText().toString()));
+            Amplify.Auth.updateUserAttributes(
+                    attributes  , // attributes is a list of AuthUserAttribute
+                    result -> Log.i("AuthDemo", "Updated user attributes = " + result.toString()),
+                    error -> Log.e("AuthDemo", "Failed to update user attributes.", error)
+            );
+            fetchData();
+
+            // CHANge visibiltt if butones
+            imageEdit.setVisibility(View.VISIBLE);
+            editDone.setVisibility(View.INVISIBLE);
+            // change visabilty of text viow
+            name.setVisibility(View.VISIBLE);
+            uniID.setVisibility(View.VISIBLE);
+            major.setVisibility(View.VISIBLE);
+
+
+            nameEdit.setVisibility(View.INVISIBLE);
+            uniId_edit.setVisibility(View.INVISIBLE);
+            major_edit.setVisibility(View.INVISIBLE);
+
+
+        });
+//            Intent intent=new Intent(getActivity(),Profile.class);
+//            startActivity(intent);
+
+
+
+
 //        newImage = findViewById(R.id.imageView_profile);
 
-        Amplify.Auth.fetchUserAttributes(
-                attributes ->{
-                    Bundle bundle =new Bundle();
-                    bundle.putString("newUserName",attributes.get(3).getValue());
-                    bundle.putString("newEmail",attributes.get(4).getValue());
-                    bundle.putString("newMajor",attributes.get(5).getValue());
-                    bundle.putString("UID",attributes.get(2).getValue());
-                    Message message = new Message();
-                    message.setData(bundle);
-                    handler.sendMessage(message);
-                },
-                error -> Log.e(TAG, "can't find username",error)
-        );
-        handler= new Handler(Looper.getMainLooper(), msg ->{
-            String newUser= msg.getData().getString("newUserName");
-            String newEmail= msg.getData().getString("newEmail");
-            String newMajor= msg.getData().getString("newMajor");
-            String uniId= msg.getData().getString("UID");
+        fetchData();
+        handler = new Handler(Looper.getMainLooper(), msg -> {
+            String newUser = msg.getData().getString("newUserName");
+            String newEmail = msg.getData().getString("newEmail");
+            String newMajor = msg.getData().getString("newMajor");
+            String uniId = msg.getData().getString("UID");
             name.setText(newUser);
             email.setText(newEmail);
             major.setText(newMajor);
-            uniID.setText("ID : " +uniId);
+            uniID.setText("ID : " + uniId);
             return true;
         });
 
@@ -94,11 +154,29 @@ public class Profile extends Fragment {
         return root;
     }
 
-    public void imageUpload(){
+    private void fetchData() {
+        Amplify.Auth.fetchUserAttributes(
+                attributes -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("newUserName", attributes.get(3).getValue());
+                    bundle.putString("newEmail", attributes.get(4).getValue());
+                    bundle.putString("newMajor", attributes.get(5).getValue());
+                    bundle.putString("UID", attributes.get(2).getValue());
+                    Message message = new Message();
+                    message.setData(bundle);
+                    handler.sendMessage(message);
+                },
+                error -> Log.e(TAG, "can't find username", error)
+        );
+    }
+
+
+    public void imageUpload() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, REQUEST_CODE);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -108,12 +186,12 @@ public class Profile extends Fragment {
             return;
         }
 
-        switch(requestCode) {
+        switch (requestCode) {
             case REQUEST_CODE:
                 // Get photo picker response for single select.
                 Uri currentUri = data.getData();
 
-                String imgName= root.findViewById(R.id.imageView_profile).toString();
+                String imgName = root.findViewById(R.id.imageView_profile).toString();
                 // Do stuff with the photo/video URI.
                 Log.i(TAG, "the uri is => " + currentUri);
 
@@ -132,7 +210,7 @@ public class Profile extends Fragment {
                             "profImg.jpg",
                             file,
                             result -> {
-                                Log.i(TAG, "Successfully uploaded: " + result.getKey()) ;
+                                Log.i(TAG, "Successfully uploaded: " + result.getKey());
                                 imageKey = result.getKey();
                                 downloadImg(imageKey);
                             },
@@ -145,6 +223,7 @@ public class Profile extends Fragment {
         }
 
     }
+
     //    /*
 //       https://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
 //        */
@@ -161,16 +240,16 @@ public class Profile extends Fragment {
     private void downloadImg(String imageKey) {
         Amplify.Storage.downloadFile(
                 imageKey,
-                new File( getActivity().getFilesDir() + "/" + imageKey),
+                new File(getActivity().getFilesDir() + "/" + imageKey),
                 response -> {
 
                     Log.i(TAG, "Successfully downloaded: " + response.getFile().getName());
                     newImage = root.findViewById(R.id.imageView_profile);
-                    Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getApplicationContext().getFilesDir()+"/"+ response.getFile().getName());
+                    Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getApplicationContext().getFilesDir() + "/" + response.getFile().getName());
                     newImage.setImageBitmap(bitmap);
 
                 },
-                error -> Log.e(TAG,  "Download Failure", error)
+                error -> Log.e(TAG, "Download Failure", error)
         );
     }
 

@@ -41,7 +41,7 @@ type Like @model {
 type Material @model {
   id: ID!
   fileName: String!
-  fileDis: String!
+
   fileUrl: String!
   fileMajor: String!
 }

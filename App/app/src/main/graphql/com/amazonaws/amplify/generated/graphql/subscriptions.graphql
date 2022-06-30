@@ -300,7 +300,6 @@ subscription OnCreateMaterial {
   onCreateMaterial {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -311,7 +310,6 @@ subscription OnUpdateMaterial {
   onUpdateMaterial {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
@@ -322,7 +320,6 @@ subscription OnDeleteMaterial {
   onDeleteMaterial {
     id
     fileName
-    fileDis
     fileUrl
     fileMajor
     createdAt
