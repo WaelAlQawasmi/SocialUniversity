@@ -97,7 +97,7 @@ public class UniversityPostActivity extends Fragment {
 
     }
 
-    public void fetchPostFromAPI(View view){
+    public void fetchPostFromAPI(View view) {
         //
         Amplify.API.query(ModelQuery.list(UniPost.class),
                 success -> {
@@ -130,18 +130,16 @@ public class UniversityPostActivity extends Fragment {
                 public void onPostItemLikeClicked(int position) {
 
                     flag = false;
-                    likesCount=0;
+                    likesCount = 0;
 
                     // fetch like table rows that have the current post ID
-                    Amplify.API.query(ModelQuery.list(Like.class,Like.UNI_POST_LIKES_ID.eq(uniPostList.get(position).getId())),
+                    Amplify.API.query(ModelQuery.list(Like.class, Like.UNI_POST_LIKES_ID.eq(uniPostList.get(position).getId())),
                             likeSuccess -> {
-                                if (likeSuccess.hasData())
-                                {
+                                if (likeSuccess.hasData()) {
                                     // check if user liked the post before by searching about the user id in the like rows
-                                    for (Like postLike : likeSuccess.getData())
-                                    {
+                                    for (Like postLike : likeSuccess.getData()) {
                                         likesCount++;
-                                        if (postLike.getUserId().equals(authUserId)){
+                                        if (postLike.getUserId().equals(authUserId)) {
                                             flag = true;
 
                                             // TODO: 6/25/2022 disLike -> delete the current like row from the table
@@ -149,72 +147,76 @@ public class UniversityPostActivity extends Fragment {
                                     }
                                 }
 
-                            }
-                            // if the user didn't like the post before
-                            if (!flag)
-                            {
-                                // create an Instance of the Like model
-                                Like like=Like.builder()
-                                        .userId(authUserId)
-                                        .uniPostLikesId(uniPostList.get(position).getId())
-                                        .build();
 
-                                // save the Like instance
-                                Amplify.DataStore.save(like,
-                                        success -> {
-                                            Log.i(TAG, "Saved like: " + success.item().getUserId());
-                                        },
-                                        error -> {
-                                            Log.e(TAG, "Could not save item to DataStore", error);
-                                        }
-                                );
+                                // if the user didn't like the post before
+                                if (!flag) {
+                                    // create an Instance of the Like model
+                                    Like like = Like.builder()
+                                            .userId(authUserId)
+                                            .uniPostLikesId(uniPostList.get(position).getId())
+                                            .build();
 
-                                Amplify.API.mutate(
-                                        ModelMutation.create(like),
-                                        success -> {
-                                            Log.i(TAG, "Saved item: " + success.getData().getUserId());
-                                        },
-                                        error -> {
-                                            Log.e(TAG, "Could not save item to API", error);
-                                        }
-                                );
+                                    // save the Like instance
+                                    Amplify.DataStore.save(like,
+                                            success -> {
+                                                Log.i(TAG, "Saved like: " + success.item().getUserId());
+                                            },
+                                            error -> {
+                                                Log.e(TAG, "Could not save item to DataStore", error);
+                                            }
+                                    );
 
-                                // update the likes count in the post
-                                likesCount++;
-                                TextView pLikes = view.findViewById(R.id.post_like);
-                                pLikes.setText(likesCount+" Like");
-                            }
-                        },
-                        likeFailure -> {
-                            Log.e(TAG, "Failed to fetch the likes ",likeFailure);
-                        });
+                                    Amplify.API.mutate(
+                                            ModelMutation.create(like),
+                                            success -> {
+                                                Log.i(TAG, "Saved item: " + success.getData().getUserId());
+                                            },
+                                            error -> {
+                                                Log.e(TAG, "Could not save item to API", error);
+                                            }
+                                    );
 
-            }
+                                    // update the likes count in the post
+                                    likesCount++;
+                                    TextView pLikes = view.findViewById(R.id.post_like);
+                                    pLikes.setText(likesCount + " Like");
+                                }
+                            },
+                            likeFailure -> {
+                                Log.e(TAG, "Failed to fetch the likes ", likeFailure);
+                            });
 
-            @Override
-            public void onPostItemCommentClicked(int position) {
-                Intent intent=new Intent(getActivity(),CommentActivity.class);
-                intent.putExtra("postId",uniPostList.get(position).getId());
-                intent.putExtra("userName",nickNameUser);
-                startActivity(intent);
-            }
+                }
 
-            @Override
-            public void onPostItemImageClicked(int position) {
-                Intent userProfile=new Intent(getActivity().getApplicationContext(),users_profile.class);
-                userProfile.putExtra("userId",uniPostList.get(position).getId());
-                startActivity(userProfile);
-            }
+                @Override
+                public void onPostItemCommentClicked(int position) {
+                    Intent intent = new Intent(getActivity(), CommentActivity.class);
+                    intent.putExtra("postId", uniPostList.get(position).getId());
+                    intent.putExtra("userName", nickNameUser);
+                    startActivity(intent);
+                }
 
-            @Override
-            public void onPostItemUserNameClicked(int position) {
-                Intent userProfile=new Intent(getActivity().getApplicationContext(),users_profile.class);
-                userProfile.putExtra("username",uniPostList.get(position).getUserName());
-                startActivity(userProfile);
-            }
+                @Override
+                public void onPostItemImageClicked(int position) {
+                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
+                    userProfile.putExtra("userId", uniPostList.get(position).getId());
+                    startActivity(userProfile);
+                }
 
+                @Override
+                public void onPostItemUserNameClicked(int position) {
+                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
+                    userProfile.putExtra("username", uniPostList.get(position).getUserName());
+                    startActivity(userProfile);
+                }
+
+            });
+
+            mRecyclerView.setAdapter(postRecyclerView);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            return true;
         });
     }
-
-
 }
