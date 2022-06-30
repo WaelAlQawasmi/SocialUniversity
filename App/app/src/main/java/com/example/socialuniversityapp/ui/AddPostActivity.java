@@ -63,6 +63,7 @@ public class AddPostActivity extends AppCompatActivity {
         mAddPostButton = findViewById(R.id.add_post_button);
 
 
+
         // To Know From Any Activity This Intent Came
         Intent intent = getIntent();
 
@@ -72,6 +73,7 @@ public class AddPostActivity extends AppCompatActivity {
             context = intent.getStringExtra("context");
 
         // Fetch Authentication User From Cloud
+
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
                     Log.i("AuthDemo", "User attributes = " + attributes.toString());

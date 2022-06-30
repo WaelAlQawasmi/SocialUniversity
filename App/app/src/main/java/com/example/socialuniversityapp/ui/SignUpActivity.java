@@ -16,10 +16,13 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.UniPost;
+import com.amplifyframework.datastore.generated.model.User;
 import com.example.socialuniversityapp.R;
 
 import java.util.ArrayList;
@@ -122,10 +125,21 @@ public class SignUpActivity extends AppCompatActivity {
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(),user_name));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major));
+        User newUser = User
+                .builder()
+                .cognitoId(uniId)
+                .name(user_name)
+                .major(major)
+                .build();
+
+        Amplify.API.mutate(ModelMutation.create(newUser),
+                success -> {
+                  Log.i(TAG,"saved New user in database");
+                },
+                failed ->{});
+
 
         Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
-
-
 
 
                 result -> {

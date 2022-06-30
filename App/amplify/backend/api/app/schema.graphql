@@ -41,7 +41,14 @@ type Like @model {
 type Material @model {
   id: ID!
   fileName: String!
-
+  fileDis: String!
   fileUrl: String!
   fileMajor: String!
+}
+type User @model{
+  id :ID!
+  cognitoId:String!
+  name:String!
+  major:String!
+
 }

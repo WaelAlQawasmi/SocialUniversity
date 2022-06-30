@@ -148,61 +148,71 @@ public class UniversityPostActivity extends Fragment {
                                         }
                                     }
                                 }
-                                // if the user didn't like the post before
-                                if (!flag)
-                                {
-                                    // create an Instance of the Like model
-                                    Like like=Like.builder()
-                                            .userId(authUserId)
-                                            .uniPostLikesId(uniPostList.get(position).getId())
-                                            .build();
 
-                                    // save the Like instance
-                                    Amplify.DataStore.save(like,
-                                            success -> {
-                                                Log.i(TAG, "Saved like: " + success.item().getUserId());
-                                            },
-                                            error -> {
-                                                Log.e(TAG, "Could not save item to DataStore", error);
-                                            }
-                                    );
+                            }
+                            // if the user didn't like the post before
+                            if (!flag)
+                            {
+                                // create an Instance of the Like model
+                                Like like=Like.builder()
+                                        .userId(authUserId)
+                                        .uniPostLikesId(uniPostList.get(position).getId())
+                                        .build();
 
-                                    Amplify.API.mutate(
-                                            ModelMutation.create(like),
-                                            success -> {
-                                                Log.i(TAG, "Saved item: " + success.getData().getUserId());
-                                            },
-                                            error -> {
-                                                Log.e(TAG, "Could not save item to API", error);
-                                            }
-                                    );
+                                // save the Like instance
+                                Amplify.DataStore.save(like,
+                                        success -> {
+                                            Log.i(TAG, "Saved like: " + success.item().getUserId());
+                                        },
+                                        error -> {
+                                            Log.e(TAG, "Could not save item to DataStore", error);
+                                        }
+                                );
 
-                                    // update the likes count in the post
-                                    likesCount++;
-                                    TextView pLikes = view.findViewById(R.id.post_like);
-                                    pLikes.setText(likesCount+" Like");
-                                }
-                            },
-                            likeFailure -> {
-                                Log.e(TAG, "Failed to fetch the likes ",likeFailure);
-                            });
+                                Amplify.API.mutate(
+                                        ModelMutation.create(like),
+                                        success -> {
+                                            Log.i(TAG, "Saved item: " + success.getData().getUserId());
+                                        },
+                                        error -> {
+                                            Log.e(TAG, "Could not save item to API", error);
+                                        }
+                                );
 
-                }
+                                // update the likes count in the post
+                                likesCount++;
+                                TextView pLikes = view.findViewById(R.id.post_like);
+                                pLikes.setText(likesCount+" Like");
+                            }
+                        },
+                        likeFailure -> {
+                            Log.e(TAG, "Failed to fetch the likes ",likeFailure);
+                        });
 
-                @Override
-                public void onPostItemCommentClicked(int position) {
-                    Intent intent=new Intent(getActivity(),CommentActivity.class);
-                    intent.putExtra("postId",uniPostList.get(position).getId());
-                    intent.putExtra("userName",nickNameUser);
-                    startActivity(intent);
-                }
-            });
+            }
 
-            mRecyclerView.setAdapter(postRecyclerView);
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            @Override
+            public void onPostItemCommentClicked(int position) {
+                Intent intent=new Intent(getActivity(),CommentActivity.class);
+                intent.putExtra("postId",uniPostList.get(position).getId());
+                intent.putExtra("userName",nickNameUser);
+                startActivity(intent);
+            }
 
-            return true;
+            @Override
+            public void onPostItemImageClicked(int position) {
+                Intent userProfile=new Intent(getActivity().getApplicationContext(),users_profile.class);
+                userProfile.putExtra("userId",uniPostList.get(position).getId());
+                startActivity(userProfile);
+            }
+
+            @Override
+            public void onPostItemUserNameClicked(int position) {
+                Intent userProfile=new Intent(getActivity().getApplicationContext(),users_profile.class);
+                userProfile.putExtra("username",uniPostList.get(position).getUserName());
+                startActivity(userProfile);
+            }
+
         });
     }
 
