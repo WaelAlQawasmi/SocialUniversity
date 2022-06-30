@@ -105,10 +105,11 @@ public class AddMaterial extends AppCompatActivity{
 
         Material item = Material.builder()
                 .fileName(titleName)
+                .fileDis(titleName)
                 .fileUrl(imageKey)
                 .fileMajor("Engineering")
                 .build();
-        // Data store save
+
 
         Amplify.API.mutate(ModelMutation.create(item),  success -> Log.i(TAG, "Saved item: " ),
                 error -> Log.e(TAG, "Could not save item to DataStore", error));

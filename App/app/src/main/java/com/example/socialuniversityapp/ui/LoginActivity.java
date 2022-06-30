@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
         SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
         String Checkbox_true_or_false=preferences.getString("remember","");
-         Log.e(TAG,Checkbox_true_or_false);
+        Log.e(TAG,Checkbox_true_or_false);
         if(Checkbox_true_or_false.equals("true")){
             String stored_email=preferences.getString("email","");
             String stored_password=preferences.getString("password","");
@@ -58,10 +58,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
 
                         runOnUiThread(new Runnable() {
-                                          @Override
-                                          public void run() {
-                                              mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                                          }
+                            @Override
+                            public void run() {
+                                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                            }
                         });
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();

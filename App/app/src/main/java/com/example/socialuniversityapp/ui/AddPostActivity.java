@@ -62,7 +62,6 @@ public class AddPostActivity extends AppCompatActivity {
         mPostContent = findViewById(R.id.add_post_body);
         mAddPostButton = findViewById(R.id.add_post_button);
 
-
         // Fetch Username from cognito
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
