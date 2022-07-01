@@ -76,19 +76,21 @@ public class SplashScreenActivity extends AppCompatActivity {
         animationText("WELCOME !!!");
 
         Animation animation2 = AnimationUtils.loadAnimation(this,R.anim.bottom_wave);
-
+        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+        String Checkbox_true_or_false=preferences.getString("remember","false");
         mImageBottom.setAnimation(animation2);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
-                String Checkbox_true_or_false=preferences.getString("remember","");
+
+                Log.e(TAG,Checkbox_true_or_false);
                 if(Checkbox_true_or_false.equals("false")) {
                     startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                     finish();
                 }
+
 
             }
         },4000);
@@ -137,7 +139,8 @@ public void loginToMainActivityIf(){
                 },
                 error -> {
                     Log.e("Error", error.toString());
-
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                    finish();
                     Bundle bundle = new Bundle();
                     bundle.putString("Sign in",error.toString());
 
