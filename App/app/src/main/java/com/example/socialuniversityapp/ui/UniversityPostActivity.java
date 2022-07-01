@@ -141,16 +141,21 @@ public class UniversityPostActivity extends Fragment {
 
             @Override
             public void onPostItemImageClicked(int position) {
+
+
                 Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
                 userProfile.putExtra("userId", uniPostList.get(position).getId());
                 startActivity(userProfile);
+
             }
 
             @Override
             public void onPostItemUserNameClicked(int position) {
+
                 Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
                 userProfile.putExtra("username", uniPostList.get(position).getUserName());
                 startActivity(userProfile);
+
             }
         });
 
@@ -210,16 +215,24 @@ public class UniversityPostActivity extends Fragment {
 
                 @Override
                 public void onPostItemImageClicked(int position) {
+
+
+
                     Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
                     userProfile.putExtra("userId", uniPostList.get(position).getId());
                     startActivity(userProfile);
+
                 }
 
                 @Override
                 public void onPostItemUserNameClicked(int position) {
+
+
+
                     Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
                     userProfile.putExtra("username", uniPostList.get(position).getUserName());
                     startActivity(userProfile);
+
                 }
             });
 
