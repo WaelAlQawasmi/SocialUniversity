@@ -134,12 +134,19 @@ public class MajorPostAdapter extends RecyclerView.Adapter<MajorPostAdapter.Post
             postComments.setOnClickListener(view -> {
                 listener.onPostItemCommentClicked(getAdapterPosition());
             });
-
+            postImg.setOnClickListener(view ->{
+                listener.onPostItemImageClicked(getAdapterPosition());
+            });
+            stdName.setOnClickListener(view ->{
+                listener.onPostItemUserNameClicked(getAdapterPosition());
+            });
         }
     }
     public interface ClickListener {
         void onPostItemLikeClicked(int position);
         void onPostItemCommentClicked(int position);
+        void onPostItemImageClicked(int position);
+        void onPostItemUserNameClicked(int position);
     }
 
 }
