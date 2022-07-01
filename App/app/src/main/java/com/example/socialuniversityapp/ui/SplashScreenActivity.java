@@ -6,9 +6,12 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -46,7 +49,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         mImageBottom = findViewById(R.id.iv_bottom);
         mTextView = findViewById(R.id.text_view);
 
-
+        loginToMainActivityIf();
 
 
         //set full screen
@@ -78,11 +81,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+                String Checkbox_true_or_false=preferences.getString("remember","");
+                if(Checkbox_true_or_false.equals("false")) {
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
-                finish();
-
+                    finish();
+                }
 
             }
         },4000);
@@ -112,5 +118,35 @@ public class SplashScreenActivity extends AppCompatActivity {
         handler.postDelayed(runnable,delay);
     }
 
+public void loginToMainActivityIf(){
+    SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
+    String Checkbox_true_or_false=preferences.getString("remember","");
+    Log.e(TAG,Checkbox_true_or_false);
+    if(Checkbox_true_or_false.equals("true")){
+        String stored_email=preferences.getString("email","");
+        String stored_password=preferences.getString("password","");
 
+        Amplify.Auth.signIn(
+                stored_email,
+                stored_password,
+                result -> {
+                    Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                    finish();
+                },
+                error -> {
+                    Log.e("Error", error.toString());
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Sign in",error.toString());
+
+                    Message message = new Message();
+                    message.setData(bundle);
+
+                    handler.sendMessage(message);
+                }
+        );
+    }
+}
 }

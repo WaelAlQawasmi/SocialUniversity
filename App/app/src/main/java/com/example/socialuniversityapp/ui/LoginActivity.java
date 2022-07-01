@@ -52,41 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailAndPasswordError = findViewById(R.id.email_password_error_text);
 
 
-        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
-        String Checkbox_true_or_false=preferences.getString("remember","");
-        Log.e(TAG,Checkbox_true_or_false);
-        if(Checkbox_true_or_false.equals("true")){
-            String stored_email=preferences.getString("email","");
-            String stored_password=preferences.getString("password","");
 
-            Amplify.Auth.signIn(
-                    stored_email,
-                    stored_password,
-                    result -> {
-                        Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                            }
-                        });
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                    },
-                    error -> {
-                        Log.e("Error", error.toString());
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Sign in",error.toString());
-
-                        Message message = new Message();
-                        message.setData(bundle);
-
-                        handler.sendMessage(message);
-                    }
-            );
-        }
 
 
 
