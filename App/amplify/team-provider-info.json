@@ -12,16 +12,21 @@
       "AmplifyAppId": "d295jd5dsp8irz"
     },
     "categories": {
+
       "auth": {
         "app38af627a": {},
         "app520f5e7b": {},
         "app313c3d8b": {}
       },
+
       "function": {
         "S3Trigger8a2abc3c": {
           "deploymentBucketName": "amplify-app-socaialenv-172204-deployment",
           "s3Key": "amplify-builds/S3Trigger8a2abc3c-6a6157526a777a577632-build.zip"
         }
+      },
+      "auth": {
+        "app520f5e7b": {}
       }
     }
   }

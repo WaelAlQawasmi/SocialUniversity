@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,8 +32,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private EditText mEmail, mPassword;
     private Button mLoginButton;
-    private TextView mSignUpLink;
+    private TextView mSignUpLink, mEmailError, mEmailAndPasswordError;
     private ProgressBar mLoadingProgressBar;
+
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +48,11 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
         mSignUpLink = findViewById(R.id.login_toSign_up);
         mLoadingProgressBar = findViewById(R.id.loading_login);
+        mEmailError = findViewById(R.id.email_error_text);
+        mEmailAndPasswordError = findViewById(R.id.email_password_error_text);
 
-        SharedPreferences preferences=getSharedPreferences("checkbox",MODE_PRIVATE);
-        String Checkbox_true_or_false=preferences.getString("remember","");
-         Log.e(TAG,Checkbox_true_or_false);
-        if(Checkbox_true_or_false.equals("true")){
-            String stored_email=preferences.getString("email","");
-            String stored_password=preferences.getString("password","");
 
-            Amplify.Auth.signIn(
-                    stored_email,
-                    stored_password,
-                    result -> {
-                        Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
 
-                        runOnUiThread(new Runnable() {
-                                          @Override
-                                          public void run() {
-                                              mLoadingProgressBar.setVisibility(View.INVISIBLE);
-                                          }
-                        });
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
-                    },
-                    error -> Log.e(TAG, error.toString())
-            );
-        }
 
 
 
@@ -77,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Login Button Click
         mLoginButton.setOnClickListener(mLoginButtonClick);
+
     }
 
     // Sign Up Link ClickListener
@@ -92,7 +77,20 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             mLoadingProgressBar.setVisibility(View.VISIBLE);
-            login(mEmail.getText().toString(), mPassword.getText().toString());
+            mEmailAndPasswordError.setText("");
+            int count = 0;
+            if (mEmail.getText().toString().contains("@") == false){
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                mEmail.setError("Please Enter correct Email");
+                count++;
+            }
+            if (mPassword.getText().toString().equals("")){
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                mPassword.setError("Please Enter your password ");
+                count++;
+            }
+            if (count ==0)
+                login(mEmail.getText().toString(), mPassword.getText().toString());
         }
 
     };
@@ -127,7 +125,36 @@ public class LoginActivity extends AppCompatActivity {
 
                     finish();
                 },
-                error -> Log.e(TAG, error.toString())
+                error -> {
+                    Log.e("Error", error.toString());
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Sign in",error.toString());
+
+                    Message message = new Message();
+                    message.setData(bundle);
+
+                    handler.sendMessage(message);
+                }
         );
+        // Handler
+        handler = new Handler(Looper.getMainLooper(), msg ->{
+            String msgHandler = msg.getData().getString("Sign in");
+
+            if (msgHandler.contains("UserNotFoundException")) {
+                mEmail.setError("Email isn't correct");
+                mLoadingProgressBar.setVisibility(View.GONE);
+            }
+            else if (msgHandler.contains("NotAuthorizedException")){
+                mPassword.setError("Please enter correct email and password");
+                mLoadingProgressBar.setVisibility(View.GONE);
+            }else  {
+                mEmailAndPasswordError.setVisibility(View.VISIBLE);
+                mLoadingProgressBar.setVisibility(View.GONE);
+            }
+            return true;
+        });
     }
+
+
 }
