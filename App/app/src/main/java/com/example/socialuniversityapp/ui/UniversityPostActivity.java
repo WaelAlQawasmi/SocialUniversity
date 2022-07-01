@@ -138,6 +138,16 @@ public class UniversityPostActivity extends Fragment {
                 intent.putExtra("authUserId",authUserId);
                 startActivity(intent);
             }
+
+            @Override
+            public void onPostItemImageClicked(int position) {
+
+            }
+
+            @Override
+            public void onPostItemUserNameClicked(int position) {
+
+            }
         });
 
         mRecyclerView.setAdapter(postRecyclerView);
@@ -192,6 +202,16 @@ public class UniversityPostActivity extends Fragment {
                     intent.putExtra("userName",nickNameUser);
                     intent.putExtra("authUserId",authUserId);
                     startActivity(intent);
+                }
+
+                @Override
+                public void onPostItemImageClicked(int position) {
+
+                }
+
+                @Override
+                public void onPostItemUserNameClicked(int position) {
+
                 }
             });
 

@@ -72,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         // Sign Up Button
         mSignUpButton.setOnClickListener(mSignUpButtonClick);
 
+
     }
 
     // auto Complete Click
@@ -100,11 +101,34 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             mLoadingProgressBar.setVisibility(View.VISIBLE);
-            signUp(mEmail.getText().toString(),
-                    mPassword.getText().toString(),
-                    mFullName.getText().toString(),
-                    majorName,
-                    mUniversityId.getText().toString());
+            int count = 0;
+            if (mEmail.getText().toString().contains("@") == false){
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                mEmail.setError("Enter a correct Your Email");
+                count++;
+            } if (mPassword.getText().length() < 8){
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                mPassword.setError("Your password must be grater than 8 char or ");
+                count++;
+            }
+            if (mFullName.getText().toString().equals("")){
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                mFullName.setError("Please enter your FullName");
+                count++;
+            }
+            if (mUniversityId.getText().toString().length() < 5){
+                mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                mUniversityId.setError("University Id must be grater than 5 numbers");
+                count++;
+            }
+
+            if (count == 0) {
+                signUp(mEmail.getText().toString(),
+                        mPassword.getText().toString(),
+                        mFullName.getText().toString(),
+                        majorName,
+                        mUniversityId.getText().toString());
+            }
         }
     };
 
@@ -136,7 +160,9 @@ public class SignUpActivity extends AppCompatActivity {
                 success -> {
                   Log.i(TAG,"saved New user in database");
                 },
-                failed ->{});
+                error ->{
+                    Log.e(TAG, "sign up error ", error);
+                });
 
 
         Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
@@ -162,25 +188,9 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                            mEmail.setError("Email is Already Exists");
                         }
                     });
-
-                    builder.setMessage(error.getMessage()).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    });
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            AlertDialog alert = builder.create();
-
-                            alert.setTitle("Error!");
-                            alert.show();
-                        }
-                    });
-
                 }
         );
 
