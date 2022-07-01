@@ -133,6 +133,20 @@ public class MajorPostActivity extends Fragment {
                 public void onPostItemCommentClicked(int position) {
 
                 }
+
+                @Override
+                public void onPostItemImageClicked(int position) {
+                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
+                    userProfile.putExtra("userId", majorPostList.get(position).getId());
+                    startActivity(userProfile);
+                }
+
+                @Override
+                public void onPostItemUserNameClicked(int position) {
+                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
+                    userProfile.putExtra("username", majorPostList.get(position).getUserName());
+                    startActivity(userProfile);
+                }
             });
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
