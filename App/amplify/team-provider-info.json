@@ -14,7 +14,8 @@
     "categories": {
       "auth": {
         "app38af627a": {},
-        "app520f5e7b": {}
+        "app520f5e7b": {},
+        "app313c3d8b": {}
       },
       "function": {
         "S3Trigger8a2abc3c": {

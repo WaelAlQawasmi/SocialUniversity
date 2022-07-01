@@ -18,6 +18,17 @@ type UniPost @model {
   likes: [Like] @hasMany
   comments: [Comment] @hasMany
 }
+
+type MajorPost @model {
+  id:ID!
+  user_name: String!
+  body: String
+  image: String
+  major: String!
+  likes: [Like] @hasMany
+  comments: [Comment] @hasMany
+}
+
 type Comment @model {
   id: ID!
   comment_user_name: String!
@@ -30,7 +41,7 @@ type Like @model {
 type Material @model {
   id: ID!
   fileName: String!
-
+  fileDis: String!
   fileUrl: String!
   fileMajor: String!
 }
