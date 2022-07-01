@@ -2,7 +2,6 @@ package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -21,9 +20,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.MajorPost;
 import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
 import com.squareup.picasso.Picasso;
@@ -45,7 +46,7 @@ public class AddPostActivity extends AppCompatActivity {
     private ImageView mImageIcon, mImageContent;
     private EditText mPostContent;
     private Button mAddPostButton;
-    private String username, imageKey;
+    private String username, imageKey, majorName, context;
 
     Handler handler;
 
@@ -56,23 +57,34 @@ public class AddPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_post);
 
         //Inflate
-
         mImageContent = findViewById(R.id.add_post_image_content);
         mImageIcon = findViewById(R.id.add_post_image_icon);
         mPostContent = findViewById(R.id.add_post_body);
         mAddPostButton = findViewById(R.id.add_post_button);
 
 
-        // Fetch Username from cognito
+
+        // To Know From Any Activity This Intent Came
+        Intent intent = getIntent();
+
+        if (intent.getStringExtra("context").equals("University"))
+            context = intent.getStringExtra("context");
+        else if (intent.getStringExtra("context").equals("Major"))
+            context = intent.getStringExtra("context");
+
+        // Fetch Authentication User From Cloud
+
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
                     Log.i("AuthDemo", "User attributes = " + attributes.toString());
                     attributes.forEach(authUserAttribute -> {
 
                         if (authUserAttribute.getKey().getKeyString().equals("nickname"))
-                        {
                             username=authUserAttribute.getValue();
-                        }
+
+
+                        if (authUserAttribute.getKey().getKeyString().equals("custom:majoreName"))
+                            majorName = authUserAttribute.getValue();
                     });
                 },
                 error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
@@ -95,24 +107,47 @@ public class AddPostActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
 
-            UniPost newPost = UniPost
+            UniPost uniPost = UniPost
                     .builder()
                     .userName(username)
                     .body(mPostContent.getText().toString())
                     .image(imageKey)
                     .build();
 
-            Amplify.API.mutate(ModelMutation.create(newPost),
-                    success -> {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mPostContent.setText("");
-                                mImageContent.setVisibility(View.GONE);
-                            }
-                        });
-                    },
-                    filed ->{});
+            MajorPost majorPost = MajorPost
+                    .builder()
+                    .userName(username)
+                    .major(majorName)
+                    .body(mPostContent.getText().toString())
+                    .image(imageKey)
+                    .build();
+
+            if (context.equals("University")){
+                Amplify.API.mutate(ModelMutation.create(uniPost),
+                        success -> {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mPostContent.setText("");
+                                    mImageContent.setVisibility(View.GONE);
+                                }
+                            });
+                        },
+                        filed ->{});
+
+            } else if (context.equals("Major")){
+                Amplify.API.mutate(ModelMutation.create(majorPost),
+                        success -> {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mPostContent.setText("");
+                                    mImageContent.setVisibility(View.GONE);
+                                }
+                            });
+                        },
+                        filed ->{});
+            }
         }
     };
 
@@ -214,6 +249,7 @@ public class AddPostActivity extends AppCompatActivity {
             String imageUrl = msg.getData().getString("url");
             mImageContent.setVisibility(View.VISIBLE);
             Picasso.get().load(imageUrl).into(mImageContent);
+            Toast.makeText(this, "Post Successful", Toast.LENGTH_SHORT).show();
             return true;
         });
     }

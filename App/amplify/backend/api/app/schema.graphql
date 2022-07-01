@@ -45,3 +45,10 @@ type Material @model {
   fileUrl: String!
   fileMajor: String!
 }
+type User @model{
+  id :ID!
+  cognitoId:String!
+  name:String!
+  major:String!
+
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Profile"
+    android:id="@+id/drawer_layout">
+
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_profile"
+        android:layout_width="202dp"
+        android:layout_height="199dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/user_profile" />
+
+    <TextView
+        android:id="@+id/userName_profile"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView_profile"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/oswald_bold"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userName_profile"
+        android:layout_centerHorizontal="true"
+        android:text="TouristGuide" />
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="-30dp"
+        android:src="@drawable/profile_ui_design" />
+
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/major_prof"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/background"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="58dp"
+        android:drawableLeft="@drawable/education"
+        android:drawablePadding="10dp"
+        android:text="Major"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/major_prof"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="156dp"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="message">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+
+</RelativeLayout>
+
+
