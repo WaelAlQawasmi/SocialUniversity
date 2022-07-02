@@ -12,6 +12,7 @@
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_material.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_material_and_posts.xml" value="0.25052083333333336" />
+        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_material_rec_view.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.14945652173913043" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_university_post.xml" value="0.25052083333333336" />
@@ -32,14 +33,19 @@
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.159375" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.18" />
         <entry key="..\:/Users/Roa'a/finalProject/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.2" />
+        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/drawable/gradint_bg.xml" value="0.151" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_add_job.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_add_post.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_job_recycler.xml" value="0.1" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.1911231884057971" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_material.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_signup.xml" value="0.21875" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_university_post.xml" value="0.21875" />
+        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/activity_weather.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/list_item.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/layout/post_row.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/User/Music/gitHup/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/drawable/ic_menu_camera.xml" value="0.2555" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/WAEL/SocialUniversity/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.20512820512820512" />
