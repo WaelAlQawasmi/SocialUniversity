@@ -102,7 +102,7 @@ public class WeatherActivity extends Fragment {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
 
-
+        mProgressBar.setVisibility(View.VISIBLE);
         // Get Location
         getLastLocation();
         Log.i(TAG, "location" + longValue + "  " + latitude);
@@ -114,7 +114,7 @@ public class WeatherActivity extends Fragment {
 
     private void loadWeatherByCityName() {
         Ion.with(this)
-                .load("https://api.openweathermap.org/data/2.5/weather?lat="+ latValue+ "&lon=" + longValue + "&appid=" + API_KEY)
+                .load("https://api.openweathermap.org/data/2.5/weather?lat=37.4220005&lon=-122.0839996&appid=9fbf399d64f1d9eee0ec07446b12a2de")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -143,8 +143,8 @@ public class WeatherActivity extends Fragment {
 
                             JsonObject sys = result.get("sys").getAsJsonObject();
                             String country = sys.get("country").getAsString();
-                            String City = result.get("name").getAsString();
-                            mCity.setText(City + country);
+                            String city = result.get("name").getAsString();
+                            mCity.setText( city + " ' "+country);
 
                             // but for brevity, use the ImageView specific builder...
                             JsonArray weather = result.get("weather").getAsJsonArray();
