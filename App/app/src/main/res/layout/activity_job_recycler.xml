@@ -30,7 +30,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/jobs_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="413dp"
             android:layout_marginTop="20dp"
             android:background="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,10 +40,11 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
-            android:layout_width="109dp"
-            android:layout_height="wrap_content"
+            android:layout_width="72dp"
+            android:layout_height="82dp"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
+            android:backgroundTint="@color/main_color"
             app:srcCompat="@drawable/plusicon" />
 
     </LinearLayout>

@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-ads:21.0.0'
     implementation "com.google.android.material:material:1.7.0-alpha02"
 
     // Amplify Services
@@ -60,9 +61,10 @@ dependencies {
     implementation "com.airbnb.android:lottie:3.4.0"
 
     implementation 'com.squareup.picasso:picasso:2.8'
-    implementation 'com.koushikdutta.ion:ion:3.0.8'
+    implementation 'com.koushikdutta.ion:ion:3.1.0'
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
 }

@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.socialuniversityapp.recycler_view.MaterialRecyclerView;
 import com.example.socialuniversityapp.ui.MainActivity;
 import com.example.socialuniversityapp.ui.MajorPostActivity;
 import com.example.socialuniversityapp.ui.MaterialActivity;
@@ -29,7 +30,7 @@ private String []titles=new String[]{"Material","Major","University"};
     public Fragment createFragment(int position) {
         switch (position) {
             case 0 :{
-                return new MaterialActivity();
+                return new MaterialRecyclerView();
             }
             case 1:
                 return new MajorPostActivity();
@@ -37,7 +38,7 @@ private String []titles=new String[]{"Material","Major","University"};
             case 2:
                 return new UniversityPostActivity();
         }
-        return new MaterialActivity();
+        return new MaterialRecyclerView();
     }
 
     @Override
