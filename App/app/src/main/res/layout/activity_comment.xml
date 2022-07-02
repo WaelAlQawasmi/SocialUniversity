@@ -112,6 +112,13 @@
             android:textColor="@color/main_color"
             android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/comment_ic_comm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/post_commet"
+            app:tint="#70B8F1" />
 
         <TextView
             android:id="@+id/post_comment_comm"
@@ -121,18 +128,11 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:text="0 Comment"
-            android:textAlignment="textEnd"
             android:textColor="@color/main_color"
             android:textStyle="bold"
             tools:ignore="RtlCompat" />
 
-        <ImageButton
-            android:id="@+id/comment_ic_comm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/post_commet"
-            app:tint="#70B8F1" />
+
       </LinearLayout>
 
 
