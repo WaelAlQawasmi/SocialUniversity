@@ -200,8 +200,6 @@ public class UniversityPostActivity extends Fragment {
                 @Override
                 public void onPostItemLikeClicked(int position) {
 
-
-
                 }
 
                 @Override

@@ -15,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
         <activity
+            android:name=".ui.WeatherActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
             android:name=".ui.users_profile"
             android:exported="false" />
         <activity
