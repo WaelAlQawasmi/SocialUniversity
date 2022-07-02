@@ -29,7 +29,7 @@ public class JobRecyclerView extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private static final String TAG = "JobRecyclerView";
-    List<JobData> jobList = new ArrayList<>();
+    List<Job> jobList = new ArrayList<>();
     Handler handler;
 
     private FloatingActionButton mFloatingActionButton;
@@ -51,9 +51,9 @@ public class JobRecyclerView extends AppCompatActivity {
                 success -> {
                     for (Job job:success.getData()) {
                         JobData newJob = new JobData(job.getName(),job.getBody(),job.getPhone(),job.getAddress());
-                        jobList.add(newJob);
+                        jobList.add(job);
                     }
-                     Bundle bundle = new Bundle();
+                    Bundle bundle = new Bundle();
                     bundle.putString("success","success");
 
                     Message message = new Message();
@@ -67,29 +67,19 @@ public class JobRecyclerView extends AppCompatActivity {
                 }
         );
 
-                handler= new Handler(Looper.getMainLooper(),Msg ->{
+        handler= new Handler(Looper.getMainLooper(),Msg ->{
             setRecyclerJob(jobList);
             return true;
         });
     }
 
-    public void setRecyclerJob(List<JobData> newJobList){
-//        JobAdapter adapter = new JobAdapter(newJobList, new JobAdapter.ClickListener() {
-        JobAdapter adapter = new JobAdapter(
-                newJobList, position ->  {
-            Toast.makeText(
-                    JobRecyclerView.this,
-                    "you clicked :  " + newJobList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(getApplicationContext(), JobDetails.class);
-//            intent.putExtra("id", newJobList.get(position).getId());
-//            System.out.println("Job list DB : "+ newJobList);
-//            startActivity(intent);
-        }){
-//            @Override
+    public void setRecyclerJob(List<Job> newJobList){
+        JobAdapter adapter = new JobAdapter(newJobList, new JobAdapter.ClickListener() {
+            @Override
             public void onTaskItemClicked(int position) {
-
+                Toast.makeText(JobRecyclerView.this, "you clicked :  ", Toast.LENGTH_SHORT).show();
             }
-        };
+        }) ;
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -98,5 +88,35 @@ public class JobRecyclerView extends AppCompatActivity {
     private void navigateToAddJob() {
         Intent addJobActivity = new Intent(this, AddJobActivity.class);
         startActivity(addJobActivity);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Amplify.API.query(ModelQuery.list(Job.class),
+                success -> {
+                    for (Job job:success.getData()) {
+                        JobData newJob = new JobData(job.getName(),job.getBody(),job.getPhone(),job.getAddress());
+                        jobList.add(job);
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString("success","success");
+
+                    Message message = new Message();
+                    message.setData(bundle);
+
+                    handler.sendMessage(message);
+
+                },
+                failure -> {
+                    Log.i("Amplify", "failed to query .");
+                }
+        );
+
+        handler= new Handler(Looper.getMainLooper(),Msg ->{
+            setRecyclerJob(jobList);
+            return true;
+        });
+
     }
 }
