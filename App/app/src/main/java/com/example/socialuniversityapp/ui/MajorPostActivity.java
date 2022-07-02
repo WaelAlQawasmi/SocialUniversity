@@ -43,7 +43,8 @@ public class MajorPostActivity extends Fragment {
 
     List<MajorPost> majorPostList = new ArrayList<>();
     private Handler handler;
-
+    private String authUserId;
+    private String nickNameUser;
     private String majorUser;
 
 
@@ -77,9 +78,17 @@ public class MajorPostActivity extends Fragment {
                         if (authUserAttribute.getKey().getKeyString().equals("custom:majoreName"))
                             majorUser=authUserAttribute.getValue();
                         Log.i(TAG, "User Major in auth : "+ majorUser);
+                        if (authUserAttribute.getKey().getKeyString().equals("sub"))
+                        {
+                            authUserId=authUserAttribute.getValue();
+                        }
+                        if (authUserAttribute.getKey().getKeyString().equals("nickname"))
+                        {
+                            nickNameUser=authUserAttribute.getValue();
+                        }
 
                     });
-                    fetchPostFromAPI(view,majorUser);
+                    fetchPostFromAPI(majorUser);
 
                 },
                 error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
@@ -96,7 +105,7 @@ public class MajorPostActivity extends Fragment {
         }
 
     };
-    public void fetchPostFromAPI(View view,String majorUser){
+    public void fetchPostFromAPI(String majorUser){
         Log.i(TAG, "User Major in api : "+ majorUser);
         Amplify.API.query(ModelQuery.list(MajorPost.class, MajorPost.MAJOR.contains(majorUser)),
                 posts -> {
@@ -119,7 +128,7 @@ public class MajorPostActivity extends Fragment {
                 });
 
         handler = new Handler(Looper.getMainLooper(), msg -> {
-            mRecyclerView = view.findViewById(R.id.major_post_recycler);
+
 
             Log.i(TAG, "fetchPostFromAPI: "+ majorPostList);
             // defining action to the like and comment buttons
@@ -131,7 +140,11 @@ public class MajorPostActivity extends Fragment {
 
                 @Override
                 public void onPostItemCommentClicked(int position) {
-
+                    Intent intent=new Intent(getActivity(),MajorCommentActivity.class);
+                    intent.putExtra("postId",majorPostList.get(position).getId());
+                    intent.putExtra("userName",nickNameUser);
+                    intent.putExtra("authUserId",authUserId);
+                    startActivity(intent);
                 }
 
                 @Override
@@ -148,14 +161,85 @@ public class MajorPostActivity extends Fragment {
                     startActivity(userProfile);
                 }
             });
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
             mRecyclerView.setAdapter(postRecyclerViewAdapter);
             mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
             return true;
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<MajorPost> onResumePostList=new ArrayList<>();
+
+        Amplify.API.query(ModelQuery.list(MajorPost.class, MajorPost.MAJOR.contains(majorUser)),
+                posts -> {
+                    for(MajorPost majorposts:posts.getData()){
+                        onResumePostList.add(majorposts);
+                    }
+
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("postsList", posts.toString());
+
+                    Message message = new Message();
+                    message.setData(bundle);
+
+                    handler.sendMessage(message);
+                },
+                error -> {
+                    Log.e(TAG, "Could not query Api", error);
+                });
+
+        handler = new Handler(Looper.getMainLooper(), msg -> {
+
+
+            Log.i(TAG, "fetchPostFromAPI: "+ onResumePostList);
+            // defining action to the like and comment buttons
+            MajorPostAdapter postRecyclerViewAdapter = new MajorPostAdapter(onResumePostList, new MajorPostAdapter.ClickListener() {
+                @Override
+                public void onPostItemLikeClicked(int position) {
+
+                }
+
+                @Override
+                public void onPostItemCommentClicked(int position) {
+                    Intent intent=new Intent(getActivity(),MajorCommentActivity.class);
+                    intent.putExtra("postId",onResumePostList.get(position).getId());
+                    intent.putExtra("userName",nickNameUser);
+                    intent.putExtra("authUserId",authUserId);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onPostItemImageClicked(int position) {
+                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
+                    userProfile.putExtra("userId", onResumePostList.get(position).getId());
+                    startActivity(userProfile);
+                }
+
+                @Override
+                public void onPostItemUserNameClicked(int position) {
+                    Intent userProfile = new Intent(getActivity().getApplicationContext(), users_profile.class);
+                    userProfile.putExtra("username", onResumePostList.get(position).getUserName());
+                    startActivity(userProfile);
+                }
+            });
+
+
+            mRecyclerView.setAdapter(postRecyclerViewAdapter);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+            return true;
+        });
     }
 }

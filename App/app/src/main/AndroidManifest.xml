@@ -31,6 +31,9 @@
         <activity
             android:name=".ui.CommentActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.MajorCommentActivity"
+            android:exported="false"/>
         <activity android:name=".ui.AddJobActivity" />
         <activity
             android:name=".recycler_view.JobRecyclerView"

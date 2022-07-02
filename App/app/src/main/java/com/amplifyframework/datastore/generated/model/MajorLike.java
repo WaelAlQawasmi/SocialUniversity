@@ -16,24 +16,24 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Like type in your schema. */
+/** This is an auto generated class representing the MajorLike type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Likes")
-public final class Like implements Model {
-  public static final QueryField ID = field("Like", "id");
-  public static final QueryField USER_ID = field("Like", "userId");
-  public static final QueryField UNI_POST_LIKES_ID = field("Like", "uniPostLikesId");
+@ModelConfig(pluralName = "MajorLikes")
+public final class MajorLike implements Model {
+  public static final QueryField ID = field("MajorLike", "id");
+  public static final QueryField MAJOR_USER_ID = field("MajorLike", "majorUserId");
+  public static final QueryField MAJOR_POST_LIKES_ID = field("MajorLike", "majorPostLikesId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="String", isRequired = true) String userId;
+  private final @ModelField(targetType="String", isRequired = true) String majorUserId;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-  private final @ModelField(targetType="ID") String uniPostLikesId;
+  private final @ModelField(targetType="ID") String majorPostLikesId;
   public String getId() {
       return id;
   }
   
-  public String getUserId() {
-      return userId;
+  public String getMajorUserId() {
+      return majorUserId;
   }
   
   public Temporal.DateTime getCreatedAt() {
@@ -44,14 +44,14 @@ public final class Like implements Model {
       return updatedAt;
   }
   
-  public String getUniPostLikesId() {
-      return uniPostLikesId;
+  public String getMajorPostLikesId() {
+      return majorPostLikesId;
   }
   
-  private Like(String id, String userId, String uniPostLikesId) {
+  private MajorLike(String id, String majorUserId, String majorPostLikesId) {
     this.id = id;
-    this.userId = userId;
-    this.uniPostLikesId = uniPostLikesId;
+    this.majorUserId = majorUserId;
+    this.majorPostLikesId = majorPostLikesId;
   }
   
   @Override
@@ -61,12 +61,12 @@ public final class Like implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Like like = (Like) obj;
-      return ObjectsCompat.equals(getId(), like.getId()) &&
-              ObjectsCompat.equals(getUserId(), like.getUserId()) &&
-              ObjectsCompat.equals(getCreatedAt(), like.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), like.getUpdatedAt()) &&
-              ObjectsCompat.equals(getUniPostLikesId(), like.getUniPostLikesId());
+      MajorLike majorLike = (MajorLike) obj;
+      return ObjectsCompat.equals(getId(), majorLike.getId()) &&
+              ObjectsCompat.equals(getMajorUserId(), majorLike.getMajorUserId()) &&
+              ObjectsCompat.equals(getCreatedAt(), majorLike.getCreatedAt()) &&
+              ObjectsCompat.equals(getUpdatedAt(), majorLike.getUpdatedAt()) &&
+              ObjectsCompat.equals(getMajorPostLikesId(), majorLike.getMajorPostLikesId());
       }
   }
   
@@ -74,10 +74,10 @@ public final class Like implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
-      .append(getUserId())
+      .append(getMajorUserId())
       .append(getCreatedAt())
       .append(getUpdatedAt())
-      .append(getUniPostLikesId())
+      .append(getMajorPostLikesId())
       .toString()
       .hashCode();
   }
@@ -85,17 +85,17 @@ public final class Like implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Like {")
+      .append("MajorLike {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("userId=" + String.valueOf(getUserId()) + ", ")
+      .append("majorUserId=" + String.valueOf(getMajorUserId()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
-      .append("uniPostLikesId=" + String.valueOf(getUniPostLikesId()))
+      .append("majorPostLikesId=" + String.valueOf(getMajorPostLikesId()))
       .append("}")
       .toString();
   }
   
-  public static UserIdStep builder() {
+  public static MajorUserIdStep builder() {
       return new Builder();
   }
   
@@ -107,8 +107,8 @@ public final class Like implements Model {
    * @param id the id of the existing item this instance will represent
    * @return an instance of this model with only ID populated
    */
-  public static Like justId(String id) {
-    return new Like(
+  public static MajorLike justId(String id) {
+    return new MajorLike(
       id,
       null,
       null
@@ -117,45 +117,45 @@ public final class Like implements Model {
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      userId,
-      uniPostLikesId);
+      majorUserId,
+      majorPostLikesId);
   }
-  public interface UserIdStep {
-    BuildStep userId(String userId);
+  public interface MajorUserIdStep {
+    BuildStep majorUserId(String majorUserId);
   }
   
 
   public interface BuildStep {
-    Like build();
+    MajorLike build();
     BuildStep id(String id);
-    BuildStep uniPostLikesId(String uniPostLikesId);
+    BuildStep majorPostLikesId(String majorPostLikesId);
   }
   
 
-  public static class Builder implements UserIdStep, BuildStep {
+  public static class Builder implements MajorUserIdStep, BuildStep {
     private String id;
-    private String userId;
-    private String uniPostLikesId;
+    private String majorUserId;
+    private String majorPostLikesId;
     @Override
-     public Like build() {
+     public MajorLike build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Like(
+        return new MajorLike(
           id,
-          userId,
-          uniPostLikesId);
+          majorUserId,
+          majorPostLikesId);
     }
     
     @Override
-     public BuildStep userId(String userId) {
-        Objects.requireNonNull(userId);
-        this.userId = userId;
+     public BuildStep majorUserId(String majorUserId) {
+        Objects.requireNonNull(majorUserId);
+        this.majorUserId = majorUserId;
         return this;
     }
     
     @Override
-     public BuildStep uniPostLikesId(String uniPostLikesId) {
-        this.uniPostLikesId = uniPostLikesId;
+     public BuildStep majorPostLikesId(String majorPostLikesId) {
+        this.majorPostLikesId = majorPostLikesId;
         return this;
     }
     
@@ -171,20 +171,20 @@ public final class Like implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String userId, String uniPostLikesId) {
+    private CopyOfBuilder(String id, String majorUserId, String majorPostLikesId) {
       super.id(id);
-      super.userId(userId)
-        .uniPostLikesId(uniPostLikesId);
+      super.majorUserId(majorUserId)
+        .majorPostLikesId(majorPostLikesId);
     }
     
     @Override
-     public CopyOfBuilder userId(String userId) {
-      return (CopyOfBuilder) super.userId(userId);
+     public CopyOfBuilder majorUserId(String majorUserId) {
+      return (CopyOfBuilder) super.majorUserId(majorUserId);
     }
     
     @Override
-     public CopyOfBuilder uniPostLikesId(String uniPostLikesId) {
-      return (CopyOfBuilder) super.uniPostLikesId(uniPostLikesId);
+     public CopyOfBuilder majorPostLikesId(String majorPostLikesId) {
+      return (CopyOfBuilder) super.majorPostLikesId(majorPostLikesId);
     }
   }
   
