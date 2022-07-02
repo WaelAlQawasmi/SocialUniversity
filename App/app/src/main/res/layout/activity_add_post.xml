@@ -41,23 +41,15 @@
 
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <EditText
+            android:id="@+id/add_post_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="body"
-            android:inputType="textMultiLine"
-            app:startIconDrawable="@drawable/body_icon">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/add_post_body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            android:hint="enter your content"
+            android:textSize="18sp"
+            android:layout_marginRight="10dp"
+            android:textColorHint="@color/white"
+            />
 
         <ImageView
             android:id="@+id/add_post_image_content"

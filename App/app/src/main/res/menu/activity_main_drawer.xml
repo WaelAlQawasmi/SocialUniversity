@@ -15,7 +15,7 @@
             android:icon="@drawable/username_icon"
             android:title="@string/menu_profile" />
         <item
-            android:id="@+id/nav_wether"
+            android:id="@+id/nav_weather"
             android:icon="@drawable/weather"
             android:title="@string/menu_weather" />
         <item
@@ -26,5 +26,6 @@
             android:id="@+id/nav_logout"
             android:icon="@drawable/out"
             android:title="@string/menu_logout" />
+
     </group>
 </menu>
