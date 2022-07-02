@@ -1,6 +1,7 @@
 package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -26,6 +27,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -43,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import android.widget.ArrayAdapter;
 
 public class Profile extends Fragment {
     private static final String TAG = "Profile";
@@ -55,6 +60,9 @@ public class Profile extends Fragment {
     View root;
     private final MediaPlayer mp = new MediaPlayer();
 
+    private String majorName;
+    String[] items = {"Computer Science", "Software Eng", "AI", "Networking Sec", "Data Analysis", "Math", "Physics", "History"};
+    ArrayAdapter<String> adapterItem;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,7 +76,7 @@ public class Profile extends Fragment {
         Button editDone = root.findViewById(R.id.editDone);
         EditText nameEdit = root.findViewById(R.id.userName_edit);
         EditText uniId_edit = root.findViewById(R.id.uniId_edit);
-        EditText major_edit = root.findViewById(R.id.major_edit);
+        AutoCompleteTextView autoCompleteTextView= root.findViewById(R.id.sign_up_major_text);
 
 
         imageEdit.setOnClickListener(view -> {
@@ -79,18 +87,50 @@ public class Profile extends Fragment {
             name.setVisibility(View.INVISIBLE);
             uniID.setVisibility(View.INVISIBLE);
             major.setVisibility(View.INVISIBLE);
-            String filterId = (String) uniID.getText();
 
+            // set and get text
+            String filterId = (String) uniID.getText();
             nameEdit.setText(name.getText());
+          //autoCompleteTextView.setText(major.getText());
+
+            // CHANge visibility if buttons
             uniId_edit.setText(filterId.replace("ID : ", ""));
-            major_edit.setText(major.getText());
+            root.findViewById(R.id.sign_up_major_text);
             nameEdit.setVisibility(View.VISIBLE);
             uniId_edit.setVisibility(View.VISIBLE);
-            major_edit.setVisibility(View.VISIBLE);
+            root.findViewById(R.id.major_edit).setVisibility(View.VISIBLE);
+
 
 
         });
 
+
+        adapterItem = new ArrayAdapter<>(getActivity(), R.layout.list_item, items);
+        autoCompleteTextView.setAdapter(adapterItem);
+
+
+        // auto Complete Click
+        final AdapterView.OnItemClickListener autoCompleteTextViewClick = new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                char currentValue = adapterView.getItemAtPosition(position).toString().charAt(0);
+                switch (currentValue){
+                    case 'C':
+                    case 'S':
+                    case 'A':
+                    case 'N':
+                    case 'D':
+                    case 'P':
+                    case 'M':
+                        majorName = adapterView.getItemAtPosition(position).toString();
+                        break;
+
+                }
+
+            }
+        };
+        autoCompleteTextView.setOnItemClickListener(autoCompleteTextViewClick);
 
 
         editDone.setOnClickListener(view -> {
@@ -100,13 +140,13 @@ public class Profile extends Fragment {
 
             attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(), nameEdit.getText().toString()));
             attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId_edit.getText().toString()));
-            attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major_edit.getText().toString()));
+           // attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), majorName));
             Amplify.Auth.updateUserAttributes(
                     attributes  , // attributes is a list of AuthUserAttribute
                     result -> Log.i("AuthDemo", "Updated user attributes = " + result.toString()),
                     error -> Log.e("AuthDemo", "Failed to update user attributes.", error)
             );
-            fetchData();
+          // fetchData();
 
             // CHANge visibiltt if butones
             imageEdit.setVisibility(View.VISIBLE);
@@ -116,22 +156,24 @@ public class Profile extends Fragment {
             uniID.setVisibility(View.VISIBLE);
             major.setVisibility(View.VISIBLE);
 
+            String filterId = (String) uniID.getText();
+            name.setText(nameEdit.getText());
+            uniID.setText("ID : "+uniId_edit.getText());
+            //autoCompleteTextView.setText(major.getText());
 
             nameEdit.setVisibility(View.INVISIBLE);
             uniId_edit.setVisibility(View.INVISIBLE);
-            major_edit.setVisibility(View.INVISIBLE);
+            //  major_edit.setVisibility(View.INVISIBLE);
+            root.findViewById(R.id.major_edit).setVisibility(View.INVISIBLE);
 
 
         });
 //            Intent intent=new Intent(getActivity(),Profile.class);
 //            startActivity(intent);
-
-
-
-
 //        newImage = findViewById(R.id.imageView_profile);
 
         fetchData();
+
         handler = new Handler(Looper.getMainLooper(), msg -> {
             String newUser = msg.getData().getString("newUserName");
             String newEmail = msg.getData().getString("newEmail");

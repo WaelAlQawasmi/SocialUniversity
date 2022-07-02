@@ -12,7 +12,6 @@
       "AmplifyAppId": "d295jd5dsp8irz"
     },
     "categories": {
-
       "function": {
         "S3Trigger8a2abc3c": {
           "deploymentBucketName": "amplify-app-socaialenv-172204-deployment",
