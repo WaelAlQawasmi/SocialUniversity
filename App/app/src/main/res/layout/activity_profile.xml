@@ -6,32 +6,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Profile"
-    android:id="@+id/drawer_layout">
-
-
+    android:id="@+id/drawer_layout"
+    android:paddingBottom="60dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView_profile"
-            android:layout_width="202dp"
-            android:layout_height="199dp"
+            android:layout_width="176dp"
+            android:layout_height="135dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:src="@drawable/user_profile" />
 
         <TextView
             android:id="@+id/userName_profile"
-            android:layout_width="156dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView_profile"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="121dp"
             android:layout_marginTop="22dp"
             android:fontFamily="@font/oswald_bold"
             android:text="Name"
             android:textColor="@color/black"
-            android:textSize="35sp"
-            android:textStyle="bold"
+            android:textSize="30sp"
+             android:gravity="center_horizontal"
             android:visibility="visible" />
 
         <EditText
@@ -101,14 +99,35 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/major_edit"
+<!--        <EditText-->
+<!--            android:id="@+id/major_edit"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignBottom="@+id/major_prof"-->
+<!--            android:visibility="invisible" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_alignBottom="@+id/major_prof"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/job_icon"
             android:visibility="invisible"
-            android:layout_alignBottom="@+id/major_prof"
-            />
+            android:id="@+id/major_edit"
+            android:hint="Major"
+            >
 
+                <AutoCompleteTextView
+                    android:id="@+id/sign_up_major_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:inputType="none"
+                    android:text=""
+
+                    />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/uniId"
@@ -146,6 +165,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/imgBtn"
             android:layout_width="109dp"
@@ -153,33 +173,32 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|right"
-            android:layout_marginTop="203dp"
-            android:layout_marginEnd="74dp"
+            android:layout_marginTop="137dp"
+            android:layout_marginEnd="90dp"
             app:srcCompat="@drawable/camera" />
-
 
         <ImageView
             android:id="@+id/edit"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="65dp"
+            android:layout_height="19dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|right"
-            android:layout_marginTop="409dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginTop="345dp"
+            android:layout_marginEnd="15dp"
             app:srcCompat="@drawable/pencil" />
 
         <Button
-            android:visibility="invisible"
             android:id="@+id/editDone"
-            android:layout_width="111dp"
+            android:layout_width="79dp"
             android:layout_height="37dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="bottom|right"
-            android:layout_marginTop="406dp"
-            android:layout_marginEnd="1dp"
+            android:layout_marginTop="340dp"
+            android:layout_marginEnd="9dp"
             android:text="edit"
+            android:visibility="invisible"
             app:srcCompat="@drawable/email_icon" />
 
 

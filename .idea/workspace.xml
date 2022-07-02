@@ -23,29 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b00591e-2599-4873-ae65-b1fc76516fb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/newSousalUnvercity.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/cli-inputs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/parameters.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/resolvers/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/schema.graphql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/stacks/CustomResources.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/api/app/transform.conf.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/auth/app520f5e7b/cli-inputs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/S3Trigger8a2abc3c-cloudformation-template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/amplify.state" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/event.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/function/S3Trigger8a2abc3c/src/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/amplify/backend/storage/s373b83eee/cli-inputs.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/.config/project-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/.config/project-config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/backend/backend-config.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/backend-config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amplify/backend/types/amplify-dependent-resources-ref.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/backend/types/amplify-dependent-resources-ref.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amplify/team-provider-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/amplify/team-provider-info.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
