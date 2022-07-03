@@ -188,7 +188,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
                             Amplify.API.mutate(
                                     ModelMutation.create(like),
                                     success -> {
-                                        Log.i(TAG, "Saved item: " + success.getData().getUserId());
+                                        Log.i(TAG, "Saved item: " );
                                     },
                                     error -> {
                                         Log.e(TAG, "Could not save item to API", error);

@@ -59,5 +59,23 @@ type User @model{
   cognitoId:String!
   name:String!
   major:String!
+  email:String!
+  chats :[chat] @hasMany
+  messages :[Message] @hasMany
 
 }
+type Message @model{
+  id :ID!
+  content:String!
+ date :AWSDateTime
+ user : User @hasOne
+ chat : chat @hasOne
+}
+type chat @model {
+  id :ID!
+  firstUser: User @hasOne
+  secondUser: User @hasOne
+  lastMessage :String
+  messages : [Message] @hasMany
+}
+
