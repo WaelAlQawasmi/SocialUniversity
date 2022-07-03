@@ -32,10 +32,9 @@ public class users_profile extends AppCompatActivity {
         TextView major = findViewById(R.id.major_prof);
 
         Intent getuserId=getIntent();
+
         String username=getuserId.getStringExtra("username");
-        RestOptions options = RestOptions.builder()
-                .addPath("/User")
-                .build();
+
 
 
         Amplify.API.query( ModelQuery.list(User.class,User.NAME.contains(username)),

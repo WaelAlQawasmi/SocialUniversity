@@ -39,21 +39,122 @@ public class chatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        ListView messsageListView=findViewById(R.id.messageListView);
-        chatAdapter=new chatAdapter(getApplicationContext(),R.id.messageListView,messages);
-        messsageListView.setAdapter(chatAdapter);
+
+        connectListViewToChatAdapter();
 
         getPreviousMessages();
 
-       Amplify.DataStore.observe(
-               Message.class,
-               cancelable -> Log.i("Amplify-oberver","observation begun")
-               ,this::onNewMessageReceived,
-               failure ->Log.e("amplify App","observation failed",failure),
-               ()->Log.i("Amplify-observer","observation complete")
-       );
+
+        observeMessages();
 
 
+
+    }
+    public void onClickSendMessage(View view){
+
+        Amplify.API.query(
+                ModelQuery.list(chat.class), chats->
+                        runOnUiThread(() ->{
+
+                            String current_user_email=Amplify.Auth.getCurrentUser().getUsername();
+
+                            Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(current_user_email)), users ->{
+                                String current_user_id="";
+
+
+                                if(users.hasData()){
+
+
+                                    for(User user:users.getData()){
+                                        current_user_id=user.getId();
+                                        break;
+                                    }
+
+                                    String chatId = null;
+                                    Boolean condition=false;
+                                    if(chats.hasData()){
+                                        for (chat temp_chat:chats.getData()){
+
+                                           if( getTheCommonChatBetweenTwoUser(temp_chat,current_user_id)){
+                                                chatId=temp_chat.getId();
+                                                condition=true;
+                                                break;
+                                            }
+
+                                        }
+                                    }
+                                    buildSaveMutateMessage(condition,current_user_id,chatId);
+
+                                        runOnUiThread(()->{
+                                            chatAdapter.notifyDataSetChanged();
+                                        });
+                                    }
+
+                            },error->{
+
+                            });
+                        }),error ->{
+
+                });
+
+    }
+
+    private void buildSaveMutateMessage(Boolean condition,String current_user_id,String chat_id) {
+        EditText enterMessage = findViewById(R.id.enterMessage);
+
+        String messageContent = enterMessage.getText().toString();
+        if (!messageContent.isEmpty() && condition) {
+            Message message = Message.builder()
+                    .content(messageContent)
+                    .messageUserId(current_user_id)
+                    .messageChatId(chat_id)
+                    .date(new Temporal.DateTime(new Date(), getOffest()))
+                    .build();
+
+            Amplify.DataStore.save(message, target -> {
+                Log.i(TAG, "message sent");
+
+            }, error -> {
+                Log.e(TAG, error.getMessage());
+            });
+            Amplify.API.mutate(ModelMutation.create(message),
+
+                    response -> {
+                        Log.i(TAG, "Todo with id mutate ");
+
+                    },
+                    error2 -> Log.e(TAG, "Create failed mutate", error2)
+            );
+        }
+    }
+    private boolean getTheCommonChatBetweenTwoUser(chat chat ,String current_user_id) {
+        String firstId = chat.getChatFirstUserId();
+        String secondId = chat.getChatSecondUserId();
+
+        Intent getOtherUser = getIntent();
+        String otherUserID = getOtherUser.getStringExtra("id");
+        if ((firstId.equals(current_user_id) && (secondId.equals(otherUserID))) ||
+                (firstId.equals(otherUserID) && (secondId.equals(current_user_id)))) {
+            return true;
+        } else {
+
+            return false;
+        }
+    }
+    private void observeMessages() {
+        Amplify.DataStore.observe(
+                Message.class,
+                cancelable -> Log.i("Amplify-oberver","observation begun")
+                ,this::onNewMessageReceived,
+                failure ->Log.e("amplify App","observation failed",failure),
+                ()->Log.i("Amplify-observer","observation complete")
+        );
+    }
+
+    private void connectListViewToChatAdapter() {
+        ListView messsageListView=findViewById(R.id.messageListView);
+        chatAdapter=new chatAdapter(getApplicationContext(),R.id.messageListView,messages);
+        messsageListView.setAdapter(chatAdapter);
     }
 
     private void onNewMessageReceived(DataStoreItemChange<Message> messageChanged) {
@@ -67,58 +168,36 @@ public class chatsActivity extends AppCompatActivity {
     }
 
     private void getPreviousMessages() {
-//        Amplify.API.query(ModelQuery.list(
-//                Message.class, Where.sorted(Message.DATE.ascending()),messagesDataStore -> runOnUiThread(() ->{
-//                      for (Message message:messagesDataStore.getData()){
-//                       Message message=messagesDataStore.;
-//                          messages.add(message);
-//                          chatAdapter.notifyDataSetChanged();
-//                      }
-//                })),error ->{
-//
-//        });
-
 
         Amplify.API.query(
                 ModelQuery.list(chat.class), chats->
                  runOnUiThread(() ->{
-                     Intent getOtherUser=getIntent();
-                     String otherUserId= getOtherUser.getStringExtra("id");
+
                     String current_user_email=Amplify.Auth.getCurrentUser().getUsername();
-                     Log.i(TAG,"second "+current_user_email);
+
+
                      Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(current_user_email)), users ->{
                          String current_user_id="";
+
                          if(users.hasData()) {
+
                              for (User user : users.getData()) {
+
                                  current_user_id = user.getId();
+
                              }
                              if (chats.hasData()){
+
                                  for (chat temp_chat : chats.getData()) {
 
-                                     Log.i(TAG, "3 ");
-
-                                     String firstId = temp_chat.getChatFirstUserId();
-                                     String secondId = temp_chat.getChatSecondUserId();
 
 
-                                     if ((firstId.equals(current_user_id) && (secondId.equals(otherUserId))) ||
-                                             (firstId.equals(otherUserId) && (secondId.equals(current_user_id)))) {
-                                         Log.i(TAG, "4 +");
-                                            Amplify.API.query(ModelQuery.list(Message.class,Message.MESSAGE_CHAT_ID.contains(temp_chat.getId())),
-                                                    messagesFromDatastore -> runOnUiThread(() ->{
-                                                               if(messagesFromDatastore.hasData()) {
-                                                                   for (Message temp_message : messagesFromDatastore.getData())
-                                                                       if (temp_message.getMessageChatId().equals(temp_chat.getId())) {
-                                                                           temp_chat.getMessages().add(temp_message);
-                                                                           messages.add(temp_message);
-                                                                           Log.i(TAG, "4");
 
-                                                                       }
+                                     if (checkIfCurrentUserEqualToFirstId(temp_chat,current_user_id) ||
+                                             checkIfCurrentUserEqualToSecondId(temp_chat,current_user_id)) {
 
-                                                                   chatAdapter.notifyDataSetChanged();
-                                                               }
-                                                    }),error ->{
-                                            });
+                                            getAllMessagesFromAPIThatRelateToTheUser(temp_chat.getId());
+
 
                                          break;
                                      }
@@ -130,96 +209,46 @@ public class chatsActivity extends AppCompatActivity {
                      },error->{
 
                      });
-                     Log.i(TAG,"5 ");
                      chatAdapter.notifyDataSetChanged();
-                     Log.i(TAG,"6 ");
                 }),error ->{
 
                 });
     }
-    public void onClickSendMessage(View view){
-        EditText enterMessage=findViewById(R.id.enterMessage);
 
-        Log.i(TAG,"7 ");
-        Amplify.API.query(
-                ModelQuery.list(chat.class), chats->
-                        runOnUiThread(() ->{
-                            Log.i(TAG,"8 test");
-                            String current_user_email=Amplify.Auth.getCurrentUser().getUsername();
-                             Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(current_user_email)), users ->{
-                                String current_user_id="";
-                                Log.i(TAG,"9 test");
+    private void getAllMessagesFromAPIThatRelateToTheUser(String chat_id) {
+        Amplify.API.query(ModelQuery.list(Message.class,Message.MESSAGE_CHAT_ID.contains(chat_id)),
+                messagesFromDatastore -> runOnUiThread(() ->{
+                    if(messagesFromDatastore.hasData()) {
+                        for (Message temp_message : messagesFromDatastore.getData())
+                            if (temp_message.getMessageChatId().equals(chat_id)) {
+                                messages.add(temp_message);
+                                Log.i(TAG, "4");
 
-                                if(users.hasData()){
-                                    Log.i(TAG,"10 test");
-
-                                    for(User user:users.getData()){
-                                        current_user_id=user.getId();
-                                        break;
-                                    }
-                                    Log.i(TAG,"11 test");
-
-                                    String chatId = null;
-                            Boolean condition=false;
-                                       if(chats.hasData()){
-                                  for (chat temp_chat:chats.getData()){
-
-
-                                Log.i(TAG,"14 test");
-                                String firstId=temp_chat.getChatFirstUserId();
-                                String secondId=temp_chat.getChatSecondUserId();
-                                      Intent getOtherUser=getIntent();
-                                      String otherUserEmail= getOtherUser.getStringExtra("id");
-                                if((firstId.equals(current_user_id)&& (secondId.equals(otherUserEmail)))||
-                                        (firstId.equals(otherUserEmail)&& (secondId.equals(current_user_id)))){
-                                   chatId=temp_chat.getId();
-                                    Log.i(TAG,"15 test");
-                                    condition=true;
-                                    break;
-                                }
-
-
-                            }}
-                                    String messageContent=enterMessage.getText().toString();
-                                    if(!messageContent.isEmpty()&&condition){
-                                Log.i(TAG,"11");
-                                Message message=Message.builder()
-                                        .content(messageContent)
-                                        .messageUserId(current_user_id)
-                                        .messageChatId(chatId)
-                                        .date(new Temporal.DateTime(new Date(),getOffest()))
-                                        .build();
-                                Log.i(TAG,message+"");
-
-
-                                Amplify.DataStore.save(message,target ->{
-                                    Log.i("amplify datastore","message sent");
-                                    Log.i(TAG,"12 ");
-
-                                },error ->{
-                                    Log.e("amplify datastore",error.getMessage());
-                                    Log.i(TAG,"13 ");
-                                });
-             Amplify.API.mutate(ModelMutation.create(message),
-
-                response -> {
-                    Log.i(TAG, "Todo with id mutate ");
-
-                },
-                error2 -> Log.e(TAG, "Create failed mutate", error2)
-        );
-                                        runOnUiThread(()->{
-                                            chatAdapter.notifyDataSetChanged();
-                                        });
                             }
-                                }
-                            },error->{
 
-                            });
-                        }),error ->{
+                        chatAdapter.notifyDataSetChanged();
+                    }
+                }),error ->{
 
                 });
+    }
 
+    private boolean checkIfCurrentUserEqualToSecondId(chat chat, String current_user_id) {
+        String firstId = chat.getChatFirstUserId();
+        String secondId = chat.getChatSecondUserId();
+        return firstId.equals(getOtherUserId()) && (secondId.equals(current_user_id));
+    }
+
+    private boolean checkIfCurrentUserEqualToFirstId(chat chat ,String current_user) {
+        String firstId = chat.getChatFirstUserId();
+        String secondId = chat.getChatSecondUserId();
+      return   firstId.equals(current_user) && (secondId.equals(getOtherUserId()));
+    }
+
+    private String getOtherUserId() {
+        Intent getOtherUser=getIntent();
+        String otherUserId= getOtherUser.getStringExtra("id");
+        return otherUserId;
     }
 
     private int getOffest() {

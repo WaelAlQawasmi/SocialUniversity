@@ -35,29 +35,36 @@ public class chatAdapter extends ArrayAdapter<Message> {
     private static final String TAG = chatAdapter.class.getSimpleName();
     View view;
     LayoutInflater layoutInflater;
-    boolean isCurrentUser ;
+    boolean isCurrentUser;
+
     public chatAdapter(@NonNull Context context, int resource, @NonNull List<Message> objects) {
         super(context, resource, objects);
-
     }
+
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
       Message message=getItem(position);
-        ss();
+
+        getTheCurrentId();
 
         SharedPreferences preferences=getContext().getSharedPreferences("user",MODE_PRIVATE);
         String current_user_id=preferences.getString("current_user_id","");
-         Log.i(TAG,"current"+current_user_id);
+
+
         isCurrentUser = message.getMessageUserId().equals(current_user_id);
 
         layoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-          Log.i(TAG," user"+current_user_id+"");
+
         if (isCurrentUser) {
+
                 view = layoutInflater.inflate(R.layout.message_sent_layout, parent, false);
+
             } else {
+
                 view = layoutInflater.inflate(R.layout.message_recieve_layout, parent, false);
+
                 TextView nameText = view.findViewById(R.id.name);
 
                 nameText.setText(message.getUser().getName());
@@ -66,9 +73,11 @@ public class chatAdapter extends ArrayAdapter<Message> {
 
 
             TextView messageContentText = view.findViewById(R.id.message);
+
             TextView messageDateText = view.findViewById(R.id.messageDate);
 
             messageContentText.setText(message.getContent());
+
             messageDateText.setText(message.getDate().format());
 
 
@@ -77,7 +86,7 @@ public class chatAdapter extends ArrayAdapter<Message> {
 
         return view;
 }
-public void ss(){
+public void getTheCurrentId(){
     Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(Amplify.Auth.getCurrentUser().getUsername())), users ->{
 
         if(users.hasData()){
