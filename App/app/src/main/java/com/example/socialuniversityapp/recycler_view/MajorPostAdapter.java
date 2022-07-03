@@ -24,14 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Like;
 import com.amplifyframework.datastore.generated.model.MajorLike;
 import com.amplifyframework.datastore.generated.model.MajorPost;
-import com.amplifyframework.datastore.generated.model.UniPost;
 import com.example.socialuniversityapp.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MajorPostAdapter extends RecyclerView.Adapter<MajorPostAdapter.PostViewHolder> {

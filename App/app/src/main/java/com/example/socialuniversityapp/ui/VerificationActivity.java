@@ -1,9 +1,11 @@
 package com.example.socialuniversityapp.ui;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,7 +23,7 @@ public class VerificationActivity extends AppCompatActivity {
     private EditText mVerificationCode;
     private Button mVerifyButton;
     private TextView mTextError;
-    private String email;
+    private String email, userIdNumber;
 
     private Handler handler;
 
@@ -41,6 +43,7 @@ public class VerificationActivity extends AppCompatActivity {
     }
 
     private final View.OnClickListener mVerifyButtonClick= new View.OnClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onClick(View view) {
             Amplify.Auth.confirmSignUp(
@@ -48,6 +51,8 @@ public class VerificationActivity extends AppCompatActivity {
                     mVerificationCode.getText().toString(),
                     result -> {
                         Log.i(TAG, result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete");
+                        // Fetch Authentication User From Cloud
+
 
                         startActivity(new Intent(VerificationActivity.this, LoginActivity.class));
                         finish();

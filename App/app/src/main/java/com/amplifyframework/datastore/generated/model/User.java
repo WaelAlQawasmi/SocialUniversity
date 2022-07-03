@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
@@ -24,10 +25,14 @@ public final class User implements Model {
   public static final QueryField COGNITO_ID = field("User", "cognitoId");
   public static final QueryField NAME = field("User", "name");
   public static final QueryField MAJOR = field("User", "major");
+  public static final QueryField EMAIL = field("User", "email");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String cognitoId;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String", isRequired = true) String major;
+  private final @ModelField(targetType="String", isRequired = true) String email;
+  private final @ModelField(targetType="chat") @HasMany(associatedWith = "firstUser", type = chat.class) List<chat> chats = null;
+  private final @ModelField(targetType="Message") @HasMany(associatedWith = "user", type = Message.class) List<Message> messages = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -46,6 +51,18 @@ public final class User implements Model {
       return major;
   }
   
+  public String getEmail() {
+      return email;
+  }
+  
+  public List<chat> getChats() {
+      return chats;
+  }
+  
+  public List<Message> getMessages() {
+      return messages;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -54,11 +71,12 @@ public final class User implements Model {
       return updatedAt;
   }
   
-  private User(String id, String cognitoId, String name, String major) {
+  private User(String id, String cognitoId, String name, String major, String email) {
     this.id = id;
     this.cognitoId = cognitoId;
     this.name = name;
     this.major = major;
+    this.email = email;
   }
   
   @Override
@@ -73,6 +91,7 @@ public final class User implements Model {
               ObjectsCompat.equals(getCognitoId(), user.getCognitoId()) &&
               ObjectsCompat.equals(getName(), user.getName()) &&
               ObjectsCompat.equals(getMajor(), user.getMajor()) &&
+              ObjectsCompat.equals(getEmail(), user.getEmail()) &&
               ObjectsCompat.equals(getCreatedAt(), user.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), user.getUpdatedAt());
       }
@@ -85,6 +104,7 @@ public final class User implements Model {
       .append(getCognitoId())
       .append(getName())
       .append(getMajor())
+      .append(getEmail())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -99,6 +119,7 @@ public final class User implements Model {
       .append("cognitoId=" + String.valueOf(getCognitoId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("major=" + String.valueOf(getMajor()) + ", ")
+      .append("email=" + String.valueOf(getEmail()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -122,6 +143,7 @@ public final class User implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -130,7 +152,8 @@ public final class User implements Model {
     return new CopyOfBuilder(id,
       cognitoId,
       name,
-      major);
+      major,
+      email);
   }
   public interface CognitoIdStep {
     NameStep cognitoId(String cognitoId);
@@ -143,7 +166,12 @@ public final class User implements Model {
   
 
   public interface MajorStep {
-    BuildStep major(String major);
+    EmailStep major(String major);
+  }
+  
+
+  public interface EmailStep {
+    BuildStep email(String email);
   }
   
 
@@ -153,11 +181,12 @@ public final class User implements Model {
   }
   
 
-  public static class Builder implements CognitoIdStep, NameStep, MajorStep, BuildStep {
+  public static class Builder implements CognitoIdStep, NameStep, MajorStep, EmailStep, BuildStep {
     private String id;
     private String cognitoId;
     private String name;
     private String major;
+    private String email;
     @Override
      public User build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -166,7 +195,8 @@ public final class User implements Model {
           id,
           cognitoId,
           name,
-          major);
+          major,
+          email);
     }
     
     @Override
@@ -184,9 +214,16 @@ public final class User implements Model {
     }
     
     @Override
-     public BuildStep major(String major) {
+     public EmailStep major(String major) {
         Objects.requireNonNull(major);
         this.major = major;
+        return this;
+    }
+    
+    @Override
+     public BuildStep email(String email) {
+        Objects.requireNonNull(email);
+        this.email = email;
         return this;
     }
     
@@ -202,11 +239,12 @@ public final class User implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String cognitoId, String name, String major) {
+    private CopyOfBuilder(String id, String cognitoId, String name, String major, String email) {
       super.id(id);
       super.cognitoId(cognitoId)
         .name(name)
-        .major(major);
+        .major(major)
+        .email(email);
     }
     
     @Override
@@ -222,6 +260,11 @@ public final class User implements Model {
     @Override
      public CopyOfBuilder major(String major) {
       return (CopyOfBuilder) super.major(major);
+    }
+    
+    @Override
+     public CopyOfBuilder email(String email) {
+      return (CopyOfBuilder) super.email(email);
     }
   }
   

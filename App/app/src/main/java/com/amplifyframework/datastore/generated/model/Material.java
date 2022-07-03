@@ -60,7 +60,7 @@ public final class Material implements Model {
       return updatedAt;
   }
   
-  public Material(String id, String fileName, String fileDis, String fileUrl, String fileMajor) {
+  private Material(String id, String fileName, String fileDis, String fileUrl, String fileMajor) {
     this.id = id;
     this.fileName = fileName;
     this.fileDis = fileDis;
