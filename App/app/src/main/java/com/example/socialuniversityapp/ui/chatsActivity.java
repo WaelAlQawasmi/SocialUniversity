@@ -1,8 +1,10 @@
 package com.example.socialuniversityapp.ui;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,9 @@ import com.amplifyframework.datastore.generated.model.chat;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.recycler_view.chatAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -196,7 +201,11 @@ public class chatsActivity extends AppCompatActivity {
                                      if (checkIfCurrentUserEqualToFirstId(temp_chat,current_user_id) ||
                                              checkIfCurrentUserEqualToSecondId(temp_chat,current_user_id)) {
 
-                                            getAllMessagesFromAPIThatRelateToTheUser(temp_chat.getId());
+                                         try {
+                                             getAllMessagesFromAPIThatRelateToTheUser(temp_chat.getId());
+                                         } catch (ParseException e) {
+                                             e.printStackTrace();
+                                         }
 
 
                                          break;
@@ -215,23 +224,48 @@ public class chatsActivity extends AppCompatActivity {
                 });
     }
 
-    private void getAllMessagesFromAPIThatRelateToTheUser(String chat_id) {
+    private void getAllMessagesFromAPIThatRelateToTheUser(String chat_id) throws ParseException {
         Amplify.API.query(ModelQuery.list(Message.class,Message.MESSAGE_CHAT_ID.contains(chat_id)),
                 messagesFromDatastore -> runOnUiThread(() ->{
                     if(messagesFromDatastore.hasData()) {
-                        for (Message temp_message : messagesFromDatastore.getData())
+                        for (Message temp_message : messagesFromDatastore.getData()) {
                             if (temp_message.getMessageChatId().equals(chat_id)) {
                                 messages.add(temp_message);
-                                Log.i(TAG, "4");
 
                             }
-
+                        }
+                        try {
+                            sortMessages(messages);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                         chatAdapter.notifyDataSetChanged();
                     }
                 }),error ->{
 
                 });
+
+}
+
+
+    private void sortMessages(ArrayList <Message>messages) throws ParseException {
+        Log.i(TAG,""+messages.size());
+        for(int i=1;i<messages.size();i++){
+            int j=i-1;
+            Message temp_message=messages.get(i);
+
+            while(j>=0&&temp_message.getDate().toDate().compareTo(messages.get(j).getDate().toDate())<0){
+                messages.set(j+1,messages.get(j));
+
+                j=j-1;
+            }
+            messages.set(j+1,temp_message);
+        }
+        Log.i(TAG,messages.get(0).getContent()+"");
+        connectListViewToChatAdapter();
+
     }
+
 
     private boolean checkIfCurrentUserEqualToSecondId(chat chat, String current_user_id) {
         String firstId = chat.getChatFirstUserId();
