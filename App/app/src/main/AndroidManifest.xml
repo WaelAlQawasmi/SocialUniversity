@@ -23,6 +23,12 @@
             android:name=".ui.users_profile"
             android:exported="false" />
         <activity
+            android:name=".ui.messages"
+            android:exported="false" />
+        <activity
+            android:name=".ui.chatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.AddMaterial"
             android:exported="false" />
         <activity

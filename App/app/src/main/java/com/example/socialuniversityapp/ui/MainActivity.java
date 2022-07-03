@@ -6,6 +6,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -39,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         findViewById(R.id.fab).setOnClickListener(view -> {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            Intent messagesActivity=new Intent(this,messages.class);
+
+            startActivity(messagesActivity);
 
         });
 

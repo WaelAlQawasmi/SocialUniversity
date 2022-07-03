@@ -176,6 +176,7 @@ public class UniversityPostActivity extends Fragment {
                     if (success.hasData()) {
                         for (UniPost uniPost : success.getData()) {
                             onResumePostList.add(uniPost);
+                            int i;
                         }
                     }
                     Bundle bundle = new Bundle();

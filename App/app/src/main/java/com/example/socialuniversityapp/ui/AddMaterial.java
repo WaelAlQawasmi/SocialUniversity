@@ -166,7 +166,7 @@ public class AddMaterial extends AppCompatActivity{
     public void imageUpload() {
         // Launches photo picker in single-select mode.
         // This means that the user can select one photo or video.
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*|application/pdf|audio/*");
 
         startActivityForResult(intent, REQUEST_CODE);

@@ -154,6 +154,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .cognitoId(uniId)
                 .name(user_name)
                 .major(major)
+                .email(email)
                 .build();
 
         Amplify.API.mutate(ModelMutation.create(newUser),
