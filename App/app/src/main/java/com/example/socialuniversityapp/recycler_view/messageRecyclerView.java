@@ -33,10 +33,9 @@ public class messageRecyclerView extends RecyclerView.Adapter<messageRecyclerVie
         this.listener = listener;
     }
     @Override
-    public void onBindViewHolder(@NonNull messageRecyclerView.MessagesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessagesViewHolder holder, int position) {
         User user=dataList.get(position);
         holder.username.setText(user.getName());
-        holder.lastMessage.setText("message");
     }
 
     @Override
@@ -44,10 +43,8 @@ public class messageRecyclerView extends RecyclerView.Adapter<messageRecyclerVie
         return  dataList.size();
     }
     static class MessagesViewHolder extends RecyclerView.ViewHolder {
-TextView username;
-CircleImageView image;
-TextView lastMessage;
-TextView lastMessageTime;
+     TextView username;
+     CircleImageView image;
 
 
         CustomClickListener listener;
@@ -56,8 +53,6 @@ TextView lastMessageTime;
             super(itemView);
             this.listener = listener;
             username = itemView.findViewById(R.id.MessageUsername);
-            lastMessage = itemView.findViewById(R.id.LastMessageSent);
-            lastMessageTime = itemView.findViewById(R.id.LastMessageTimeSent);
             image = itemView.findViewById(R.id.profile_img);
             itemView.setOnClickListener(view -> this.listener.OnUserMessageClicked(getAdapterPosition()));
         }

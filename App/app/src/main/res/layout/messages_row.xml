@@ -54,26 +54,7 @@
 
 
         </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-        <TextView
-            android:id="@+id/LastMessageSent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-        <TextView
-            android:id="@+id/LastMessageTimeSent"
-            android:layout_width="50dp"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:text="33 min"
-             />
-</LinearLayout>
+
         <ImageView
             android:id="@+id/post_img"
             android:layout_width="match_parent"
