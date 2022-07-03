@@ -1,8 +1,19 @@
 package com.example.socialuniversityapp.ui;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
-
+    private InterstitialAd mInterstitialAd;
     private static final String TAG = SignUpActivity.class.getSimpleName();
     public static final String EMAIL = "email";
     private EditText mFullName, mUniversityId, mPassword, mEmail;
@@ -47,6 +58,18 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+//Ads intial
+
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        setAds();
+
+      //
 
         // Inflate
         mFullName = findViewById(R.id.sign_up_fullName_text);
@@ -98,8 +121,26 @@ public class SignUpActivity extends AppCompatActivity {
     };
 
     private final View.OnClickListener mSignUpButtonClick = new View.OnClickListener() {
+
         @Override
         public void onClick(View view) {
+
+            if (mInterstitialAd != null) {
+
+                mInterstitialAd.show(SignUpActivity.this);
+
+                mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        super.onAdDismissedFullScreenContent();
+
+                        mInterstitialAd = null;
+                        setAds();
+
+                    }
+                });
+            }
+
             mLoadingProgressBar.setVisibility(View.VISIBLE);
             int count = 0;
             if (mEmail.getText().toString().contains("@") == false){
@@ -135,6 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
     private final View.OnClickListener mLoginLinkClick = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
+
             startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
         }
     };
@@ -196,4 +238,61 @@ public class SignUpActivity extends AppCompatActivity {
         );
 
     }
+
+    public void setAds() {
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                mInterstitialAd = null;
+            }
+        });
+
+
+    }
+
+
+    public  void show() {
+
+        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
+            @Override
+            public void onAdDismissedFullScreenContent() {
+                // Called when fullscreen content is dismissed.
+                Log.d("TAG", "The ad was dismissed.");
+            }
+
+            @Override
+            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                // Called when fullscreen content failed to show.
+                Log.d("TAG", "The ad failed to show.");
+            }
+
+            @Override
+            public void onAdShowedFullScreenContent() {
+                // Called when fullscreen content is shown.
+                // Make sure to set your reference to null so you don't
+                // show it a second time.
+                mInterstitialAd = null;
+                Log.d("TAG", "The ad was shown.");
+            }
+        });
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(this);
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+        }
+    }
+
 }

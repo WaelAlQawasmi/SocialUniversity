@@ -1,7 +1,5 @@
 package com.example.socialuniversityapp.ui;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,8 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,24 +24,12 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationRequest;
-
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-
 import com.example.socialuniversityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.gson.JsonArray;
@@ -54,6 +38,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 public class WeatherActivity extends Fragment {
+
     private static final String API_KEY = "9fbf399d64f1d9eee0ec07446b12a2de";
     private static final String TAG = WeatherActivity.class.getSimpleName();
 
@@ -77,6 +62,7 @@ public class WeatherActivity extends Fragment {
             longValue = mLastLocation.getLongitude() + "";
             latValue = mLastLocation.getLatitude() + "";
             Log.i(TAG, "long :" + longValue + " Lat : "+ latValue);
+            loadWeatherByCityName();
         }
     };
 
@@ -102,11 +88,11 @@ public class WeatherActivity extends Fragment {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
 
-
+        mProgressBar.setVisibility(View.VISIBLE);
         // Get Location
         getLastLocation();
         Log.i(TAG, "location" + longValue + "  " + latitude);
-        loadWeatherByCityName();
+
 
     }
 
@@ -114,7 +100,7 @@ public class WeatherActivity extends Fragment {
 
     private void loadWeatherByCityName() {
         Ion.with(this)
-                .load("https://api.openweathermap.org/data/2.5/weather?lat="+ latValue+ "&lon=" + longValue + "&appid=" + API_KEY)
+                .load("https://api.openweathermap.org/data/2.5/weather?lat="+ latitude +"&lon=" +longValue + "&appid=" + API_KEY)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -143,8 +129,8 @@ public class WeatherActivity extends Fragment {
 
                             JsonObject sys = result.get("sys").getAsJsonObject();
                             String country = sys.get("country").getAsString();
-                            String City = result.get("name").getAsString();
-                            mCity.setText(City + country);
+                            String city = result.get("name").getAsString();
+                            mCity.setText( city + " ' "+country);
 
                             // but for brevity, use the ImageView specific builder...
                             JsonArray weather = result.get("weather").getAsJsonArray();
@@ -237,7 +223,8 @@ public class WeatherActivity extends Fragment {
     // method to check
     // if location is enabled
     private boolean isLocationEnabled() {
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }

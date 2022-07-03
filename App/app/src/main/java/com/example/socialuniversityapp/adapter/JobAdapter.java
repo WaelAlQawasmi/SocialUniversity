@@ -9,17 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.Job;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.data.JobData;
 
 import java.util.List;
 
-public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder>{
+public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder> {
 
-    List<JobData> jobsList;
+    List<Job> jobsList;
     ClickListener listener;
 
-    public JobAdapter(List<JobData> jobsList, ClickListener listener) {
+    public JobAdapter(List<Job> jobsList, ClickListener listener) {
         this.jobsList = jobsList;
         this.listener = listener;
     }
@@ -35,7 +36,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull JobHolder holder, int position) {
-        holder.title.setText(jobsList.get(position).getTitle());
+        holder.title.setText(jobsList.get(position).getName());
         holder.body.setText(jobsList.get(position).getBody());
         holder.phone.setText(jobsList.get(position).getPhone());
         holder.address.setText(jobsList.get(position).getAddress());
@@ -57,21 +58,16 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobHolder>{
 
         public JobHolder(@NonNull View itemView, ClickListener clickListener) {
             super(itemView);
-
+            this.listener = clickListener;
             title = itemView.findViewById(R.id.title);
-            body  = itemView.findViewById(R.id.body);
+            body = itemView.findViewById(R.id.body);
             phone = itemView.findViewById(R.id.phone);
             address = itemView.findViewById(R.id.address);
+            listener.onTaskItemClicked(getAdapterPosition());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onTaskItemClicked(getAdapterPosition());
-                }
-            });
         }
     }
     public interface ClickListener {
-        void onTaskItemClicked (int position);
+        void onTaskItemClicked(int position);
     }
 }

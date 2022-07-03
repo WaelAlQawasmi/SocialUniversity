@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.socialuniversityapp">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".AmplifyApplication"
@@ -14,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialUniversityApp">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2047900943322535~8852911095"/>
         <activity
             android:name=".ui.WeatherActivity"
             android:exported="true" >
@@ -37,6 +42,9 @@
         <activity
             android:name=".ui.CommentActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.MajorCommentActivity"
+            android:exported="false"/>
         <activity android:name=".ui.AddJobActivity" />
         <activity
             android:name=".recycler_view.JobRecyclerView"
