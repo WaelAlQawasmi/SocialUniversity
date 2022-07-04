@@ -53,7 +53,6 @@ public class chatsActivity extends AppCompatActivity {
         observeMessages();
 
 
-
     }
     public void onClickSendMessage(View view){
 
@@ -249,7 +248,6 @@ public class chatsActivity extends AppCompatActivity {
 
 
     private void sortMessages(ArrayList <Message>messages) throws ParseException {
-        Log.i(TAG,""+messages.size());
         for(int i=1;i<messages.size();i++){
             int j=i-1;
             Message temp_message=messages.get(i);
@@ -261,7 +259,6 @@ public class chatsActivity extends AppCompatActivity {
             }
             messages.set(j+1,temp_message);
         }
-        Log.i(TAG,messages.get(0).getContent()+"");
         connectListViewToChatAdapter();
 
     }

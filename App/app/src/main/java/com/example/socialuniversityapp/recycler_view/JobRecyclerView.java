@@ -6,9 +6,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JobRecyclerView extends AppCompatActivity {
+public class JobRecyclerView extends Fragment {
 
     private RecyclerView mRecyclerView;
     private static final String TAG = "JobRecyclerView";
@@ -33,18 +39,23 @@ public class JobRecyclerView extends AppCompatActivity {
     Handler handler;
 
     private FloatingActionButton mFloatingActionButton;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_recycler);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_job_recycler, container, false);
 
-        mRecyclerView = findViewById(R.id.jobs_recycler);
-        mFloatingActionButton = findViewById(R.id.floating_action_button);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        mFloatingActionButton.setOnClickListener(view -> {
+        mRecyclerView = view.findViewById(R.id.jobs_recycler);
+        mFloatingActionButton = view.findViewById(R.id.floating_action_button);
+
+        mFloatingActionButton.setOnClickListener(view2 -> {
             navigateToAddJob();
-            startActivity(new Intent(JobRecyclerView.this, AddJobActivity.class));
+            startActivity(new Intent(this.getActivity(), AddJobActivity.class));
         });
 
         Amplify.API.query(ModelQuery.list(Job.class),
@@ -77,21 +88,21 @@ public class JobRecyclerView extends AppCompatActivity {
         JobAdapter adapter = new JobAdapter(newJobList, new JobAdapter.ClickListener() {
             @Override
             public void onTaskItemClicked(int position) {
-                Toast.makeText(JobRecyclerView.this, "you clicked :  ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "you clicked :  ", Toast.LENGTH_SHORT).show();
             }
         }) ;
         mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity().getApplicationContext()));
 
     }
 
     private void navigateToAddJob() {
-        Intent addJobActivity = new Intent(this, AddJobActivity.class);
+        Intent addJobActivity = new Intent(this.getActivity(), AddJobActivity.class);
         startActivity(addJobActivity);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         Amplify.API.query(ModelQuery.list(Job.class),
                 success -> {

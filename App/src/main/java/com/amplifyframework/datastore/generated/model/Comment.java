@@ -24,14 +24,12 @@ public final class Comment implements Model {
   public static final QueryField COMMENT_USER_NAME = field("Comment", "comment_user_name");
   public static final QueryField CONTENT = field("Comment", "content");
   public static final QueryField UNI_POST_COMMENTS_ID = field("Comment", "uniPostCommentsId");
-  public static final QueryField MAJOR_POST_COMMENTS_ID = field("Comment", "majorPostCommentsId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String comment_user_name;
   private final @ModelField(targetType="String") String content;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   private final @ModelField(targetType="ID") String uniPostCommentsId;
-  private final @ModelField(targetType="ID") String majorPostCommentsId;
   public String getId() {
       return id;
   }
@@ -56,16 +54,11 @@ public final class Comment implements Model {
       return uniPostCommentsId;
   }
   
-  public String getMajorPostCommentsId() {
-      return majorPostCommentsId;
-  }
-  
-  private Comment(String id, String comment_user_name, String content, String uniPostCommentsId, String majorPostCommentsId) {
+  private Comment(String id, String comment_user_name, String content, String uniPostCommentsId) {
     this.id = id;
     this.comment_user_name = comment_user_name;
     this.content = content;
     this.uniPostCommentsId = uniPostCommentsId;
-    this.majorPostCommentsId = majorPostCommentsId;
   }
   
   @Override
@@ -81,8 +74,7 @@ public final class Comment implements Model {
               ObjectsCompat.equals(getContent(), comment.getContent()) &&
               ObjectsCompat.equals(getCreatedAt(), comment.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), comment.getUpdatedAt()) &&
-              ObjectsCompat.equals(getUniPostCommentsId(), comment.getUniPostCommentsId()) &&
-              ObjectsCompat.equals(getMajorPostCommentsId(), comment.getMajorPostCommentsId());
+              ObjectsCompat.equals(getUniPostCommentsId(), comment.getUniPostCommentsId());
       }
   }
   
@@ -95,7 +87,6 @@ public final class Comment implements Model {
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .append(getUniPostCommentsId())
-      .append(getMajorPostCommentsId())
       .toString()
       .hashCode();
   }
@@ -109,8 +100,7 @@ public final class Comment implements Model {
       .append("content=" + String.valueOf(getContent()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
-      .append("uniPostCommentsId=" + String.valueOf(getUniPostCommentsId()) + ", ")
-      .append("majorPostCommentsId=" + String.valueOf(getMajorPostCommentsId()))
+      .append("uniPostCommentsId=" + String.valueOf(getUniPostCommentsId()))
       .append("}")
       .toString();
   }
@@ -132,7 +122,6 @@ public final class Comment implements Model {
       id,
       null,
       null,
-      null,
       null
     );
   }
@@ -141,8 +130,7 @@ public final class Comment implements Model {
     return new CopyOfBuilder(id,
       comment_user_name,
       content,
-      uniPostCommentsId,
-      majorPostCommentsId);
+      uniPostCommentsId);
   }
   public interface CommentUserNameStep {
     BuildStep commentUserName(String commentUserName);
@@ -154,7 +142,6 @@ public final class Comment implements Model {
     BuildStep id(String id);
     BuildStep content(String content);
     BuildStep uniPostCommentsId(String uniPostCommentsId);
-    BuildStep majorPostCommentsId(String majorPostCommentsId);
   }
   
 
@@ -163,7 +150,6 @@ public final class Comment implements Model {
     private String comment_user_name;
     private String content;
     private String uniPostCommentsId;
-    private String majorPostCommentsId;
     @Override
      public Comment build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -172,8 +158,7 @@ public final class Comment implements Model {
           id,
           comment_user_name,
           content,
-          uniPostCommentsId,
-          majorPostCommentsId);
+          uniPostCommentsId);
     }
     
     @Override
@@ -195,12 +180,6 @@ public final class Comment implements Model {
         return this;
     }
     
-    @Override
-     public BuildStep majorPostCommentsId(String majorPostCommentsId) {
-        this.majorPostCommentsId = majorPostCommentsId;
-        return this;
-    }
-    
     /** 
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -213,12 +192,11 @@ public final class Comment implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String commentUserName, String content, String uniPostCommentsId, String majorPostCommentsId) {
+    private CopyOfBuilder(String id, String commentUserName, String content, String uniPostCommentsId) {
       super.id(id);
       super.commentUserName(commentUserName)
         .content(content)
-        .uniPostCommentsId(uniPostCommentsId)
-        .majorPostCommentsId(majorPostCommentsId);
+        .uniPostCommentsId(uniPostCommentsId);
     }
     
     @Override
@@ -234,11 +212,6 @@ public final class Comment implements Model {
     @Override
      public CopyOfBuilder uniPostCommentsId(String uniPostCommentsId) {
       return (CopyOfBuilder) super.uniPostCommentsId(uniPostCommentsId);
-    }
-    
-    @Override
-     public CopyOfBuilder majorPostCommentsId(String majorPostCommentsId) {
-      return (CopyOfBuilder) super.majorPostCommentsId(majorPostCommentsId);
     }
   }
   
