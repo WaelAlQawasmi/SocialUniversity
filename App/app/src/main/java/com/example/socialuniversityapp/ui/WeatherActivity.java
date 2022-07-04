@@ -62,7 +62,6 @@ public class WeatherActivity extends Fragment {
             longValue = mLastLocation.getLongitude() + "";
             latValue = mLastLocation.getLatitude() + "";
             Log.i(TAG, "long :" + longValue + " Lat : "+ latValue);
-            loadWeatherByCityName();
         }
     };
 
@@ -86,12 +85,14 @@ public class WeatherActivity extends Fragment {
         mMaxTemp = view.findViewById(R.id.maxTemp);
         mDescriptions = view.findViewById(R.id.description);
         mProgressBar = view.findViewById(R.id.progress_bar);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
         mProgressBar.setVisibility(View.VISIBLE);
         // Get Location
         getLastLocation();
-        Log.i(TAG, "location" + longValue + "  " + latitude);
+        loadWeatherByCityName();
+
+        Log.i(TAG, "location " + longValue + "  " + latitude);
 
 
     }
@@ -100,7 +101,7 @@ public class WeatherActivity extends Fragment {
 
     private void loadWeatherByCityName() {
         Ion.with(this)
-                .load("https://api.openweathermap.org/data/2.5/weather?lat="+ latitude +"&lon=" +longValue + "&appid=" + API_KEY)
+                .load("https://api.openweathermap.org/data/2.5/weather?lat=37.4220005&lon=-122.0839996&appid=9fbf399d64f1d9eee0ec07446b12a2de")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
