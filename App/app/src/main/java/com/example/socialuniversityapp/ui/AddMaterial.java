@@ -1,191 +1,162 @@
 package com.example.socialuniversityapp.ui;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
-import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Message;
-import android.os.ParcelFileDescriptor;
-import android.widget.ArrayAdapter;
+import android.provider.OpenableColumns;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import android.util.Log;
 
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
-import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.AWSDataStorePlugin;
 
 import com.amplifyframework.datastore.generated.model.Material;
-import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 import com.amplifyframework.storage.options.StorageUploadFileOptions;
 import com.example.socialuniversityapp.R;
 
-public class AddMaterial extends AppCompatActivity{
-    private String username, imageKey;
-    String titleName;
+import org.chromium.base.FileUtils;
 
-    HashMap<String, String> teams = new HashMap<String, String>();
+public class AddMaterial extends AppCompatActivity {
+
+    EditText filename;
+    EditText fileDescription;
+    private String  fileKey;
     public static final int REQUEST_CODE = 123;
+    private File file;
+    private File fileCopy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_material);
 
-        Button upload = findViewById(R.id.uplod_btn);
-        upload.setOnClickListener(view -> {
+        filename = findViewById(R.id.fileName);
+        fileDescription = findViewById(R.id.fileDisc);
 
-            imageUpload();
-
+        Button uploadBtn = findViewById(R.id.uplod_btn);
+        uploadBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");
+            startActivityForResult(intent, REQUEST_CODE);
         });
     }
 
-
-
-
-
-
-
-    public void Upload() {
-
-        EditText fileName = findViewById(R.id.fileName);
-         titleName = fileName.getText().toString();
-
-        EditText fileDisc = findViewById(R.id.fileDisc);
-        String bodyName = fileDisc.getText().toString();
-
-        Material item = Material.builder()
-                .fileName(titleName)
-                .fileDis(titleName)
-                .fileUrl(imageKey)
-                .fileMajor("Engineering")
-                .build();
-
-
-        Amplify.API.mutate(ModelMutation.create(item),  success -> Log.i(TAG, "Saved item: " ),
-                error -> Log.e(TAG, "Could not save item to DataStore", error));
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode != Activity.RESULT_OK) {
-            // Handler error
-            Log.e(TAG, "onActivityResult: Error getting image from device");
+        // If the user doesn't pick a file just return
+        if (requestCode != REQUEST_CODE || resultCode != RESULT_OK) {
+            return;
         }
-        switch (requestCode) {
-            case REQUEST_CODE:
-                // Get photo picker response for single select.
-                Uri currentUri = data.getData();
-                // Do stuff with the photo/video URI
-                Log.i(TAG, "onActivityResult: the uri is => " + currentUri);
+//        System.out.println("***************************  type : "+ data.getType());
+        // Import the file
+        try {
+            importFile(data.getData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
 
-                try {
-                    Bitmap bitmapImage = getBitmapFromUri(currentUri);
-
-                    // Convert Bitmap to File
-                    File file = new File(getFilesDir(), titleName+".jpg");
-                    OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
-                    bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, os);
-                    os.close();
-
-                    // upload file to s3
-                    imageKey = UUID.randomUUID().toString();
-                    Amplify.Storage.uploadFile(
-                            imageKey + data.getType(),
-                            file,
-                            result ->  {
-                                Log.i(TAG, "Successfully uploaded: " + result.getKey());
-                                changUploadBotonColor();
-
-                            },
-                            storageFailure -> Log.e(TAG, "Failed Upload", storageFailure)
-
-                    );
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                return;
+            uploadInputStream(data.getData());
         }
 
     }
 
+    public void importFile(Uri uri) throws IOException {
+        String fileName = getFileName(uri);
+        file = new File(uri.getPath());
+        // The temp file could be whatever you want
+//        fileCopy = copyToTempFile(uri,  file);
 
-    public void imageUpload() {
-        // Launches photo picker in single-select mode.
-        // This means that the user can select one photo or video.
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*|application/pdf|audio/*");
+        // Done!
 
-        startActivityForResult(intent, REQUEST_CODE);
-        Upload();
     }
 
-    public void changUploadBotonColor() {
-        Button upload =findViewById(R.id.uplod_btn);
-        upload.setText("uploded!");
-        upload.setBackgroundColor(this.getResources().getColor(R.color.error_color));
-    }
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getContentResolver().openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
+    private String getFileName(Uri uri) throws IllegalArgumentException {
+        // Obtain a cursor with information regarding this uri
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
 
-        return image;
+        if (cursor.getCount() <= 0) {
+            cursor.close();
+            throw new IllegalArgumentException("Can't obtain file name, cursor is empty");
+        }
+
+        cursor.moveToFirst();
+
+        String fileName = cursor.getString(cursor.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME));
+
+        cursor.close();
+
+        return fileName;
     }
 
+
+    private File copyToTempFile(Uri uri, File tempFile) throws IOException {
+        // Obtain an input stream from the uri
+        InputStream inputStream = getContentResolver().openInputStream(uri);
+
+        if (inputStream == null) {
+            throw new IOException("Unable to obtain input stream from URI");
+        }
+
+        // Copy the stream to the temp file
+//        FileUtils.copyStreamToFile(inputStream, tempFile);
+        return tempFile;
+    }
+
+
+    private void uploadInputStream(Uri uri) {
+        try {
+            InputStream exampleInputStream = getContentResolver().openInputStream(uri);
+            fileKey = UUID.randomUUID().toString();
+            Amplify.Storage.uploadInputStream(
+                    fileKey,
+                    exampleInputStream,
+                    result -> {
+
+                        Material item = Material.builder()
+                                .fileName(filename.getText().toString())
+                                .fileDis(fileDescription.getText().toString())
+                                .fileUrl(fileKey)
+                                .fileMajor("Engineering")
+                                .build();
+
+
+                        Amplify.API.mutate(ModelMutation.create(item),  success -> Log.i(TAG, "Saved item: " ),
+                                error -> Log.e(TAG, "Could not save item to DataStore", error));
+
+                        Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey());
+
+                    },
+                    storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+            );
+        }  catch (FileNotFoundException error) {
+            Log.e("MyAmplifyApp", "Could not find file to open for input stream.", error);
+        }
+
+    }
 }

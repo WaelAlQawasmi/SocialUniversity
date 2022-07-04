@@ -25,6 +25,7 @@ import com.amplifyframework.datastore.generated.model.Material;
 import com.example.socialuniversityapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.CustomViewHolder>{
@@ -43,49 +44,28 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        System.out.println("adapter ******************");
-        System.out.println(holder.title.getText());
-        System.out.println(holder.description.getText());
-        System.out.println(holder.getAdapterPosition());
-        System.out.println("*****************  list  *****************");
-        System.out.println(materialList);
+
         holder.title.setText(materialList.get(position).getFileName());
         holder.description.setText(materialList.get(position).getFileMajor());
-//        holder.image.setImageResource(););
-//        if (materialList.get(position).getFileUrl() != null) {
-//            imageKey = materialList.get(position).getFileUrl();
-//            Amplify.Storage.getUrl(
-//                    imageKey + ".jpg",
-//                    success -> {
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("url", success.getUrl().toString());
-//
-//                        Message message = new Message();
-//                        message.setData(bundle);
-//
-//                        handler.sendMessage(message);
-//
-//                        Log.i(TAG, "image " + success.getUrl());
-//                    },
-//                    error -> {
-//                        Log.i(TAG, "image Error : " + error);
-//                    });
-//        }
-//            // Handler
-//            handler = new Handler(Looper.getMainLooper(), msg -> {
-//                String imageUrl = msg.getData().getString("url");
-//                holder.image.setVisibility(View.VISIBLE);
-//                Picasso.get().load(imageUrl).into(holder.image);
-//                return true;
-//            });
+
         holder.image.setOnClickListener(view -> {
             Toast.makeText(
                     recContext,
                     "you clicked :  " + materialList.get(position).getFileName(), Toast.LENGTH_SHORT).show();
+
+
+                Amplify.Storage.downloadFile(
+                        "hello",
+                        new File(recContext.getApplicationContext().getFilesDir() +"/"+ materialList.get(position).getFileName()+".pdf"),
+                        result -> {
+                            Log.i(TAG, "path    : "+ result.getFile().getPath());
+                            Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());},
+                        error -> Log.e("MyAmplifyApp",  "Download Failure", error)
+                );
+
         });
 
     }
-
     @NonNull
     @Override
     public CustomViewHolder  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -97,13 +77,9 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return materialList.size();
-//        return 2;
-
     }
 
     public void onTaskItemClicked(int position) {

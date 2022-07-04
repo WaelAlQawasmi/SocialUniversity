@@ -25,7 +25,7 @@
         android:layout_marginTop="231dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text=" file name"
+        android:text="filename"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
