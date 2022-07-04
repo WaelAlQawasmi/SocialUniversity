@@ -118,8 +118,10 @@ public class LoginActivity extends AppCompatActivity {
                 password,
                 result -> {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
+                    runOnUiThread(()->{
+                        mLoadingProgressBar.setVisibility(View.INVISIBLE);
 
-                    mLoadingProgressBar.setVisibility(View.INVISIBLE);
+                    });
 
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
 

@@ -66,7 +66,6 @@ public class AllUsersActivity extends AppCompatActivity {
         });
 
     }
-
     // Fetch All data from User Table
     public void fetchAllUser (){
         Amplify.API.query(ModelQuery.list(User.class),
@@ -159,16 +158,13 @@ public class AllUsersActivity extends AppCompatActivity {
 
                                                        Amplify.API.mutate(ModelMutation.create(newChat),
                                                                success2 ->{
-                                                                   Handler handler = new Handler();
-                                                                   handler.postDelayed(new Runnable() {
+                                                                   new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                                                        @Override
                                                                        public void run() {
-
-                                                                           finish();
-
+                                                                          finish();
                                                                        }
                                                                    }, 5000);
-                                                                   mLoadingProgressBar.setVisibility(View.INVISIBLE);
+
 
                                                                },
                                                                error->{});
