@@ -58,18 +58,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-//Ads intial
-
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        setAds();
-
-      //
 
         // Inflate
         mFullName = findViewById(R.id.sign_up_fullName_text);
@@ -79,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.sign_up_email_text);
         mLoginLink = findViewById(R.id.sign_up_toLogin);
         mSignUpButton = findViewById(R.id.sign_up_button);
-        mLoadingProgressBar = findViewById(R.id.loading);
+        mLoadingProgressBar = findViewById(R.id.sign_up_loading);
 
         builder = new AlertDialog.Builder(this);
 
@@ -95,7 +83,14 @@ public class SignUpActivity extends AppCompatActivity {
         // Sign Up Button
         mSignUpButton.setOnClickListener(mSignUpButtonClick);
 
+        //Ads initial
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
 
+        setAds();
     }
 
     // auto Complete Click

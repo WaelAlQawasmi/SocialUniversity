@@ -112,7 +112,10 @@ public class UniversityPostActivity extends Fragment {
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent (getActivity(), AddPostActivity.class));
+
+                Intent intent = new Intent(getActivity(), AddPostActivity.class);
+                intent.putExtra("context", "University");
+                startActivity(intent);
             }
         });
 
