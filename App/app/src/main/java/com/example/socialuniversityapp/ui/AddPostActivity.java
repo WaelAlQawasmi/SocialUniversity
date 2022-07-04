@@ -194,6 +194,7 @@ public class AddPostActivity extends AppCompatActivity {
 
                     // upload file to s3
                     imageKey = UUID.randomUUID().toString();
+
                     Amplify.Storage.uploadFile(
                             imageKey + ".jpg",
                             file,

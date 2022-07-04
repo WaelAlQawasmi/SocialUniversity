@@ -259,7 +259,7 @@ public class WeatherActivity extends Fragment {
     // method to check
     // if location is enabled
     private boolean isLocationEnabled() {
-        LocationManager locationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
@@ -268,7 +268,7 @@ public class WeatherActivity extends Fragment {
     // method to check for permissions
     private boolean checkPermissions() {
         return ActivityCompat
-                .checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                .checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED
                 &&
                 ActivityCompat

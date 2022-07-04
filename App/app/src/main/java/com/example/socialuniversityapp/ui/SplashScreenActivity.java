@@ -133,12 +133,12 @@ public void loginToMainActivityIf(){
                 stored_password,
                 result -> {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
-
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                     finish();
                 },
                 error -> {
                     Log.e("Error", error.toString());
+
                     startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                     finish();
                     Bundle bundle = new Bundle();
