@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_jobs"
-        android:name="com.example.socialuniversityapp.ui.JobActivity"
+        android:name="com.example.socialuniversityapp.recycler_view.JobRecyclerView"
         android:label="Jobs"
         tools:layout="@layout/activity_job_recycler" />
     <fragment

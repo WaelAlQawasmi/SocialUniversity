@@ -31,8 +31,8 @@ public final class MajorPost implements Model {
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String image;
   private final @ModelField(targetType="String", isRequired = true) String major;
-  private final @ModelField(targetType="Like") @HasMany(associatedWith = "majorPostLikesId", type = Like.class) List<Like> likes = null;
-  private final @ModelField(targetType="Comment") @HasMany(associatedWith = "majorPostCommentsId", type = Comment.class) List<Comment> comments = null;
+  private final @ModelField(targetType="MajorLike") @HasMany(associatedWith = "majorPostLikesId", type = MajorLike.class) List<MajorLike> likes = null;
+  private final @ModelField(targetType="MajorComment") @HasMany(associatedWith = "majorPostCommentsId", type = MajorComment.class) List<MajorComment> comments = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -55,11 +55,11 @@ public final class MajorPost implements Model {
       return major;
   }
   
-  public List<Like> getLikes() {
+  public List<MajorLike> getLikes() {
       return likes;
   }
   
-  public List<Comment> getComments() {
+  public List<MajorComment> getComments() {
       return comments;
   }
   

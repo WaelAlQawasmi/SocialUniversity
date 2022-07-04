@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.User;
@@ -30,6 +31,16 @@ String TAG=messages.class.getSimpleName();
 
 
         getUsersAlreadyTalkedTo();
+//        chat chat1=chat.builder()
+//                .chatFirstUserId("56510c0f-ad04-4812-bc59-4302240828bf")
+//                .chatSecondUserId("e21eb46b-b03c-4cf8-bb84-2577d6454e82")
+//                .build();
+//        Amplify.API.mutate(ModelMutation.create(chat1), f->{
+//            Log.i(TAG,"worked");
+//        },error->{
+//            Log.i(TAG,"failed");
+//
+//        });
 
     }
 
