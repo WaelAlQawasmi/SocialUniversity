@@ -15,9 +15,12 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.User;
+import com.amplifyframework.storage.StorageItem;
 import com.example.socialuniversityapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -78,6 +81,17 @@ public class Profile extends Fragment {
         EditText uniId_edit = root.findViewById(R.id.uniId_edit);
         AutoCompleteTextView autoCompleteTextView= root.findViewById(R.id.sign_up_major_text);
 
+        Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(Amplify.Auth.getCurrentUser().getUsername())), users ->{
+            User user=null;
+            if(users.hasData()) {
+                for (User temp_user : users.getData()) {
+                    user = temp_user;
+                    downloadImg(user.getCognitoId()+".jpg");
+
+                }
+            }},error->{
+
+                });
 
         imageEdit.setOnClickListener(view -> {
             // CHANge visibiltt if butones
@@ -248,16 +262,33 @@ public class Profile extends Fragment {
 
                     // upload to s3
                     // uploads the file
-                    Amplify.Storage.uploadFile(
-                            "profImg.jpg",
+                    String email=Amplify.Auth.getCurrentUser().getUsername();
+
+                    Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(email)), users ->{
+                        User user=null;
+                        if(users.hasData()){
+                            for (User temp_user:users.getData()){
+                                user=temp_user;
+                            }
+                            assert user != null;
+                            User finalUser = user;
+                            Amplify.Storage.uploadFile(
+                            user.getCognitoId()+".jpg",
                             file,
                             result -> {
                                 Log.i(TAG, "Successfully uploaded: " + result.getKey());
                                 imageKey = result.getKey();
-                                downloadImg(imageKey);
+                                downloadImg(finalUser.getCognitoId()+".jpg");
                             },
                             storageFailure -> Log.e(TAG, "Upload failed", storageFailure)
                     );
+
+                        }
+
+
+                    },error ->{
+
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -280,6 +311,25 @@ public class Profile extends Fragment {
     }
 
     private void downloadImg(String imageKey) {
+        Amplify.Storage.list("",
+                result -> {
+                    boolean condition=true;
+                    for (StorageItem item : result.getItems()) {
+                        if(item.getKey().equals(imageKey)){
+                            condition=false;
+                        }
+                    }
+                    if(condition){
+                        Amplify.Storage.remove(
+                                imageKey,
+                                result2 -> Log.i("MyAmplifyApp", "Successfully removed: "),
+                                error -> Log.e("MyAmplifyApp", "Remove failure", error)
+                        );
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "List failure", error)
+        );
+
         Amplify.Storage.downloadFile(
                 imageKey,
                 new File(getActivity().getFilesDir() + "/" + imageKey),

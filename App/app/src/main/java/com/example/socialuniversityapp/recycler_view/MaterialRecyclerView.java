@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Message;
@@ -17,6 +18,7 @@ import android.content.Intent;
 
 import android.os.Handler;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -42,7 +44,6 @@ public class MaterialRecyclerView extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        System.out.println("hello");
         materialsList = new ArrayList<>();
         root = inflater.inflate(R.layout.activity_material_rec_view, container, false);
         FloatingActionButton addJob =root.findViewById(R.id.addMaterialBtn);
@@ -77,23 +78,10 @@ public class MaterialRecyclerView extends Fragment {
             MaterialAdapter customRecyclerViewAdapter = new MaterialAdapter(materialsList, new MaterialAdapter.CustomClickListener() {
                 @Override
                 public void onTaskClicked(int position) {
-
+//                    downloadFile();
                 }
             });
-//                    position -> {
-//                Toast.makeText(
-//                        MaterialRecyclerView,
-//                        "you clicked :  " + materialsList.get(position).getFileName(), Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getApplicationContext(), taskDetails.class);
-//                intent.putExtra("id", materialsList.get(position).getId());
-//                System.out.println("tasks list DB : " + materialsList);
-//                startActivity(intent);
-//            }) {
-//                @Override
-//                public void onTaskItemClicked(int position) {
-//
-//                }
-//            };
+
 
             recyclerView.setAdapter(customRecyclerViewAdapter);
             recyclerView.setHasFixedSize(true);
@@ -111,6 +99,10 @@ public class MaterialRecyclerView extends Fragment {
         Intent addMaterialActivity = new Intent(getActivity(), AddMaterial.class);
         startActivity(addMaterialActivity);
     }
+
+
+
+
 }
 
 

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_job.xml" value="0.1" />
+        <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_material.xml" value="0.10625" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_add_post.xml" value="0.1640625" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job.xml" value="0.2" />
         <entry key="..\:/Users/96277/SocialUniversity/App/app/src/main/res/layout/activity_job_details.xml" value="0.18541666666666667" />
@@ -80,6 +81,8 @@
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_all_users.xml" value="0.1" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_chat.xml" value="0.15454545454545454" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_comment.xml" value="0.17889492753623187" />
+        <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_job.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_job_details.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_job_recycler.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/activity_major_post.xml" value="0.264" />
@@ -95,8 +98,11 @@
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/message_recieve_layout.xml" value="0.1" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/message_sent_layout.xml" value="0.1" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/messages_row.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/nav_header_navagation.xml" value="0.1" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/layout/post_row.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/menu/activity_main_drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/menu/menu.xml" value="0.18425925925925926" />
+        <entry key="..\:/Users/kilany/SocialUniversity/App/app/src/main/res/menu/navagation.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

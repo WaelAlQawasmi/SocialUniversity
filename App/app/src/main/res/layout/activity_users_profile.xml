@@ -9,10 +9,8 @@
     android:id="@+id/drawer_layout">
 
 
-
-
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_profile"
+        android:id="@+id/imageView_User_profile"
         android:layout_width="202dp"
         android:layout_height="199dp"
         android:layout_centerHorizontal="true"
@@ -23,7 +21,7 @@
         android:id="@+id/userName_profile"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView_profile"
+        android:layout_below="@+id/imageView_User_profile"
         android:layout_alignParentStart="true"
         android:layout_marginStart="121dp"
         android:layout_marginTop="22dp"

@@ -34,6 +34,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MajorPostAdapter extends RecyclerView.Adapter<MajorPostAdapter.PostViewHolder> {
 
     private static final String TAG = UniversityPostAdapter.class.getSimpleName();
@@ -224,6 +226,7 @@ public class MajorPostAdapter extends RecyclerView.Adapter<MajorPostAdapter.Post
         ImageView postImg;
         ImageButton like_ic;
         ImageButton comment_ic;
+        CircleImageView profile_img;
 
 
         ClickListener listener;
@@ -241,6 +244,7 @@ public class MajorPostAdapter extends RecyclerView.Adapter<MajorPostAdapter.Post
             postComments=itemView.findViewById(R.id.post_comment);
             like_ic=itemView.findViewById(R.id.like_ic);
             comment_ic=itemView.findViewById(R.id.comment_ic);
+            profile_img=itemView.findViewById(R.id.uni_profile_img);
 
 
             like_ic.setOnClickListener(view -> {
@@ -249,7 +253,7 @@ public class MajorPostAdapter extends RecyclerView.Adapter<MajorPostAdapter.Post
             comment_ic.setOnClickListener(view -> {
                 listener.onPostItemCommentClicked(getAdapterPosition());
             });
-            postImg.setOnClickListener(view ->{
+            profile_img.setOnClickListener(view ->{
                 listener.onPostItemImageClicked(getAdapterPosition());
             });
             stdName.setOnClickListener(view ->{
