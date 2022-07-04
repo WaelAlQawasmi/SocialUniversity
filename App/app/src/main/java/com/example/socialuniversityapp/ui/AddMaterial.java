@@ -129,6 +129,7 @@ public class AddMaterial extends AppCompatActivity {
     }
 
 
+
     private void uploadInputStream(Uri uri) {
         try {
             InputStream exampleInputStream = getContentResolver().openInputStream(uri);
@@ -137,6 +138,7 @@ public class AddMaterial extends AppCompatActivity {
                     fileKey,
                     exampleInputStream,
                     result -> {
+
 
                         Material item = Material.builder()
                                 .fileName(filename.getText().toString())

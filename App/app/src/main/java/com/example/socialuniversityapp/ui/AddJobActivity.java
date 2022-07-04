@@ -94,7 +94,6 @@ public class AddJobActivity extends AppCompatActivity {
             Amplify.API.mutate(ModelMutation.create(job),
                     success -> {
                         Log.i(TAG, "Add Job Success");
-                        startActivity(new Intent(AddJobActivity.this, JobRecyclerView.class));
                     },
                     error -> {
                     });

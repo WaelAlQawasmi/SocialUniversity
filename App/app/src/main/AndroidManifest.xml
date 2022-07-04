@@ -19,13 +19,18 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2047900943322535~8852911095"/>
-        <activity
-            android:name=".ui.WeatherActivity"
-            android:exported="true" >
 
-        </activity>
         <activity
             android:name=".ui.users_profile"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AllUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.messages"
+            android:exported="false" />
+        <activity
+            android:name=".ui.chatsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.AddMaterial"
@@ -40,9 +45,7 @@
             android:name=".ui.MajorCommentActivity"
             android:exported="false"/>
         <activity android:name=".ui.AddJobActivity" />
-        <activity
-            android:name=".recycler_view.JobRecyclerView"
-            android:exported="false" />
+
         <activity
             android:name=".ui.VerificationActivity"
             android:exported="false" />

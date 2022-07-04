@@ -34,6 +34,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAdapter.PostViewHolder> {
 
     private static final String TAG = UniversityPostAdapter.class.getSimpleName();
@@ -188,7 +190,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
                             Amplify.API.mutate(
                                     ModelMutation.create(like),
                                     success -> {
-                                        Log.i(TAG, "Saved item: " + success.getData().getUserId());
+                                        Log.i(TAG, "Saved item: " );
                                     },
                                     error -> {
                                         Log.e(TAG, "Could not save item to API", error);
@@ -225,7 +227,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
         ImageView postImg;
         ImageButton like_ic;
         ImageButton comment_ic;
-
+        CircleImageView profile_img;
 
 
         ClickListener listener;
@@ -234,7 +236,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
             super(itemView);
 
             this.listener = listener;
-
+            profile_img=itemView.findViewById(R.id.uni_profile_img);
             stdName=itemView.findViewById(R.id.uniUsername);
             postTime=itemView.findViewById(R.id.uniTime);
             postDesc=itemView.findViewById(R.id.postDesc);
@@ -251,7 +253,7 @@ public class UniversityPostAdapter extends RecyclerView.Adapter<UniversityPostAd
             comment_ic.setOnClickListener(view -> {
                 listener.onPostItemCommentClicked(getAdapterPosition());
             });
-            postImg.setOnClickListener(view ->{
+            profile_img.setOnClickListener(view ->{
                 listener.onPostItemImageClicked(getAdapterPosition());
             });
             stdName.setOnClickListener(view ->{

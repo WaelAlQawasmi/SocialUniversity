@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.chatsActivity">
+
+
+    <ListView
+        android:id="@+id/messageListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/enterMessage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:dividerHeight="0dp"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:hint="enter message"
+            android:id="@+id/enterMessage"
+            android:layout_toLeftOf="@+id/sent_message"
+            android:layout_gravity="bottom"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/sent_message"
+            android:layout_width="109dp"
+            android:layout_weight="0"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="1dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:onClick="onClickSendMessage"
+
+
+            android:backgroundTint="@color/main_color"
+            app:srcCompat="@drawable/ic_menu_slideshow" />
+
+
+
+
+
+</RelativeLayout>

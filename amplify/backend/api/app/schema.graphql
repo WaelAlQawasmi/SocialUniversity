@@ -25,8 +25,8 @@ type MajorPost @model {
   body: String
   image: String
   major: String!
-  likes: [Like] @hasMany
-  comments: [Comment] @hasMany
+  likes: [MajorLike] @hasMany
+  comments: [MajorComment] @hasMany
 }
 
 type Comment @model {
@@ -38,6 +38,15 @@ type Like @model {
   id: ID!
   userId: String!
 }
+type MajorLike @model {
+  id: ID!
+  majorUserId: String!
+}
+type MajorComment @model {
+  id: ID!
+  major_comment_user_name: String!
+  major_content: String
+}
 type Material @model {
   id: ID!
   fileName: String!
@@ -45,3 +54,28 @@ type Material @model {
   fileUrl: String!
   fileMajor: String!
 }
+type User @model{
+  id :ID!
+  cognitoId:String!
+  name:String!
+  major:String!
+  email:String!
+  chats :[chat] @hasMany
+  messages :[Message] @hasMany
+
+}
+type Message @model{
+  id :ID!
+  content:String!
+ date :AWSDateTime
+ user : User @hasOne
+ chat : chat @hasOne
+}
+type chat @model {
+  id :ID!
+  firstUser: User @hasOne
+  secondUser: User @hasOne
+  lastMessage :String
+  messages : [Message] @hasMany
+}
+
