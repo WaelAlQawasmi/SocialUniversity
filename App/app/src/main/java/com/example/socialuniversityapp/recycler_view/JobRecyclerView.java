@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.example.socialuniversityapp.adapter.JobAdapter;
 import com.example.socialuniversityapp.data.JobData;
 import com.example.socialuniversityapp.ui.AddJobActivity;
 //import com.example.socialuniversityapp.ui.JobDetails;
+import com.example.socialuniversityapp.ui.JobDescriptionActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -34,9 +36,11 @@ import java.util.List;
 public class JobRecyclerView extends Fragment {
 
     private RecyclerView mRecyclerView;
+    private SearchView mSearchView;
     private static final String TAG = "JobRecyclerView";
     List<Job> jobList = new ArrayList<>();
     Handler handler;
+    JobAdapter adapter;
 
     private FloatingActionButton mFloatingActionButton;
     @Override
@@ -52,6 +56,20 @@ public class JobRecyclerView extends Fragment {
 
         mRecyclerView = view.findViewById(R.id.jobs_recycler);
         mFloatingActionButton = view.findViewById(R.id.floating_action_button);
+        mSearchView = view.findViewById(R.id.job_search_view);
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
 
         mFloatingActionButton.setOnClickListener(view2 -> {
             navigateToAddJob();
@@ -85,10 +103,15 @@ public class JobRecyclerView extends Fragment {
     }
 
     public void setRecyclerJob(List<Job> newJobList){
-        JobAdapter adapter = new JobAdapter(newJobList, new JobAdapter.ClickListener() {
+         adapter = new JobAdapter(newJobList, new JobAdapter.ClickListener() {
             @Override
             public void onTaskItemClicked(int position) {
-                Toast.makeText(getActivity().getApplicationContext(), "you clicked :  ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), JobDescriptionActivity.class);
+                intent.putExtra("title", jobList.get(position).getName());
+                intent.putExtra("phone", jobList.get(position).getPhone());
+                intent.putExtra("address", jobList.get(position).getAddress());
+                intent.putExtra("body", jobList.get(position).getBody());
+                startActivity(intent);
             }
         }) ;
         mRecyclerView.setAdapter(adapter);

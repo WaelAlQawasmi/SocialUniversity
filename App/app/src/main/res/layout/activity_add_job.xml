@@ -10,20 +10,9 @@
     android:orientation="vertical"
     tools:context=".ui.AddJobActivity">
 
-<!--    <TextView-->
-<!--        android:fontFamily="@font/oswald_bold"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/text_view"-->
-<!--        android:textSize="40sp"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:text="Add New Job"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_marginTop="8dp"/>-->
+
     <LinearLayout
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -64,7 +53,7 @@
             android:hint="body"
             android:inputType="textMultiLine"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconDrawable="@drawable/email_icon"
+            app:startIconDrawable="@drawable/body_icon"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,7 +72,7 @@
             android:layout_height="wrap_content"
             android:hint="Phone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconDrawable="@drawable/email_icon"
+            app:startIconDrawable="@drawable/phone"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +90,7 @@
             android:layout_height="wrap_content"
             android:hint="City / Street"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconDrawable="@drawable/email_icon"
+            app:startIconDrawable="@drawable/body_icon"
             >
 
             <com.google.android.material.textfield.TextInputEditText

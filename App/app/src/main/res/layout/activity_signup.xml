@@ -179,10 +179,17 @@
                 />
 
         </LinearLayout>
-
+        <ProgressBar
+            android:id="@+id/sign_up_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            />
 
 
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

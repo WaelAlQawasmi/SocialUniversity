@@ -35,7 +35,6 @@ public class AllUserAdapter extends RecyclerView.Adapter<AllUserAdapter.UserView
     public AllUserAdapter(List<User> userList, ClickListener listener) {
         this.userList = userList;
         this.listener = listener;
-        int count = 0;
         userListAll = new ArrayList<>(userList);
     }
 

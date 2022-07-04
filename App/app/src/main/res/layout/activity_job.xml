@@ -5,64 +5,105 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:layout_margin="10dp"
-    android:background="@color/teal_200"
+    app:cardCornerRadius="10pt"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="CardViewStyle">
+     style="CardViewStyle">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/job_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/user_img"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints">
+        android:padding="10dp"
+        >
 
 
         <TextView
+
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="title"
-            android:textColor="@color/teal_700"
-            android:textSize="25dp"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:fontFamily="@font/oswald_bold"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/body"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="body"
-            android:textColor="@color/purple_500"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/phone"
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/phone_img"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="phone"
+                android:textSize="15sp"
+             />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="phone"
-            android:textColor="#F00"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/body" />
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="address"
-            android:textColor="#F00"
-            android:textSize="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/body" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/address_img"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="phone"
+                android:textSize="15sp"
+                />
+        </LinearLayout>
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/body"-->
+
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:text="Description"-->
+<!--            android:textSize="15sp"-->
+<!--            />-->
+
+
+    </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

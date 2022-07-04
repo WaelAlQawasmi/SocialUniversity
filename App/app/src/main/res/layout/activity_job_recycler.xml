@@ -1,52 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:paddingBottom="65dp"
+    android:paddingBottom="60dp"
     tools:context=".ui.JobActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="fill"
-        android:layout_height="match_parent">
 
 
-        <TextView
-            android:fontFamily="@font/oswald_regular"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/job_search_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/jobsAdv"
-            android:textSize="48sp"
-            android:layout_gravity="center_horizontal"
-            android:text="Jobs"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"/>
-
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/jobs_recycler"
             android:layout_width="match_parent"
-            android:layout_height="413dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/teal_700"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/jobsAdv" />
+            android:layout_height="match_parent"
+             />
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_button"
-            android:layout_width="72dp"
-            android:layout_height="82dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:backgroundTint="@color/main_color"
             app:srcCompat="@drawable/plusicon" />
 
-    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
