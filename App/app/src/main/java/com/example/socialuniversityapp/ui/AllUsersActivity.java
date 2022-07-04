@@ -47,7 +47,7 @@ public class AllUsersActivity extends AppCompatActivity {
         // Inflate
         mUserRecyclerView = findViewById(R.id.user_recycler_view);
         mSearchView = findViewById(R.id.user_search_view);
-        mLoadingProgressBar = findViewById(R.id.loading);
+        mLoadingProgressBar = findViewById(R.id.loading_add_chat);
 
         // Fetch All data from User Table
         fetchAllUser();

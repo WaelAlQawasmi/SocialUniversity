@@ -47,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
     private AutoCompleteTextView mAutoCompleteTextView;
     private TextView mLoginLink;
     private Button mSignUpButton;
-    private ProgressBar mLoadingProgressBar;
     private AlertDialog.Builder builder;
 
     private String majorName;
@@ -79,7 +78,6 @@ public class SignUpActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.sign_up_email_text);
         mLoginLink = findViewById(R.id.sign_up_toLogin);
         mSignUpButton = findViewById(R.id.sign_up_button);
-        mLoadingProgressBar = findViewById(R.id.loading);
 
         builder = new AlertDialog.Builder(this);
 
@@ -141,24 +139,22 @@ public class SignUpActivity extends AppCompatActivity {
                 });
             }
 
-            mLoadingProgressBar.setVisibility(View.VISIBLE);
+            runOnUiThread(()->{
+
+            });
             int count = 0;
             if (mEmail.getText().toString().contains("@") == false){
-                mLoadingProgressBar.setVisibility(View.INVISIBLE);
                 mEmail.setError("Enter a correct Your Email");
                 count++;
             } if (mPassword.getText().length() < 8){
-                mLoadingProgressBar.setVisibility(View.INVISIBLE);
                 mPassword.setError("Your password must be grater than 8 char or ");
                 count++;
             }
             if (mFullName.getText().toString().equals("")){
-                mLoadingProgressBar.setVisibility(View.INVISIBLE);
                 mFullName.setError("Please enter your FullName");
                 count++;
             }
             if (mUniversityId.getText().toString().length() < 5){
-                mLoadingProgressBar.setVisibility(View.INVISIBLE);
                 mUniversityId.setError("University Id must be grater than 5 numbers");
                 count++;
             }
@@ -183,7 +179,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp(String email, String password, String user_name, String major, String uniId) {
 
-        mLoadingProgressBar = findViewById(R.id.loading);
 
         // create a list of attributes
         List<AuthUserAttribute> attributes=new ArrayList<>();
@@ -191,32 +186,31 @@ public class SignUpActivity extends AppCompatActivity {
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.nickname(),user_name));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:universityId"), uniId));
         attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:majoreName"), major));
-        User newUser = User
-                .builder()
-                .cognitoId(uniId)
-                .name(user_name)
-                .major(major)
-                .email(email)
-                .build();
 
-        Amplify.API.mutate(ModelMutation.create(newUser),
-                success -> {
-                  Log.i(TAG,"saved New user in database");
-                },
-                error ->{
-                    Log.e(TAG, "sign up error ", error);
-                });
 
 
         Amplify.Auth.signUp(email, password,AuthSignUpOptions.builder().userAttributes(attributes).build(),
 
 
                 result -> {
+                    User newUser = User
+                            .builder()
+                            .cognitoId(uniId)
+                            .name(user_name)
+                            .major(major)
+                            .email(email)
+                            .build();
 
+                    Amplify.API.mutate(ModelMutation.create(newUser),
+                            success -> {
+                                Log.i(TAG,"saved New user in database");
+                            },
+                            error ->{
+                                Log.e(TAG, "sign up error ", error);
+                            });
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mLoadingProgressBar.setVisibility(View.INVISIBLE);
                         }
                                       });
                     Intent intent = new Intent(SignUpActivity.this, VerificationActivity.class);
@@ -230,7 +224,6 @@ public class SignUpActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            mLoadingProgressBar.setVisibility(View.INVISIBLE);
                             mEmail.setError("Email is Already Exists");
                         }
                     });
