@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -15,6 +16,7 @@ import com.amplifyframework.datastore.generated.model.User;
 import com.amplifyframework.datastore.generated.model.chat;
 import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.recycler_view.messageRecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,12 @@ String TAG=messages.class.getSimpleName();
 
         setContentView(R.layout.activity_messages);
 
+        FloatingActionButton talk_new_user = findViewById(R.id.talk_new_user);
 
+        talk_new_user.setOnClickListener(view ->{
+            startActivity(new Intent(this,AllUsersActivity.class));
+                }
+                );
         getUsersAlreadyTalkedTo();
 //        chat chat1=chat.builder()
 //                .chatFirstUserId("56510c0f-ad04-4812-bc59-4302240828bf")
