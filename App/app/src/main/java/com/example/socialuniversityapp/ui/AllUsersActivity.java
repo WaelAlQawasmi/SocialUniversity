@@ -11,7 +11,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -26,7 +29,7 @@ import java.util.List;
 
 public class AllUsersActivity extends AppCompatActivity {
     private static final String TAG = AllUsersActivity.class.getSimpleName();
-
+    private ProgressBar mLoadingProgressBar;
     private RecyclerView mUserRecyclerView;
     private SearchView mSearchView;
 
@@ -44,6 +47,7 @@ public class AllUsersActivity extends AppCompatActivity {
         // Inflate
         mUserRecyclerView = findViewById(R.id.user_recycler_view);
         mSearchView = findViewById(R.id.user_search_view);
+        mLoadingProgressBar = findViewById(R.id.loading);
 
         // Fetch All data from User Table
         fetchAllUser();
@@ -69,9 +73,14 @@ public class AllUsersActivity extends AppCompatActivity {
                 success ->{
                     for (User user:
                          success.getData()) {
-                        Log.i(TAG, "fetchAllUser: " + user);
-                        if (user != null)
-                            userList.add(user);
+                        if (user != null) {
+                            Log.i(TAG,"check email first "+user.getEmail());
+                            Log.i(TAG,"check email second "+Amplify.Auth.getCurrentUser().getUsername());
+
+                            if(!user.getEmail().equals(Amplify.Auth.getCurrentUser().getUsername())) {
+                                userList.add(user);
+                            }
+                        }
                     }
                     Bundle bundle = new Bundle();
                     bundle.putString("fetch", "fetch");
@@ -97,21 +106,96 @@ public class AllUsersActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onPostItemSendIconClicked(int position) {
+                mLoadingProgressBar.setVisibility(View.VISIBLE);
 
-                String firstUserId = getUserIdAuth();
+                final String[] email = {""};
+                final String[] id = {""};
 
-                chat newChat = chat.builder()
-                        .chatFirstUserId(firstUserId)
-                        .chatSecondUserId(userList.get(position).getId())
-                        .build();
+                Amplify.Auth.fetchUserAttributes(
+                        attributes -> {
+                            Log.i("AuthDemo", "User attributes = " + attributes.toString());
+                            attributes.forEach(authUserAttribute -> {
 
-                Amplify.DataStore.save(newChat,
-                        success ->{},
-                        error->{});
+                                if (authUserAttribute.getKey().getKeyString().equals("email"))
+                                    email[0] = authUserAttribute.getValue();
 
-                Amplify.API.mutate(ModelMutation.create(newChat),
-                        success ->{},
-                        error->{});
+                            });
+                            Amplify.API.query(ModelQuery.list(User.class),
+                                    success->{
+                                        for (User user:
+                                                success.getData()) {
+                                            if(user!=null){
+                                                if (user.getEmail().equals(email[0])){
+                                                    Log.i(TAG,user.getEmail());
+                                                    id[0] = user.getId();
+                                                }
+                                            }}
+                                        chat newChat = chat.builder()
+                                                .chatFirstUserId(id[0])
+                                                .chatSecondUserId(userList.get(position).getId())
+                                                .build();
+                                         Amplify.API.query(ModelQuery.list(chat.class),chats ->{
+                                             boolean condition =true;
+                                               if(chats.hasData()) {
+                                                   Log.i(TAG,"second user "+userList.get(position).getId());
+                                                   Log.i(TAG,"first user "+id[0]);
+
+                                                   for (chat chat : chats.getData()) {
+                                                       if ((chat.getChatFirstUserId().equals(id[0]) &&
+                                                               chat.getChatSecondUserId().equals(userList.get(position).getId()))
+                                                               || (chat.getChatFirstUserId().equals(userList.get(position).getId()) &&
+                                                               chat.getChatSecondUserId().equals(id[0])))
+                                                        {
+                                                           condition = false;
+                                                           break;
+                                                       }
+
+                                                   }
+                                               }
+                                                   if(condition){
+                                                       Amplify.DataStore.save(newChat,
+                                                               success1 ->{},
+                                                               error->{});
+
+                                                       Amplify.API.mutate(ModelMutation.create(newChat),
+                                                               success2 ->{
+                                                                   Handler handler = new Handler();
+                                                                   handler.postDelayed(new Runnable() {
+                                                                       @Override
+                                                                       public void run() {
+
+                                                                           finish();
+
+                                                                       }
+                                                                   }, 5000);
+                                                                   mLoadingProgressBar.setVisibility(View.INVISIBLE);
+
+                                                               },
+                                                               error->{});
+                                                   }
+                                                   else{
+                                                       runOnUiThread(() ->{
+                                                           mLoadingProgressBar.setVisibility(View.INVISIBLE);
+
+                                                           Toast.makeText(AllUsersActivity.this,"this user already exist", Toast.LENGTH_SHORT).show();
+
+                                                       });
+                                                   }
+
+
+                                         },error ->{
+
+                                                 });
+
+
+
+                                    },
+                                    error->{});
+
+                        },
+                        error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
+                );
+
             }
         });
 
@@ -122,37 +206,6 @@ public class AllUsersActivity extends AppCompatActivity {
     }
 
     // Get Id for Authentication user
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public String getUserIdAuth(){
-        final String[] email = {""};
-        final String[] id = {""};
 
-        // Fetch Email For The Current User
-        Amplify.Auth.fetchUserAttributes(
-                attributes -> {
-                    Log.i("AuthDemo", "User attributes = " + attributes.toString());
-                    attributes.forEach(authUserAttribute -> {
-
-                        if (authUserAttribute.getKey().getKeyString().equals("email"))
-                            email[0] = authUserAttribute.getValue();
-                    });
-                },
-                error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
-        );
-
-
-        // Fetch The Id user from User Table with use User Email
-        Amplify.API.query(ModelQuery.list(User.class),
-                success->{
-                    for (User user:
-                            success.getData()) {
-                        if (user.getEmail().equals(email[0]))
-                            id[0] = user.getId();
-                    }
-                },
-                error->{});
-
-        return id[0];
-    }
 
 }

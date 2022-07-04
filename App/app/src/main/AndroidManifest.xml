@@ -28,6 +28,9 @@
             android:name=".ui.users_profile"
             android:exported="false" />
         <activity
+            android:name=".ui.AllUsersActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.messages"
             android:exported="false" />
         <activity
