@@ -30,8 +30,12 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -85,12 +89,13 @@ public class WeatherActivity extends Fragment {
         mMaxTemp = view.findViewById(R.id.maxTemp);
         mDescriptions = view.findViewById(R.id.description);
         mProgressBar = view.findViewById(R.id.progress_bar);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
         mProgressBar.setVisibility(View.VISIBLE);
+
+
+
+
         // Get Location
         getLastLocation();
-        loadWeatherByCityName();
 
         Log.i(TAG, "location " + longValue + "  " + latitude);
 
@@ -99,9 +104,11 @@ public class WeatherActivity extends Fragment {
 
 
 
-    private void loadWeatherByCityName() {
+    private void loadWeatherByCityName(double longitude,double latitude) {
+        Log.i(TAG,longitude+"");
+        Log.i(TAG,latitude+"");
         Ion.with(this)
-                .load("https://api.openweathermap.org/data/2.5/weather?lat=37.4220005&lon=-122.0839996&appid=9fbf399d64f1d9eee0ec07446b12a2de")
+                .load("https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=9fbf399d64f1d9eee0ec07446b12a2de")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -167,29 +174,45 @@ public class WeatherActivity extends Fragment {
     private void getLastLocation() {
         // check if permissions are given
         if (checkPermissions()) {
+            Log.i(TAG, "permisson");
 
             // check if location is enabled
             if (isLocationEnabled()) {
+                Log.i(TAG, "location enable");
 
                 // getting last
                 // location from
                 // FusedLocationClient
                 // object
-                mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                mFusedLocationClient = LocationServices. getFusedLocationProviderClient(getActivity());
+
+                mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                     @Override
-                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Location> task) {
-                        Location location=task.getResult();
+                    public void onSuccess(Location location) {
+                        Log.i(TAG, "fused ");
+
                         if (location == null) {
                             requestNewLocationData();
                         } else {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
+                            loadWeatherByCityName(longitude,latitude);
 
-                            LatLng coordinate = new LatLng(latitude, longitude);
 
                         }
                     }
-                });
+
+
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "Error trying to get last GPS location");
+                                e.printStackTrace();
+                            }
+                        });
+
+
             } else {
                 Toast.makeText(getActivity().getApplicationContext(), "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -210,14 +233,26 @@ public class WeatherActivity extends Fragment {
         // object with appropriate methods
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(5);
+        mLocationRequest.setInterval(1);
         mLocationRequest.setFastestInterval(0);
-        mLocationRequest.setNumUpdates(1);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        SettingsClient settingsClient = LocationServices.getSettingsClient(getActivity());
+
+        settingsClient.checkLocationSettings(locationSettingsRequest);
 
         // setting LocationRequest
         // on FusedLocationClient
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
-        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback(){
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                getLastLocation();
+            }
+        }, Looper.myLooper());
     }
 
 
