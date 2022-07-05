@@ -272,7 +272,7 @@ public class WeatherActivity extends Fragment {
     // method to check for permissions
     private boolean checkPermissions() {
         return ActivityCompat
-                .checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                .checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED
                 &&
                 ActivityCompat

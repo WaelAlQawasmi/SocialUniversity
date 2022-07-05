@@ -20,8 +20,10 @@
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
             android:background="@color/main_color"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:titleTextColor="#ffff"
             app:navigationIcon="@drawable/menu3bar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_height="50dp">
 
 
@@ -56,6 +58,6 @@
         app:headerLayout="@layout/nav_header_navagation"
         android:layout_gravity="start"
         app:menu="@menu/activity_main_drawer"
-        tools:ignore="MissingConstraints" />
+        />
 
 </androidx.drawerlayout.widget.DrawerLayout>

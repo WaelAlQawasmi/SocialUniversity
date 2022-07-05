@@ -49,8 +49,8 @@ public class chatsActivity extends AppCompatActivity {
         Intent getOtherUser = getIntent();
         String user_name = getOtherUser.getStringExtra("name");
 
-
-
+       Toolbar bar=findViewById(R.id.chat_user_name);
+      bar.setTitle(user_name);
 
 
         getPreviousMessages();
@@ -137,6 +137,7 @@ public class chatsActivity extends AppCompatActivity {
             );
         }
     }
+
     private boolean getTheCommonChatBetweenTwoUser(chat chat ,String current_user_id) {
         String firstId = chat.getChatFirstUserId();
         String secondId = chat.getChatSecondUserId();
@@ -223,7 +224,9 @@ public class chatsActivity extends AppCompatActivity {
                      },error->{
 
                      });
-                     chatAdapter.notifyDataSetChanged();
+//                     runOnUiThread(()->{
+//                         chatAdapter.notifyDataSetChanged();
+//                     });
                 }),error ->{
 
                 });

@@ -21,7 +21,11 @@
         android:id="@+id/nav_chat"
         android:name="com.example.socialuniversityapp.ui.messages"
         android:label="chat"
-        tools:layout="@layout/activity_messages" />
+        tools:layout="@layout/activity_messages" >
+        <action
+            android:id="@+id/action_nav_chat_to_all_users"
+            app:destination="@id/all_users" />
+    </fragment>
     <fragment
         android:id="@+id/nav_jobs"
         android:name="com.example.socialuniversityapp.recycler_view.JobRecyclerView"
@@ -37,4 +41,14 @@
         android:name="com.example.socialuniversityapp.ui.WeatherActivity"
         android:label="@string/menu_jobs"
         tools:layout="@layout/activity_weather" />
+
+    <fragment
+        android:id="@+id/all_users"
+        android:name="com.example.socialuniversityapp.ui.AllUsersActivity"
+        android:label="search"
+        tools:layout="@layout/activity_all_users" >
+        <action
+            android:id="@+id/action_all_users_to_nav_chat"
+            app:destination="@id/nav_chat" />
+    </fragment>
 </navigation>
