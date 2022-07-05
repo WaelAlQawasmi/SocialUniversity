@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.content.Intent;
 
 import android.os.Handler;
+import android.widget.SearchView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,8 +37,9 @@ public class MaterialRecyclerView extends Fragment {
 
     private Handler handler;
     List<Material> materialsList;
-
-    public static String IMGurl = "fileName";
+    private SearchView mSearchView;
+    public static String IMG_URL = "fileName";
+    MaterialAdapter customRecyclerViewAdapter;
 
 
     View root;
@@ -47,6 +49,22 @@ public class MaterialRecyclerView extends Fragment {
         materialsList = new ArrayList<>();
         root = inflater.inflate(R.layout.activity_material_rec_view, container, false);
         FloatingActionButton addJob =root.findViewById(R.id.addMaterialBtn);
+        mSearchView = root.findViewById(R.id.material_search_view);
+
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                customRecyclerViewAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
         addJob.setOnClickListener(view -> {
             navigateToAddMaterial();
         });
@@ -75,7 +93,7 @@ public class MaterialRecyclerView extends Fragment {
 
         handler = new Handler(Looper.getMainLooper(), msg -> {
             RecyclerView recyclerView = root.findViewById(R.id.material_recycler_view);
-            MaterialAdapter customRecyclerViewAdapter = new MaterialAdapter(materialsList, new MaterialAdapter.CustomClickListener() {
+             customRecyclerViewAdapter = new MaterialAdapter(materialsList, new MaterialAdapter.CustomClickListener() {
                 @Override
                 public void onTaskClicked(int position) {
 //                    downloadFile();

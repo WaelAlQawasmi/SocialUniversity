@@ -5,14 +5,13 @@
 package com.example.socialuniversityapp.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,14 +22,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Material;
 import com.example.socialuniversityapp.R;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.CustomViewHolder>{
+public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.CustomViewHolder> implements Filterable{
     private static final String TAG = MaterialAdapter.class.getSimpleName();
     List<Material> materialList;
+    List<Material> AllMaterialList;
+
     CustomClickListener listener;
     private String imageKey;
     Handler handler;
@@ -40,6 +42,7 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
     public MaterialAdapter(List<com.amplifyframework.datastore.generated.model.Material> material, CustomClickListener listener) {
         this.materialList = material;
         this.listener = listener;
+        AllMaterialList = new ArrayList<>(materialList);
     }
 
     @Override
@@ -48,7 +51,7 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
         holder.title.setText(materialList.get(position).getFileName());
         holder.description.setText(materialList.get(position).getFileMajor());
 
-        holder.image.setOnClickListener(view -> {
+        holder.downloadImage.setOnClickListener(view -> {
             Toast.makeText(
                     recContext,
                     "you clicked :  " + materialList.get(position).getFileName(), Toast.LENGTH_SHORT).show();
@@ -90,12 +93,49 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
         void onTaskClicked(int position);
     }
 
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
 
-    static class CustomViewHolder extends RecyclerView.ViewHolder {
+    Filter filter = new Filter() {
 
-        TextView title;
-        TextView description;
-        ImageView image;
+        // run on background thread
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+
+            List<Material> filterUserList = new ArrayList<>();
+
+            if (charSequence.toString().isEmpty()){
+                filterUserList.addAll(AllMaterialList);
+            }else {
+                for (Material material : AllMaterialList){
+                    if (material.getFileName().toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        filterUserList.add(material);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filterUserList;
+
+            return filterResults;
+        }
+
+        // run on ui thread
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            materialList.clear();
+            materialList.addAll((Collection<? extends Material>) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
+    static class CustomViewHolder extends RecyclerView.ViewHolder  {
+
+        TextView title, description;
+        ImageView downloadImage;
 
 
         CustomClickListener listener;
@@ -107,8 +147,8 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
 
             title = itemView.findViewById(R.id.fileName);
             description = itemView.findViewById(R.id.fileDescription);
-            image = itemView.findViewById(R.id.imageView2);
-            image.setOnClickListener(view ->
+            downloadImage = itemView.findViewById(R.id.downloadImage);
+            downloadImage.setOnClickListener(view ->
             {
                 listener.onTaskClicked(getAdapterPosition());
             });

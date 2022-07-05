@@ -1,21 +1,28 @@
 package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 
 import static android.content.ContentValues.TAG;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
@@ -23,48 +30,110 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Material;
 
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.UUID;
 
-import com.amplifyframework.storage.options.StorageUploadFileOptions;
 import com.example.socialuniversityapp.R;
 
-import org.chromium.base.FileUtils;
 
 public class AddMaterial extends AppCompatActivity {
 
-    EditText filename;
-    EditText fileDescription;
-    private String  fileKey;
+    private EditText filename;
+    private AutoCompleteTextView mAutoDescription;
+    private ImageView mUploadImage;
+    private String  fileKey = "";
     public static final int REQUEST_CODE = 123;
     private File file;
     private File fileCopy;
 
+    String fileDescriptionSel = "", majorName = "";
+
+    String[] items = {"Specialty Materials", "Help Materials", "University Materials", "College Materials"};
+    ArrayAdapter<String> adapterItem;
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_material);
 
         filename = findViewById(R.id.fileName);
-        fileDescription = findViewById(R.id.fileDisc);
+        mAutoDescription = findViewById(R.id.auto_completed_text);
+        mUploadImage = findViewById(R.id.add_material_upload);
 
-        Button uploadBtn = findViewById(R.id.uplod_btn);
-        uploadBtn.setOnClickListener(view -> {
+        getMajorNameForAuth();
+
+        Button uploadBtn = findViewById(R.id.upload_material_button);
+
+        mUploadImage.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("*/*");
             startActivityForResult(intent, REQUEST_CODE);
         });
-    }
 
+        uploadBtn.setOnClickListener(view ->{
+
+            if (!filename.getText().toString().equals("")  && !fileDescriptionSel.equals("") && !fileKey.equals("")) {
+                Material item = Material.builder()
+                        .fileName(filename.getText().toString())
+                        .fileDis(fileDescriptionSel)
+                        .fileUrl(fileKey)
+                        .fileMajor(majorName)
+                        .build();
+
+
+                Amplify.API.mutate(ModelMutation.create(item), success -> Log.i(TAG, "Saved item: "),
+                        error -> Log.e(TAG, "Could not save item to DataStore", error));
+            } else {
+                Toast.makeText(this, "Fill The missing Fields", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        adapterItem = new ArrayAdapter<>(this, R.layout.list_item, items);
+        mAutoDescription.setAdapter(adapterItem);
+
+        // auto Complete Click
+        mAutoDescription.setOnItemClickListener(mAutoDescriptionClick);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void getMajorNameForAuth(){
+        Amplify.Auth.fetchUserAttributes(
+                attributes -> {
+                    Log.i("AuthDemo", "User attributes = " + attributes.toString());
+                    attributes.forEach(authUserAttribute -> {
+
+                        if (authUserAttribute.getKey().getKeyString().equals("custom:majoreName"))
+                            majorName=authUserAttribute.getValue();
+
+                    });
+                },
+                error -> Log.e("AuthDemo", "Failed to fetch user attributes.", error)
+        );
+
+    }
+    // auto Complete Click
+    private final AdapterView.OnItemClickListener mAutoDescriptionClick = new AdapterView.OnItemClickListener() {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            char currentValue = adapterView.getItemAtPosition(position).toString().charAt(0);
+            switch (currentValue){
+                case 'S':
+                case 'H':
+                case 'U':
+                case 'C':
+                    fileDescriptionSel = adapterView.getItemAtPosition(position).toString();
+                    break;
+
+            }
+
+        }
+    };
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -138,19 +207,6 @@ public class AddMaterial extends AppCompatActivity {
                     fileKey,
                     exampleInputStream,
                     result -> {
-
-
-                        Material item = Material.builder()
-                                .fileName(filename.getText().toString())
-                                .fileDis(fileDescription.getText().toString())
-                                .fileUrl(fileKey)
-                                .fileMajor("Engineering")
-                                .build();
-
-
-                        Amplify.API.mutate(ModelMutation.create(item),  success -> Log.i(TAG, "Saved item: " ),
-                                error -> Log.e(TAG, "Could not save item to DataStore", error));
-
                         Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey());
 
                     },
