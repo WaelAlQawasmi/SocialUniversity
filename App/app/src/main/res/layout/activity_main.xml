@@ -10,7 +10,22 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar_main"
+            android:background="@color/main_color"
+            app:titleTextColor="#ffff"
+
+            android:layout_height="50dp">
+
+
+        </androidx.appcompat.widget.Toolbar>
 
 
 
@@ -24,7 +39,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
-
+</LinearLayout>
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/toolbar"
@@ -33,16 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:navigationIcon="@drawable/menu3bar" >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:orientation="horizontal">
-
-
-
-
-            </LinearLayout>
 
         </com.google.android.material.bottomappbar.BottomAppBar>
 

@@ -2,6 +2,7 @@ package com.example.socialuniversityapp.ui;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.toolbar).setOnClickListener(view -> {
             drawer.openDrawer(GravityCompat.START);
         });
+
+        Toolbar topToolBar = (Toolbar)findViewById(R.id.toolbar_main);
+        topToolBar.setTitle("Home");
 
 
         findViewById(R.id.fab).setOnClickListener(view -> {
