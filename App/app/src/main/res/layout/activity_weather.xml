@@ -9,39 +9,7 @@
     android:padding="12dp"
     android:background="@drawable/gradint_bg">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/main_container"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:weightSum="100"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        >-->
 
-<!--        <EditText-->
-<!--            android:id="@+id/etCityName"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="enter your country"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="18sp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:textColorHint="@color/white"-->
-<!--            android:layout_weight="70"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btnSearch"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="30"-->
-<!--            android:backgroundTint="#FF99CC"-->
-<!--            android:layout_marginLeft="10dp"-->
-
-<!--            android:text="Search"-->
-<!--            android:textStyle="bold"/>-->
-
-<!--    </LinearLayout>-->
 
     <TextView
         android:id="@+id/tvCity"

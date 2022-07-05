@@ -200,6 +200,7 @@ public class WeatherActivity extends Fragment {
                         } else {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
+                            Log.i(TAG, "latitude: " + latitude + " longitude " + longitude);
                             loadWeatherByCityName(longitude,latitude);
 
 

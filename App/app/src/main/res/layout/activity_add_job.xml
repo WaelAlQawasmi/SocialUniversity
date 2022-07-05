@@ -50,7 +50,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="body"
+            android:hint="Description"
             android:inputType="textMultiLine"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:startIconDrawable="@drawable/body_icon"
@@ -65,6 +65,7 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_marginTop="20dp"
@@ -90,7 +91,7 @@
             android:layout_height="wrap_content"
             android:hint="City / Street"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:startIconDrawable="@drawable/body_icon"
+            app:startIconDrawable="@drawable/address_icon"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -102,6 +103,7 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
 
     </LinearLayout>
