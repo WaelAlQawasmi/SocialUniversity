@@ -2,6 +2,7 @@ package com.example.socialuniversityapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -97,9 +98,19 @@ public class AddJobActivity extends AppCompatActivity {
                     },
                     error -> {
                     });
-            mProgressBar.setVisibility(View.INVISIBLE);
+
+            refreshViewsContent();
+
         }
 
     };
+
+    public void refreshViewsContent(){
+        mBodyText.setText("");
+        mPhoneText.setText("");
+        mAddressText.setText("");
+        mProgressBar.setVisibility(View.INVISIBLE);
+
+    }
 
 }
