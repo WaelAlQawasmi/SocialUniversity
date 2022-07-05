@@ -7,20 +7,10 @@
     android:layout_height="match_parent"
     android:paddingBottom="60dp"
     tools:context=".ui.UniversityPostActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:id="@+id/chats_toolbar"
-        app:titleTextColor="#ffff"
-        android:fitsSystemWindows="true"
-        android:background="@color/main_color"
-        android:layout_height="50dp">
 
-
-    </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/UsersMessages"
         android:layout_width="match_parent"
-        android:layout_below="@+id/chats_toolbar"
         android:fitsSystemWindows="true"
         android:layout_height="wrap_content"
 

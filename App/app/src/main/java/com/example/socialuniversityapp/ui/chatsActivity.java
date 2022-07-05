@@ -49,9 +49,8 @@ public class chatsActivity extends AppCompatActivity {
         Intent getOtherUser = getIntent();
         String user_name = getOtherUser.getStringExtra("name");
 
-        Toolbar topToolBar = (Toolbar)findViewById(R.id.chat_user_name);
-        topToolBar.setTitle(user_name);
-          connectListViewToChatAdapter();
+
+
 
 
         getPreviousMessages();

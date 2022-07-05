@@ -49,16 +49,16 @@ public class MainActivity extends AppCompatActivity {
             drawer.openDrawer(GravityCompat.START);
         });
 
-        Toolbar topToolBar = (Toolbar)findViewById(R.id.toolbar_main);
+        Toolbar topToolBar = (Toolbar)findViewById(R.id.toolbar);
         topToolBar.setTitle("Home");
 
 
-        findViewById(R.id.fab).setOnClickListener(view -> {
-            Intent messagesActivity=new Intent(this,messages.class);
-
-            startActivity(messagesActivity);
-
-        });
+//        findViewById(R.id.fab).setOnClickListener(view -> {
+//            Intent messagesActivity=new Intent(this,messages.class);
+//
+//            startActivity(messagesActivity);
+//
+//        });
         String email=Amplify.Auth.getCurrentUser().getUsername();
 
         Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(email)), users ->{
