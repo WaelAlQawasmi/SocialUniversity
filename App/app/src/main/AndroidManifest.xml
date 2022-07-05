@@ -26,8 +26,7 @@
             android:value="ca-app-pub-2047900943322535~8852911095" />
 
        
-            android:name=".ui.WeatherActivity"
-            android:exported="true"></activity>
+
 
           
 

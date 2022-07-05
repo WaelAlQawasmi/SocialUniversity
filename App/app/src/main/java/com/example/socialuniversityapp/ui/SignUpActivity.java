@@ -66,7 +66,6 @@ public class SignUpActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.sign_up_email_text);
         mLoginLink = findViewById(R.id.sign_up_toLogin);
         mSignUpButton = findViewById(R.id.sign_up_button);
-        mLoadingProgressBar = findViewById(R.id.sign_up_loading);
 
 
         builder = new AlertDialog.Builder(this);

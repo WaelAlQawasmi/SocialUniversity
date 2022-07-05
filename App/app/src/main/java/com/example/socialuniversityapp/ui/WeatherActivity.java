@@ -21,8 +21,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.socialuniversityapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -91,7 +94,8 @@ public class WeatherActivity extends Fragment {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);
 
-
+        Navigation.findNavController(view)
+                .getCurrentDestination().setLabel("k");
 
 
         // Get Location
