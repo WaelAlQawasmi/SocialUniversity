@@ -74,6 +74,12 @@ String TAG=messages.class.getSimpleName();
                                 current_user_id = user.getId();
                             }
 
+                            if(!chatsDataList.isEmpty()){
+                                chatsDataList.clear();
+                            }
+                            if(!UsersDataList.isEmpty()){
+                                UsersDataList.clear();
+                            }
                             for (chat chat : chats.getData()) {
                                 checkTheUsersAndAddHisChats(chat, current_user_id);
 
@@ -98,7 +104,6 @@ String TAG=messages.class.getSimpleName();
                 Log.e(TAG, "error to get the chats");
 
             });
-
 
 //        Amplify.DataStore.clear(
 //                () -> Log.i(TAG, "DataStore is cleared."),
@@ -126,6 +131,7 @@ String TAG=messages.class.getSimpleName();
         }
 
         private void checkTheUsersAndAddHisChats (chat chat, String current_user_id){
+
             if (chat.getChatFirstUserId().equals(current_user_id) ||
                     chat.getChatSecondUserId().equals(current_user_id)) {
                 chatsDataList.add(chat);

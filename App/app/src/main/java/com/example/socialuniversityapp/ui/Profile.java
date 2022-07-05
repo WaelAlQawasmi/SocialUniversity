@@ -313,13 +313,13 @@ public class Profile extends Fragment {
     private void downloadImg(String imageKey) {
         Amplify.Storage.list("",
                 result -> {
-                    boolean condition=true;
+                    boolean condition = true;
                     for (StorageItem item : result.getItems()) {
-                        if(item.getKey().equals(imageKey)){
-                            condition=false;
+                        if (item.getKey().equals(imageKey)) {
+                            condition = false;
                         }
                     }
-                    if(condition){
+                    if (condition) {
                         Amplify.Storage.remove(
                                 imageKey,
                                 result2 -> Log.i("MyAmplifyApp", "Successfully removed: "),
@@ -330,20 +330,22 @@ public class Profile extends Fragment {
                 error -> Log.e("MyAmplifyApp", "List failure", error)
         );
 
-        Amplify.Storage.downloadFile(
-                imageKey,
-                new File(getActivity().getFilesDir() + "/" + imageKey),
-                response -> {
+            Amplify.Storage.downloadFile(
+                    imageKey,
+                    new File(getActivity().getApplicationContext().getFilesDir() + "/" + imageKey),
+                    response -> {
 
-                    Log.i(TAG, "Successfully downloaded: " + response.getFile().getName());
-                    newImage = root.findViewById(R.id.imageView_profile);
-                    Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getApplicationContext().getFilesDir() + "/" + response.getFile().getName());
-                    newImage.setImageBitmap(bitmap);
+                        Log.i(TAG, "Successfully downloaded: " + response.getFile().getName());
+                        newImage = root.findViewById(R.id.imageView_profile);
+                        Bitmap bitmap = BitmapFactory.decodeFile(getContext().getFilesDir() + "/" + response.getFile().getName());
+                        newImage.setImageBitmap(bitmap);
 
-                },
-                error -> Log.e(TAG, "Download Failure", error)
-        );
-    }
+                    },
+                    error -> Log.e(TAG, "Download Failure", error)
+            );
+        }
+
+
 
     private void playAudio(InputStream audioData) {
         File mp3File = new File(getActivity().getCacheDir(), "audio.mp3");

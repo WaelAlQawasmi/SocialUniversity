@@ -108,13 +108,16 @@ public void getTheCurrentId(){
 public String substring(String date){
 String current=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
      String result="";
+     Log.i(TAG,"current"+current);
+    Log.i(TAG,"date"+date);
+
     int currentMonth=Integer.parseInt(current.substring(5,7));
     int messageMonth=Integer.parseInt(date.substring(5,7));
     int currentDay=Integer.parseInt(current.substring(8,10));
     int messageDay=Integer.parseInt(date.substring(8,10));
 
     int currentHour=Integer.parseInt(current.substring(11,13));
-    int messageHour=Integer.parseInt(date.substring(11,13));
+    int messageHour=Integer.parseInt(date.substring(11,13))+1;
     int currentMin=Integer.parseInt(current.substring(14,16));
     int messageMin=Integer.parseInt(date.substring(14,16));
      if(Math.abs(currentMonth-messageMonth)>0){
@@ -135,6 +138,10 @@ String current=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).
                  else if(Math.abs(currentHour-messageHour)==0){
                      if(Math.abs(currentMin-messageMin)>0){
                          result=Math.abs(currentMin-messageMin)+" min ago";
+                     }
+                     else{
+                         result="now";
+
                      }
                  }
 

@@ -16,7 +16,7 @@
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_chat"
-            android:icon="@drawable/email_icon"
+            android:icon="@drawable/chat"
             android:title="chat" />
         <item
             android:id="@+id/nav_weather"

@@ -123,7 +123,7 @@ public class chatsActivity extends AppCompatActivity {
 
             Amplify.DataStore.save(message, target -> {
                 Log.i(TAG, "message sent");
-
+               enterMessage.setText("");
             }, error -> {
                 Log.e(TAG, error.getMessage());
             });
@@ -131,6 +131,7 @@ public class chatsActivity extends AppCompatActivity {
 
                     response -> {
                         Log.i(TAG, "Todo with id mutate ");
+                        enterMessage.setText("");
 
                     },
                     error2 -> Log.e(TAG, "Create failed mutate", error2)

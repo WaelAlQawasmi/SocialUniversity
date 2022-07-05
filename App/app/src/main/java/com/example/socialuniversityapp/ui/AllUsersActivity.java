@@ -65,8 +65,7 @@ public class AllUsersActivity extends Fragment {
         mLoadingProgressBar =  view.findViewById(R.id.loading_add_chat);
 
 
-        Toolbar topToolBar = (Toolbar) view.findViewById(R.id.searc_user);
-        topToolBar.setTitle("search");
+
 
         // Fetch All data from User Table
         fetchAllUser();
