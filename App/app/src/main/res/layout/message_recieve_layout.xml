@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_alignParentEnd="true"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    android:layout_height="70dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_img"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_toLeftOf="@+id/recieve_message"
+        android:scaleType="centerCrop"
+        android:src="@drawable/user_img"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:background="@drawable/rounded_corner_recieve"
+        android:id="@+id/recieve_message"
+        >
+
+
+
     <TextView
         android:layout_marginTop="5dp"
         android:layout_marginHorizontal="5dp"
@@ -10,40 +29,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="false"
-        android:minWidth="150dp"
-        android:background="@drawable/rounded_corner_sent"
         android:text="message"
         android:textSize="20dp"
         android:padding="10dp"
         android:textColor="#fff"
+
         >
 
     </TextView>
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/message"
-        android:layout_alignParentEnd="false"
-        android:padding="10dp"
-        android:layout_marginHorizontal="5dp"
-        android:text="ff"
-        android:textSize="16dp">
-
-    </TextView>
+  
     <TextView
         android:id="@+id/messageDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/name"
         android:layout_marginHorizontal="5dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/message"
-        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/message"
+        android:padding="5dp"
         android:text="date"
+        android:textColor="@android:color/white"
         android:textSize="16dp">
 
     </TextView>
-
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.socialuniversityapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,8 @@ String TAG=messages.class.getSimpleName();
 
         setContentView(R.layout.activity_messages);
 
+        Toolbar topToolBar = (Toolbar)findViewById(R.id.chats_toolbar);
+        topToolBar.setTitle("chats");
         FloatingActionButton talk_new_user = findViewById(R.id.talk_new_user);
 
         talk_new_user.setOnClickListener(view ->{

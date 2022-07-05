@@ -4,27 +4,40 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.chatsActivity">
+<androidx.appcompat.widget.Toolbar
+    android:layout_width="match_parent"
+    android:id="@+id/chat_user_name"
+    android:background="@color/main_color"
+    app:titleTextColor="#ffff"
 
+    android:layout_height="50dp">
+
+
+</androidx.appcompat.widget.Toolbar>
 
     <ListView
         android:id="@+id/messageListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/enterMessage"
+        android:layout_below="@+id/chat_user_name"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+
         android:dividerHeight="0dp"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll" />
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="5"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:hint="enter message"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/enterMessage"
+            android:background="@drawable/enter_message"
             android:layout_toLeftOf="@+id/sent_message"
             android:layout_gravity="bottom"
             />
@@ -32,16 +45,14 @@
             android:id="@+id/sent_message"
             android:layout_width="109dp"
             android:layout_weight="0"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="1dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:onClick="onClickSendMessage"
-
-
             android:backgroundTint="@color/main_color"
-            app:srcCompat="@drawable/ic_menu_slideshow" />
+            app:srcCompat="@drawable/send_message_icon" />
 
 
 

@@ -2,6 +2,7 @@ package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +49,10 @@ public class AllUsersActivity extends AppCompatActivity {
         mUserRecyclerView = findViewById(R.id.user_recycler_view);
         mSearchView = findViewById(R.id.user_search_view);
         mLoadingProgressBar = findViewById(R.id.loading_add_chat);
+
+
+        Toolbar topToolBar = (Toolbar)findViewById(R.id.searc_user);
+        topToolBar.setTitle("search");
 
         // Fetch All data from User Table
         fetchAllUser();

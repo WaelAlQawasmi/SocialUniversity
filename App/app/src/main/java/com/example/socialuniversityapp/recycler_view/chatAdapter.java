@@ -29,7 +29,11 @@ import com.example.socialuniversityapp.R;
 import com.example.socialuniversityapp.ui.MajorPostActivity;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class chatAdapter extends ArrayAdapter<Message> {
     private static final String TAG = chatAdapter.class.getSimpleName();
@@ -65,9 +69,9 @@ public class chatAdapter extends ArrayAdapter<Message> {
 
                 view = layoutInflater.inflate(R.layout.message_recieve_layout, parent, false);
 
-                TextView nameText = view.findViewById(R.id.name);
+//                TextView nameText = view.findViewById(R.id.name);
 
-                nameText.setText(message.getUser().getName());
+//                nameText.setText(message.getUser().getName());
 
             }
 
@@ -78,7 +82,7 @@ public class chatAdapter extends ArrayAdapter<Message> {
 
             messageContentText.setText(message.getContent());
 
-            messageDateText.setText(message.getDate().format());
+            messageDateText.setText(substring(message.getDate().format()));
 
 
 
@@ -100,6 +104,44 @@ public void getTheCurrentId(){
         }},error->{
 
     });
+}
+public String substring(String date){
+String current=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
+     String result="";
+    int currentMonth=Integer.parseInt(current.substring(5,7));
+    int messageMonth=Integer.parseInt(date.substring(5,7));
+    int currentDay=Integer.parseInt(current.substring(8,10));
+    int messageDay=Integer.parseInt(date.substring(8,10));
+
+    int currentHour=Integer.parseInt(current.substring(11,13));
+    int messageHour=Integer.parseInt(date.substring(11,13));
+    int currentMin=Integer.parseInt(current.substring(14,16));
+    int messageMin=Integer.parseInt(date.substring(14,16));
+     if(Math.abs(currentMonth-messageMonth)>0){
+         result=Math.abs(currentMonth-messageMonth)+" month ago";
+     }
+     else if(true){
+         if(Math.abs(currentDay-messageDay)>1){
+             result=Math.abs(currentDay-messageDay)+" day ago";
+
+         }
+         else if(Math.abs(currentDay-messageDay)==1){
+             result="yesterday";
+         }
+         else if(Math.abs(currentDay-messageDay)==0){
+                 if(Math.abs(currentHour-messageHour)>0){
+                     result=Math.abs(currentHour-messageHour)+" hour ago";
+                 }
+                 else if(Math.abs(currentHour-messageHour)==0){
+                     if(Math.abs(currentMin-messageMin)>0){
+                         result=Math.abs(currentMin-messageMin)+" min ago";
+                     }
+                 }
+
+         }
+     }
+
+  return result;
 }
 
 }

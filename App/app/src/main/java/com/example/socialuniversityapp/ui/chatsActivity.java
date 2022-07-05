@@ -2,6 +2,7 @@ package com.example.socialuniversityapp.ui;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Build;
@@ -45,7 +46,13 @@ public class chatsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
 
-        connectListViewToChatAdapter();
+        Intent getOtherUser = getIntent();
+        String user_name = getOtherUser.getStringExtra("name");
+
+        Toolbar topToolBar = (Toolbar)findViewById(R.id.chat_user_name);
+        topToolBar.setTitle(user_name);
+          connectListViewToChatAdapter();
+
 
         getPreviousMessages();
 

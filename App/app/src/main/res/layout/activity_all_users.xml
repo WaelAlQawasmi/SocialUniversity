@@ -8,7 +8,16 @@
     tools:context=".ui.AllUsersActivity"
     android:orientation="vertical"
     >
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/searc_user"
+        android:background="@color/main_color"
+        app:titleTextColor="#ffff"
 
+        android:layout_height="50dp">
+
+
+    </androidx.appcompat.widget.Toolbar>
     <SearchView
         android:id="@+id/user_search_view"
         android:layout_width="match_parent"

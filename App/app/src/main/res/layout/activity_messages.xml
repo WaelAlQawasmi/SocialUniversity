@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,21 +7,34 @@
     android:layout_height="match_parent"
     android:paddingBottom="60dp"
     tools:context=".ui.UniversityPostActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/chats_toolbar"
+        app:titleTextColor="#ffff"
+        android:fitsSystemWindows="true"
+        android:background="@color/main_color"
+        android:layout_height="50dp">
 
+
+    </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/UsersMessages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_below="@+id/chats_toolbar"
+        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
 
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/talk_new_user"
         android:layout_width="109dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+
         android:backgroundTint="@color/main_color"
         app:srcCompat="@drawable/plusicon" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
