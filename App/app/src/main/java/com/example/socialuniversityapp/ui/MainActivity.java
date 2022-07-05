@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
       private NavController navController;
     private DrawerLayout drawer;
-
+    View headerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 for (User temp_user:users.getData()){
                     user=temp_user;
                 }
-                View headerView = navigationView.getHeaderView(0);
+                headerView = navigationView.getHeaderView(0);
 
                 TextView header_name = headerView.findViewById(R.id.header_name);
                 TextView header_email = headerView.findViewById(R.id.header_email);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         if (finalUser != null) {
                             header_name.setText(finalUser.getName());
                             header_email.setText(finalUser.getEmail());
-                            downloadImg(finalUser.getCognitoId()+".jpg",headerView);
+
                         }
                     }
                 });
@@ -95,16 +95,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
-
-
-
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_navagation);
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -112,21 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void downloadImg(String imageKey, View header) {
-        Amplify.Storage.downloadFile(
-                imageKey,
-                new File(this.getFilesDir() + "/" + imageKey),
-                response -> {
 
-                    Log.i(TAG, "Successfully downloaded: " + response.getFile().getName());
-                    ImageView newImage =header.findViewById(R.id.header_image);
-                    Bitmap bitmap = BitmapFactory.decodeFile(this.getApplicationContext().getFilesDir() + "/" + response.getFile().getName());
-                    newImage.setImageBitmap(bitmap);
-
-                },
-                error -> Log.e(TAG, "Download Failure", error)
-        );
-    }
 }
 
 
