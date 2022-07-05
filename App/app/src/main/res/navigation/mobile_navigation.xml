@@ -17,7 +17,11 @@
         android:name="com.example.socialuniversityapp.ui.Profile"
         android:label="@string/menu_profile"
         tools:layout="@layout/activity_profile" />
-
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.example.socialuniversityapp.ui.messages"
+        android:label="chat"
+        tools:layout="@layout/activity_messages" />
     <fragment
         android:id="@+id/nav_jobs"
         android:name="com.example.socialuniversityapp.recycler_view.JobRecyclerView"

@@ -18,10 +18,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:id="@+id/toolbar_main"
+            android:id="@+id/toolbar"
             android:background="@color/main_color"
             app:titleTextColor="#ffff"
-
+            app:navigationIcon="@drawable/menu3bar"
             android:layout_height="50dp">
 
 
@@ -41,22 +41,9 @@
         app:navGraph="@navigation/mobile_navigation" />
 </LinearLayout>
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/toolbar"
-            style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:navigationIcon="@drawable/menu3bar" >
 
-        </com.google.android.material.bottomappbar.BottomAppBar>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@id/toolbar"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

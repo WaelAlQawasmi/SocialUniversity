@@ -15,6 +15,10 @@
             android:icon="@drawable/username_icon"
             android:title="@string/menu_profile" />
         <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/email_icon"
+            android:title="chat" />
+        <item
             android:id="@+id/nav_weather"
             android:icon="@drawable/weather"
             android:title="@string/menu_weather" />

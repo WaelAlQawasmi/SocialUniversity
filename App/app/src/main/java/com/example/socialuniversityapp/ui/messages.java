@@ -1,13 +1,21 @@
 package com.example.socialuniversityapp.ui;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
@@ -22,25 +30,28 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class messages extends AppCompatActivity {
+public class messages extends Fragment {
 String TAG=messages.class.getSimpleName();
     List<chat> chatsDataList = new ArrayList();
     List<User> UsersDataList = new ArrayList();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_messages, container, false);
 
-        setContentView(R.layout.activity_messages);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        Toolbar topToolBar = (Toolbar)findViewById(R.id.chats_toolbar);
-        topToolBar.setTitle("chats");
-        FloatingActionButton talk_new_user = findViewById(R.id.talk_new_user);
+        FloatingActionButton talk_new_user = view.findViewById(R.id.talk_new_user);
 
-        talk_new_user.setOnClickListener(view ->{
-            startActivity(new Intent(this,AllUsersActivity.class));
+        talk_new_user.setOnClickListener(view2 ->{
+            startActivity(new Intent(getActivity(),AllUsersActivity.class));
                 }
                 );
-        getUsersAlreadyTalkedTo();
+        getUsersAlreadyTalkedTo(view);
 //        chat chat1=chat.builder()
 //                .chatFirstUserId("56510c0f-ad04-4812-bc59-4302240828bf")
 //                .chatSecondUserId("e21eb46b-b03c-4cf8-bb84-2577d6454e82")
@@ -56,9 +67,9 @@ String TAG=messages.class.getSimpleName();
 
 
 
-    public void getUsersAlreadyTalkedTo(){
+    public void getUsersAlreadyTalkedTo(View view){
 
-        RecyclerView recyclerView = findViewById(R.id.UsersMessages);
+        RecyclerView recyclerView = view.findViewById(R.id.UsersMessages);
 
 
         String current_user_email=Amplify.Auth.getCurrentUser().getUsername();
@@ -86,7 +97,7 @@ String TAG=messages.class.getSimpleName();
 
                     recyclerView.setAdapter(messageRecyclerViewMethod());
                     recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 });
 
                     }
@@ -118,7 +129,7 @@ String TAG=messages.class.getSimpleName();
             Log.i(TAG,"test");
             User user=UsersDataList.get(position);
 
-            Intent chatActivity=new Intent(this, chatsActivity.class);
+            Intent chatActivity=new Intent(getActivity(), chatsActivity.class);
             chatActivity.putExtra("id",user.getId());
             chatActivity.putExtra("cognitoid",user.getCognitoId());
             chatActivity.putExtra("email",user.getEmail());
