@@ -94,8 +94,7 @@ public class WeatherActivity extends Fragment {
         mProgressBar = view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);
 
-        Navigation.findNavController(view)
-                .getCurrentDestination().setLabel("k");
+
 
 
         // Get Location
