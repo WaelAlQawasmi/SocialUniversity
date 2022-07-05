@@ -1,18 +1,27 @@
 package com.example.socialuniversityapp.ui;
 
+import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -28,7 +37,7 @@ import com.example.socialuniversityapp.recycler_view.AllUserAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllUsersActivity extends AppCompatActivity {
+public class AllUsersActivity extends Fragment {
     private static final String TAG = AllUsersActivity.class.getSimpleName();
     private ProgressBar mLoadingProgressBar;
     private RecyclerView mUserRecyclerView;
@@ -38,20 +47,25 @@ public class AllUsersActivity extends AppCompatActivity {
     private AllUserAdapter adapter;
 
     Handler handler;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_users);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_all_users, container, false);
+
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
 
         // Inflate
-        mUserRecyclerView = findViewById(R.id.user_recycler_view);
-        mSearchView = findViewById(R.id.user_search_view);
-        mLoadingProgressBar = findViewById(R.id.loading_add_chat);
+        mUserRecyclerView = view.findViewById(R.id.user_recycler_view);
+        mSearchView =  view.findViewById(R.id.user_search_view);
+        mLoadingProgressBar =  view.findViewById(R.id.loading_add_chat);
 
 
-        Toolbar topToolBar = (Toolbar)findViewById(R.id.searc_user);
+        Toolbar topToolBar = (Toolbar) view.findViewById(R.id.searc_user);
         topToolBar.setTitle("search");
 
         // Fetch All data from User Table
@@ -166,7 +180,8 @@ public class AllUsersActivity extends AppCompatActivity {
                                                                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                                                        @Override
                                                                        public void run() {
-                                                                          finish();
+                                                                           Navigation.findNavController(getView()).navigate(R.id.action_all_users_to_nav_chat);
+
                                                                        }
                                                                    }, 5000);
 
@@ -178,7 +193,7 @@ public class AllUsersActivity extends AppCompatActivity {
                                                        runOnUiThread(() ->{
                                                            mLoadingProgressBar.setVisibility(View.INVISIBLE);
 
-                                                           Toast.makeText(AllUsersActivity.this,"this user already exist", Toast.LENGTH_SHORT).show();
+                                                           Toast.makeText(getActivity().getApplicationContext(),"this user already exist", Toast.LENGTH_SHORT).show();
 
                                                        });
                                                    }
@@ -202,7 +217,7 @@ public class AllUsersActivity extends AppCompatActivity {
 
         mUserRecyclerView.setAdapter(adapter);
         mUserRecyclerView.setHasFixedSize(true);
-        mUserRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        mUserRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
     }
 

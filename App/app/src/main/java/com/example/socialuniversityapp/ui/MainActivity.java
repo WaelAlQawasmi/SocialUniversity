@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import java.io.File;
@@ -34,7 +35,8 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
+      private NavController navController;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        drawer = findViewById(R.id.drawerLayout);
         NavigationView navigationView = findViewById(R.id.navgationView);
         navigationView.setItemIconTintList(null);
         findViewById(R.id.toolbar).setOnClickListener(view -> {
@@ -52,13 +54,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar topToolBar = (Toolbar)findViewById(R.id.toolbar);
         topToolBar.setTitle("Home");
 
+        NavHostFragment navHostfragment= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_content_navagation);
+        navController= navHostfragment.getNavController();
 
-//        findViewById(R.id.fab).setOnClickListener(view -> {
-//            Intent messagesActivity=new Intent(this,messages.class);
-//
-//            startActivity(messagesActivity);
-//
-//        });
+        setSupportActionBar(topToolBar);
+        NavigationUI.setupActionBarWithNavController(this,navController,drawer);
+
+
+
         String email=Amplify.Auth.getCurrentUser().getUsername();
 
         Amplify.API.query(ModelQuery.list(User.class,User.EMAIL.contains(email)), users ->{
@@ -102,7 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void downloadImg(String imageKey,View header) {
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, drawer);
+
+    }
+
+    private void downloadImg(String imageKey, View header) {
         Amplify.Storage.downloadFile(
                 imageKey,
                 new File(this.getFilesDir() + "/" + imageKey),
