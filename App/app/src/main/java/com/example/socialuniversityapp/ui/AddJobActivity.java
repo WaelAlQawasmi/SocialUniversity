@@ -111,6 +111,8 @@ public class AddJobActivity extends AppCompatActivity {
         mAddressText.setText("");
         mProgressBar.setVisibility(View.INVISIBLE);
 
+        finish();
+
     }
 
 }

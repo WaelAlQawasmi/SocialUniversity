@@ -48,6 +48,8 @@ public class AddMaterial extends AppCompatActivity {
     public static final int REQUEST_CODE = 123;
     private File file;
     private File fileCopy;
+    String extension="";
+
 
     String fileDescriptionSel = "", majorName = "";
 
@@ -76,12 +78,16 @@ public class AddMaterial extends AppCompatActivity {
 
         uploadBtn.setOnClickListener(view ->{
 
+
+
+
             if (!filename.getText().toString().equals("")  && !fileDescriptionSel.equals("") && !fileKey.equals("")) {
                 Material item = Material.builder()
                         .fileName(filename.getText().toString())
                         .fileDis(fileDescriptionSel)
                         .fileUrl(fileKey)
                         .fileMajor(majorName)
+                        .fileExtension(extension)
                         .build();
 
 
@@ -149,8 +155,27 @@ public class AddMaterial extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
-
-            uploadInputStream(data.getData());
+            String extensionType = getContentResolver().getType(data.getData());
+            Log.i(TAG, "****************** type  :"+ extensionType);
+            switch (extensionType) {
+                case "application/msword":
+                    extension=".docx";
+                    break;
+                case "application/pdf":
+                    extension=".pdf";
+                    break;
+                case "binary/octet-stream":
+                    extension=".pptx";
+                    break;
+                case "image/png":
+                    extension=".png";
+                    break;
+                case "image/jpeg":
+                    extension=".jpeg";
+                    break;
+            }
+            Log.i(TAG, "uploaded  ext   : "+  extension);
+            uploadInputStream(data.getData(), extension);
         }
 
     }
@@ -199,12 +224,12 @@ public class AddMaterial extends AppCompatActivity {
 
 
 
-    private void uploadInputStream(Uri uri) {
+    private void uploadInputStream(Uri uri, String extension) {
         try {
             InputStream exampleInputStream = getContentResolver().openInputStream(uri);
             fileKey = UUID.randomUUID().toString();
             Amplify.Storage.uploadInputStream(
-                    fileKey,
+                    fileKey + extension,
                     exampleInputStream,
                     result -> {
                         Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey());
@@ -217,4 +242,9 @@ public class AddMaterial extends AppCompatActivity {
         }
 
     }
+//    public void changUploadBotonColor() {
+//        Button upload =findViewById(R.id.uplod_btn);
+//        upload.setText("uploded!");
+//        upload.setBackgroundColor(this.getResources().getColor(R.color.error_color));
+//    }
 }
