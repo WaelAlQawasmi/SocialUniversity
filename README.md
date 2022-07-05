@@ -11,6 +11,26 @@ help each other and exchanging their Information.
 
 ___
 
+#screenShots
+![SEPLASH](image/Screenshot_20220705_233648.png)
+
+![login](image/Screenshot_20220705_233532.png)
+![SHINE UP](image/Screenshot_20220705_233440.png)
+![NAV](image/Screenshot_20220705_232215.png)
+![PROFILE](image/Screenshot_20220705_232341.png)
+![ADD POST](image/Screenshot_20220705_234722.png)
+![MAJOR](image/Screenshot_20220705_232726.png)
+![MATERIAL](image/Screenshot_20220705_232816.png)
+![ADD MATERIAL](image/Screenshot_20220705_234707.png)
+![WETHER](image/Screenshot_20220705_233050.png)
+![JOBS](image/Screenshot_20220705_233107.png)
+![ADD JOB](image/Screenshot_20220705_234739.png)
+
+![CHAT](image/Screenshot_20220705_233249.png)
+
+
+
+![ADS](image/Screenshot_20220705_233449.png)
 
 ## Wireframe
 

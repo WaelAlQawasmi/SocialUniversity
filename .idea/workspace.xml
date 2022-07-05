@@ -23,7 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b00591e-2599-4873-ae65-b1fc76516fb9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/newSousalUnvercity.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/newSousalUnvercity.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_232215.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_232341.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_232726.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_232816.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233050.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233107.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233249.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233440.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233449.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233532.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_233648.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_234707.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_234722.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image/Screenshot_20220705_234739.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +53,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2Aq8kNGR51jmgwrv8YNUmYY4pr5" />
   <component name="ProjectLevelVcsManager">
@@ -53,8 +72,13 @@
     <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="cidr.known.project.marker" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/image" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\WAEL\SusalUnverSityCommunity\image" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -89,7 +113,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
