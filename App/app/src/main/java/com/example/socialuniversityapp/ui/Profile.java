@@ -337,7 +337,7 @@ public class Profile extends Fragment {
 
                     Log.i(TAG, "Successfully downloaded: " + response.getFile().getName());
                     newImage = root.findViewById(R.id.imageView_profile);
-                    Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getApplicationContext().getFilesDir() + "/" + response.getFile().getName());
+                    Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getFilesDir() + "/" + response.getFile().getName());
                     newImage.setImageBitmap(bitmap);
 
                 },
