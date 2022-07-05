@@ -53,6 +53,7 @@ type Material @model {
   fileDis: String!
   fileUrl: String!
   fileMajor: String!
+  fileExtension: String!
 }
 type User @model{
   id :ID!

@@ -50,10 +50,9 @@ public class chatsActivity extends AppCompatActivity {
         String user_name = getOtherUser.getStringExtra("name");
 
        Toolbar bar=findViewById(R.id.chat_user_name);
-      bar.setTitle(user_name);
+       bar.setTitle(user_name);
 
-
-        getPreviousMessages();
+       getPreviousMessages();
 
 
         observeMessages();

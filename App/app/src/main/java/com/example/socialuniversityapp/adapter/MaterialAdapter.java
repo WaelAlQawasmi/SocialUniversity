@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Material;
 import com.example.socialuniversityapp.R;
@@ -48,25 +49,45 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
-        holder.title.setText(materialList.get(position).getFileName());
-        holder.description.setText(materialList.get(position).getFileMajor());
+//        holder.title.setText(materialList.get(position).getFileName());
+//        holder.description.setText(materialList.get(position).getFileMajor());
+//
+//        holder.downloadImage.setOnClickListener(view -> {
+//            Toast.makeText(
+//                    recContext,
+//                    "you clicked :  " + materialList.get(position).getFileName(), Toast.LENGTH_SHORT).show();
+//
+//
+//                Amplify.Storage.downloadFile(
+//                        "hello",
+//                        new File(recContext.getApplicationContext().getFilesDir() +"/"+ materialList.get(position).getFileName()+".pdf"),
+//                        result -> {
+//                            Log.i(TAG, "path    : "+ result.getFile().getPath());
+//                            Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());},
+//                        error -> Log.e("MyAmplifyApp",  "Download Failure", error)
+//                );
+//
+//        });
+//
+//        String extension = materialList.get(position).toString();
+//        switch (extension){
+//            case ".docx":
+//                holder.fileImage.setImageResource(R.drawable.doc_image);
+//                break;
+//            case ".pdf":
+//                holder.fileImage.setImageResource(R.drawable.pdf_icon);
+//                break;
+//            case ".pptx":
+//                holder.fileImage.setImageResource(R.drawable.ppt_image);
+//                break;
+//            case ".jpeg":
+//                holder.fileImage.setImageResource(R.drawable.jpeg_image);
+//                break;
+//            case ".jpg":
+//                holder.fileImage.setImageResource(R.drawable.jpg_icon);
+//                break;
 
-        holder.downloadImage.setOnClickListener(view -> {
-            Toast.makeText(
-                    recContext,
-                    "you clicked :  " + materialList.get(position).getFileName(), Toast.LENGTH_SHORT).show();
-
-
-                Amplify.Storage.downloadFile(
-                        "hello",
-                        new File(recContext.getApplicationContext().getFilesDir() +"/"+ materialList.get(position).getFileName()+".pdf"),
-                        result -> {
-                            Log.i(TAG, "path    : "+ result.getFile().getPath());
-                            Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());},
-                        error -> Log.e("MyAmplifyApp",  "Download Failure", error)
-                );
-
-        });
+//        }
 
     }
     @NonNull
@@ -135,7 +156,7 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
     static class CustomViewHolder extends RecyclerView.ViewHolder  {
 
         TextView title, description;
-        ImageView downloadImage;
+        ImageView downloadImage, fileImage;
 
 
         CustomClickListener listener;
@@ -148,6 +169,7 @@ public class MaterialAdapter extends RecyclerView.Adapter<MaterialAdapter.Custom
             title = itemView.findViewById(R.id.fileName);
             description = itemView.findViewById(R.id.fileDescription);
             downloadImage = itemView.findViewById(R.id.downloadImage);
+            fileImage = itemView.findViewById(R.id.fileImage);
             downloadImage.setOnClickListener(view ->
             {
                 listener.onTaskClicked(getAdapterPosition());

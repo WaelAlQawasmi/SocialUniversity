@@ -25,11 +25,13 @@ public final class Material implements Model {
   public static final QueryField FILE_DIS = field("Material", "fileDis");
   public static final QueryField FILE_URL = field("Material", "fileUrl");
   public static final QueryField FILE_MAJOR = field("Material", "fileMajor");
+  public static final QueryField FILE_EXTENSION = field("Material", "fileExtension");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String fileName;
   private final @ModelField(targetType="String", isRequired = true) String fileDis;
   private final @ModelField(targetType="String", isRequired = true) String fileUrl;
   private final @ModelField(targetType="String", isRequired = true) String fileMajor;
+  private final @ModelField(targetType="String", isRequired = true) String fileExtension;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -52,6 +54,10 @@ public final class Material implements Model {
       return fileMajor;
   }
   
+  public String getFileExtension() {
+      return fileExtension;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -60,12 +66,13 @@ public final class Material implements Model {
       return updatedAt;
   }
   
-  private Material(String id, String fileName, String fileDis, String fileUrl, String fileMajor) {
+  private Material(String id, String fileName, String fileDis, String fileUrl, String fileMajor, String fileExtension) {
     this.id = id;
     this.fileName = fileName;
     this.fileDis = fileDis;
     this.fileUrl = fileUrl;
     this.fileMajor = fileMajor;
+    this.fileExtension = fileExtension;
   }
   
   @Override
@@ -81,6 +88,7 @@ public final class Material implements Model {
               ObjectsCompat.equals(getFileDis(), material.getFileDis()) &&
               ObjectsCompat.equals(getFileUrl(), material.getFileUrl()) &&
               ObjectsCompat.equals(getFileMajor(), material.getFileMajor()) &&
+              ObjectsCompat.equals(getFileExtension(), material.getFileExtension()) &&
               ObjectsCompat.equals(getCreatedAt(), material.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), material.getUpdatedAt());
       }
@@ -94,6 +102,7 @@ public final class Material implements Model {
       .append(getFileDis())
       .append(getFileUrl())
       .append(getFileMajor())
+      .append(getFileExtension())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -109,6 +118,7 @@ public final class Material implements Model {
       .append("fileDis=" + String.valueOf(getFileDis()) + ", ")
       .append("fileUrl=" + String.valueOf(getFileUrl()) + ", ")
       .append("fileMajor=" + String.valueOf(getFileMajor()) + ", ")
+      .append("fileExtension=" + String.valueOf(getFileExtension()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -133,6 +143,7 @@ public final class Material implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -142,7 +153,8 @@ public final class Material implements Model {
       fileName,
       fileDis,
       fileUrl,
-      fileMajor);
+      fileMajor,
+      fileExtension);
   }
   public interface FileNameStep {
     FileDisStep fileName(String fileName);
@@ -160,7 +172,12 @@ public final class Material implements Model {
   
 
   public interface FileMajorStep {
-    BuildStep fileMajor(String fileMajor);
+    FileExtensionStep fileMajor(String fileMajor);
+  }
+  
+
+  public interface FileExtensionStep {
+    BuildStep fileExtension(String fileExtension);
   }
   
 
@@ -170,12 +187,13 @@ public final class Material implements Model {
   }
   
 
-  public static class Builder implements FileNameStep, FileDisStep, FileUrlStep, FileMajorStep, BuildStep {
+  public static class Builder implements FileNameStep, FileDisStep, FileUrlStep, FileMajorStep, FileExtensionStep, BuildStep {
     private String id;
     private String fileName;
     private String fileDis;
     private String fileUrl;
     private String fileMajor;
+    private String fileExtension;
     @Override
      public Material build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -185,7 +203,8 @@ public final class Material implements Model {
           fileName,
           fileDis,
           fileUrl,
-          fileMajor);
+          fileMajor,
+          fileExtension);
     }
     
     @Override
@@ -210,9 +229,16 @@ public final class Material implements Model {
     }
     
     @Override
-     public BuildStep fileMajor(String fileMajor) {
+     public FileExtensionStep fileMajor(String fileMajor) {
         Objects.requireNonNull(fileMajor);
         this.fileMajor = fileMajor;
+        return this;
+    }
+    
+    @Override
+     public BuildStep fileExtension(String fileExtension) {
+        Objects.requireNonNull(fileExtension);
+        this.fileExtension = fileExtension;
         return this;
     }
     
@@ -228,12 +254,13 @@ public final class Material implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String fileName, String fileDis, String fileUrl, String fileMajor) {
+    private CopyOfBuilder(String id, String fileName, String fileDis, String fileUrl, String fileMajor, String fileExtension) {
       super.id(id);
       super.fileName(fileName)
         .fileDis(fileDis)
         .fileUrl(fileUrl)
-        .fileMajor(fileMajor);
+        .fileMajor(fileMajor)
+        .fileExtension(fileExtension);
     }
     
     @Override
@@ -254,6 +281,11 @@ public final class Material implements Model {
     @Override
      public CopyOfBuilder fileMajor(String fileMajor) {
       return (CopyOfBuilder) super.fileMajor(fileMajor);
+    }
+    
+    @Override
+     public CopyOfBuilder fileExtension(String fileExtension) {
+      return (CopyOfBuilder) super.fileExtension(fileExtension);
     }
   }
   
