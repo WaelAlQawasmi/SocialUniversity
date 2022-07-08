@@ -16,11 +16,11 @@ ___
 
 ![login](image/Screenshot_20220705_233532.png)
 ![SHINE UP](image/Screenshot_20220705_233440.png)
-![NAV](image/Screenshot_20220705_232215.png)
+![NAV](image/navD.png)
 ![PROFILE](image/Screenshot_20220705_232341.png)
 ![ADD POST](image/Screenshot_20220705_234722.png)
 ![MAJOR](image/Screenshot_20220705_232726.png)
-![MATERIAL](image/Screenshot_20220705_232816.png)
+![MATERIAL](image/HOMEs.png)
 ![ADD MATERIAL](image/Screenshot_20220705_234707.png)
 ![WETHER](image/Screenshot_20220705_233050.png)
 ![JOBS](image/Screenshot_20220705_233107.png)
@@ -62,6 +62,17 @@ ___
 ___
 
 
+
+
+## APK
+[APK](App/app/build/outputs/apk/debug/app-debug.apk)
+
+## APK
+[APK](App/app/build/outputs/apk/debug/app-debug.apk)
+
+___
+## Project slides presentations
+[slides](Social_university.pptx)
 ## Members
 
 1. Wael Alqawasmi
@@ -111,3 +122,12 @@ ___
         - ensure that the message presesnt to the second user.
 
 ___
+
+## installation
+1. colon the project from github
+2. cd to App
+3. write this command 
+> amplify init
+![install](image/install.png)
+
+
