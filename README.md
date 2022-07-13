@@ -65,12 +65,9 @@ ___
 
 
 ## APK
-[APK](App/app/build/outputs/apk/debug/app-debug.apk)
+[APK](App/app-debug.apk)
 
-## APK
-[APK](App/app/build/outputs/apk/debug/app-debug.apk)
 
-___
 ## Project slides presentations
 [slides](Social_university.pptx)
 ## Members
