@@ -69,9 +69,9 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="Code Code"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/email_icon"
+        app:startIconDrawable="@drawable/body_icon"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="5dp"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
