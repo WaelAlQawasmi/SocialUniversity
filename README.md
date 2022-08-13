@@ -110,8 +110,8 @@ ___
 
 ___
 
-## installation
-1. colon the project from github
+## Installation
+1. Clone the project from github
 2. cd to App
 3. write this command 
 > amplify init
