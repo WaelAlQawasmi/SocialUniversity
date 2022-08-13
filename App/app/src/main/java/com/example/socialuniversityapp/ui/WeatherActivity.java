@@ -98,7 +98,7 @@ public class WeatherActivity extends Fragment {
 
 
         // Get Location
-        getLastLocation();
+//        getLastLocation();
 
         Log.i(TAG, "location " + longValue + "  " + latitude);
 
@@ -173,134 +173,134 @@ public class WeatherActivity extends Fragment {
 //
 //    }
 
-    @SuppressLint("MissingPermission")
-    private void getLastLocation() {
-        // check if permissions are given
-        if (checkPermissions()) {
-            Log.i(TAG, "permisson");
-
-            // check if location is enabled
-            if (isLocationEnabled()) {
-                Log.i(TAG, "location enable");
-
-                // getting last
-                // location from
-                // FusedLocationClient
-                // object
-                mFusedLocationClient = LocationServices. getFusedLocationProviderClient(getActivity());
-
-                mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        Log.i(TAG, "fused ");
-
-                        if (location == null) {
-                            requestNewLocationData();
-                        } else {
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                            Log.i(TAG, "latitude: " + latitude + " longitude " + longitude);
-                            loadWeatherByCityName(longitude,latitude);
-
-
-                        }
-                    }
-
-
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d(TAG, "Error trying to get last GPS location");
-                                e.printStackTrace();
-                            }
-                        });
-
-
-            } else {
-                Toast.makeText(getActivity().getApplicationContext(), "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        } else {
-            // if permissions aren't available,
-            // request for permissions
-            requestPermissions();
-        }
-
-    }
-
-    @SuppressLint("MissingPermission")
-    private void requestNewLocationData() {
-
-        // Initializing LocationRequest
-        // object with appropriate methods
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(1);
-        mLocationRequest.setFastestInterval(0);
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        LocationSettingsRequest locationSettingsRequest = builder.build();
-
-        SettingsClient settingsClient = LocationServices.getSettingsClient(getActivity());
-
-        settingsClient.checkLocationSettings(locationSettingsRequest);
-
-        // setting LocationRequest
-        // on FusedLocationClient
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
-        mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback(){
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                getLastLocation();
-            }
-        }, Looper.myLooper());
-    }
-
-
-    // method to check
-    // if location is enabled
-    private boolean isLocationEnabled() {
-        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    // method to check for permissions
-    private boolean checkPermissions() {
-        return ActivityCompat
-                .checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED
-                &&
-                ActivityCompat
-                        .checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED;
-
-        // If we want background location
-        // on Android 10.0 and higher,
-        // use:
-        // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
-    }
-
-    // method to request for permissions
-    private void requestPermissions() {
-        ActivityCompat.requestPermissions(getActivity(), new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ID);
-    }
-    // If everything is alright then
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSION_ID) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLastLocation();
-            }
-        }
-    }
+//    @SuppressLint("MissingPermission")
+//    private void getLastLocation() {
+//        // check if permissions are given
+//        if (checkPermissions()) {
+//            Log.i(TAG, "permisson");
+//
+//            // check if location is enabled
+//            if (isLocationEnabled()) {
+//                Log.i(TAG, "location enable");
+//
+//                // getting last
+//                // location from
+//                // FusedLocationClient
+//                // object
+//                mFusedLocationClient = LocationServices. getFusedLocationProviderClient(getActivity());
+//
+//                mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+//                    @Override
+//                    public void onSuccess(Location location) {
+//                        Log.i(TAG, "fused ");
+//
+//                        if (location == null) {
+//                            requestNewLocationData();
+//                        } else {
+//                            latitude = location.getLatitude();
+//                            longitude = location.getLongitude();
+//                            Log.i(TAG, "latitude: " + latitude + " longitude " + longitude);
+//                            loadWeatherByCityName(longitude,latitude);
+//
+//
+//                        }
+//                    }
+//
+//
+//                })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Log.d(TAG, "Error trying to get last GPS location");
+//                                e.printStackTrace();
+//                            }
+//                        });
+//
+//
+//            } else {
+//                Toast.makeText(getActivity().getApplicationContext(), "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                startActivity(intent);
+//            }
+//        } else {
+//            // if permissions aren't available,
+//            // request for permissions
+//            requestPermissions();
+//        }
+//
+//    }
+//
+//    @SuppressLint("MissingPermission")
+//    private void requestNewLocationData() {
+//
+//        // Initializing LocationRequest
+//        // object with appropriate methods
+//        LocationRequest mLocationRequest = new LocationRequest();
+//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//        mLocationRequest.setInterval(1);
+//        mLocationRequest.setFastestInterval(0);
+//
+//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+//        builder.addLocationRequest(mLocationRequest);
+//        LocationSettingsRequest locationSettingsRequest = builder.build();
+//
+//        SettingsClient settingsClient = LocationServices.getSettingsClient(getActivity());
+//
+//        settingsClient.checkLocationSettings(locationSettingsRequest);
+//
+//        // setting LocationRequest
+//        // on FusedLocationClient
+//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
+//        mFusedLocationClient.requestLocationUpdates(mLocationRequest, new LocationCallback(){
+//            @Override
+//            public void onLocationResult(LocationResult locationResult) {
+//                getLastLocation();
+//            }
+//        }, Looper.myLooper());
+//    }
+//
+//
+//    // method to check
+//    // if location is enabled
+//    private boolean isLocationEnabled() {
+//        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+//
+//        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+//                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//    }
+//
+//    // method to check for permissions
+//    private boolean checkPermissions() {
+//        return ActivityCompat
+//                .checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
+//                PackageManager.PERMISSION_GRANTED
+//                &&
+//                ActivityCompat
+//                        .checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+//                        PackageManager.PERMISSION_GRANTED;
+//
+//        // If we want background location
+//        // on Android 10.0 and higher,
+//        // use:
+//        // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
+//    }
+//
+//    // method to request for permissions
+//    private void requestPermissions() {
+//        ActivityCompat.requestPermissions(getActivity(), new String[]{
+//                Manifest.permission.ACCESS_COARSE_LOCATION,
+//                Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ID);
+//    }
+//    // If everything is alright then
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        if (requestCode == PERMISSION_ID) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                getLastLocation();
+//            }
+//        }
+//    }
 
 }

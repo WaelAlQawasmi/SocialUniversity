@@ -33,7 +33,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     TextView mTextView;
     CharSequence charSequence;
     int index;
-    long delay = 200;
+    long delay = 500;
     Handler handler = new Handler();
 
     @Override
