@@ -1,6 +1,6 @@
 # SocialUniversity
 
-For university students, our application will help them to communicate with their 
+For University students, our application will help them to communicate with their 
 colleagues in the same department and the same university. and they can also find the
 required resources to help them on their study and saving their time instead of spent their
 time searching on these resources in different places. in addition, if any student 
