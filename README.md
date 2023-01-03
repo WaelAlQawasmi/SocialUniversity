@@ -22,6 +22,14 @@ ___
 | ![](image/NavigationDrawer.png)  |   ![](image/Profile_Page.png)    | ![](image/Jobs.png)      |
 | ![](image/JobDetails.png)  |   ![](image/AddJob.png)    | ![](image/Chat.png)      |
 
+## Members
+
+1. Wael Alqawasmi
+2. Roaa Hailat
+3. Motasem Alkilany
+4. Manar Alzou'bi
+5. Mohammad Aladarbeh --> Team Leader
+
 ## Wireframe
 
 ![login](image/login_page.png)
@@ -60,13 +68,7 @@ ___
 
 ## Project slides presentations
 [slides](Social_university.pptx)
-## Members
 
-1. Wael Alqawasmi
-2. Roaa Hailat
-3. Motasem Alkilany
-4. Mohammad Aladarbeh
-5. Manar Alzou'bi
 ___
 
 # Stories
