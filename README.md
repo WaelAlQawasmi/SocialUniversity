@@ -54,7 +54,7 @@ ___
 ___
 
 
-## Database Schema
+## Relaion  Database Schema
 
 ![databaseSchema](image/database_schema.png)
 ___
